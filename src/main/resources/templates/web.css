@@ -1,0 +1,60 @@
+
+
+:root {
+    --darkblue: #00408C;
+    --blue: #96ADD6;
+    --red: #E85234;
+    --peach: #F9B8AF;
+    --pink: #F2D7D3;
+    --background-color: #F2EEE9; /*cream*/
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: white;
+    font-family: "Montserrat", sans-serif;
+}
+
+
+/* Menú de navegación */
+#navegacion-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--background-color);
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Menú en una sola línea */
+#menu-navegacion {
+    display: flex;
+    flex-wrap: wrap; /* Permite que los elementos bajen en pantallas pequeñas */
+    list-style: none;
+    gap: 20px;
+}
+
+#menu-navegacion li {
+    border-radius: 5px;
+}
+
+#menu-navegacion li a {
+    padding: 15px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: black;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+#menu-navegacion li:hover,
+#menu-navegacion li.active {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+/*Imagenes pantalla home*/
