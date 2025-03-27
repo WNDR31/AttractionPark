@@ -1,9 +1,9 @@
 package com.example.demo.repositories;
 
-import com.example.demo.entities.Attraction;
+import com.example.demo.entities.Thrill;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AttractionRepository extends JpaRepository<Attraction, Long> {
+public interface ThrillRepository extends JpaRepository<Thrill, Long> {
 }

@@ -29,6 +29,10 @@ public class Attraction {
     @JoinColumn(name = "intensity_id")
     private Thrill intensity;
 
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private Type type;  // Relación con Type
+
     public Attraction() {}
 
     // Getters y Setters
@@ -76,4 +80,7 @@ public class Attraction {
 
     public Thrill getIntensity() { return intensity; }
     public void setIntensity(Thrill intensity) { this.intensity = intensity; }
+
+    public Type getType() { return type; } // Getter para Type
+    public void setType(Type type) { this.type = type; } // Setter para Type
 }
