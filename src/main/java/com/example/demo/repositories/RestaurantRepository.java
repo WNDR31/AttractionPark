@@ -1,5 +1,9 @@
 package com.example.demo.repositories;
 
-public class RestaurantRepository {
-    
+import com.example.demo.entities.Restaurant;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface RestaurantRepository extends JpaRepository<Restaurant, Long> {
 }
