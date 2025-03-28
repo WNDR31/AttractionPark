@@ -26,56 +26,77 @@
     </nav>
 
     <main>
-        <div id="myCarousel" class="carousel slide mb-6" data-bs-ride="carousel">
+        <div id="album" class="carousel slide mb-6" data-bs-ride="album">
             <div class="carousel-indicators">
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
-              <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+              <button type="button" data-bs-target="#album" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+              <button type="button" data-bs-target="#album" data-bs-slide-to="1" aria-label="Slide 2"></button>
+              <button type="button" data-bs-target="#album" data-bs-slide-to="2" aria-label="Slide 3"></button>
             </div>
             <div class="carousel-inner">
               <div class="carousel-item active">
-                <!-- Reemplazamos el SVG con la imagen 1 -->
-                <img src="Imagenes/imagen1.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
-                <div class="container">
-                  <div class="carousel-caption text-start">
-                    <h1>Example headline.</h1>
-                    <p class="opacity-75">Some representative placeholder content for the first slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p>
-                  </div>
-                </div>
-              </div>
-              <div class="carousel-item">
-                <!-- Reemplazamos el SVG con la imagen 2 -->
-                <img src="Imagenes/imagen2.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
+                <!--Primera imagen-->
+                <img src="Imagenes/imagenatracciones.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
                 <div class="container">
                   <div class="carousel-caption">
-                    <h1>Another example headline.</h1>
-                    <p>Some representative placeholder content for the second slide of the carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Learn more</a></p>
+                    <h1>¡Tu aventura comienza ahora!</h1>
+                    <p class="opacity-75">Prepárate para la emoción</p>
                   </div>
                 </div>
               </div>
               <div class="carousel-item">
-                <!-- Reemplazamos el SVG con la imagen 3 -->
-                <img src="Imagenes/imagen3.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
+                <!-- Segunda imagen -->
+                <img src="Imagenes/TiendasRestauración.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
                 <div class="container">
-                  <div class="carousel-caption text-end">
-                    <h1>One more for good measure.</h1>
-                    <p>Some representative placeholder content for the third slide of this carousel.</p>
-                    <p><a class="btn btn-lg btn-primary" href="#">Browse gallery</a></p>
+                  <div class="carousel-caption">
+                    <h1>Deleita Tus Sentidos</h1>
+                    <p>Sumérgete en un mundo de sabores, aromas y texturas.  Más que tiendas, experiencias inolvidables.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-item">
+                <!-- Tercera imagen -->
+                <img src="Imagenes/acuatico.jpg" class="bd-placeholder-img" width="100%" height="100%" aria-hidden="true">
+                <div class="container">
+                  <div class="carousel-caption">
+                    <h1>Diversión Acuática Proximamente</h1>
+                    <p>¡La emoción esta por llegar!</p>
                   </div>
                 </div>
               </div>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <button class="carousel-control-prev" type="button" data-bs-target="#album" data-bs-slide="prev">
               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <button class="carousel-control-next" type="button" data-bs-target="#album" data-bs-slide="next">
               <span class="carousel-control-next-icon" aria-hidden="true"></span>
               <span class="visually-hidden">Next</span>
             </button>
+        </div>
+        <!-- Columnas apartado hoteles, restaurantes y tiendas -->
+        <div class="container servicios">
+          <h1 id="seccion-titulo">NUESTROS SERVICIOS EXCLUSIVOS</h1>
+          <div class="row">
+            <div class="columnas col-md-4 text-center">
+              <img src="Imagenes/placeholder-tiendas.jpg" class="rounded-circle" width="140" height="140" alt="Imagen de Tiendas Placeholder">
+              <h2 class="nombre">Tiendas</h2>
+              <p>Explora una variedad de tiendas con productos únicos y souvenirs para recordar tu visita.</p>
+              <p><a class="btn btn-secondary" href="#">Ver Tiendas »</a></p>
+            </div>
+            <div class="columnas col-md-4 text-center">
+              <img src="Imagenes/placeholder-tiendas.jpg" class="rounded-circle" width="140" height="140" alt="Imagen de Tiendas Placeholder">
+              <h2 class="nombre">Restaurantes</h2>
+              <p>Deléitate con una variedad de restaurantes, desde opciones de alta cocina hasta experiencias gastronómicas casuales. Descubre sabores locales e internacionales, ambientes únicos y servicios excepcionales.</p>
+              <p><a class="btn btn-secondary" href="#">Ver Restaurantes »</a></p>
+            </div>
+            <div class="columnas col-md-4 text-center">
+              <img src="Imagenes/placeholder-tiendas.jpg" class="rounded-circle" width="140" height="140" alt="Imagen de Tiendas Placeholder">
+              <h2 class="nombre">Hoteles</h2>
+              <p>Elige entre una selección de hoteles diseñados para ofrecerte el máximo confort y relajación.  Desde habitaciones lujosas hasta suites familiares, encuentra el alojamiento perfecto para tu estancia ideal. Disfruta de amenidades de primera clase y un servicio impecable.</p>
+              <p><a class="btn btn-secondary" href="#">Ver Hoteles »</a></p>
+            </div>
           </div>
+        </div>
     </main>
     <footer>
         <p></p>
