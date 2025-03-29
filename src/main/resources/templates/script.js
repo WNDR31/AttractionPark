@@ -45,4 +45,4 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
 const entradasSeleccionadas = new Set();
 
 
-
+// Función para seleccionar el tipo de promoción

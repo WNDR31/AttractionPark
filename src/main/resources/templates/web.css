@@ -117,9 +117,9 @@ body {
     margin-bottom: 15px;
     text-align: center;
     border:  #00408C solid 3px;
-    background-color: #f8f9fa; /* Un color de fondo gris claro similar al ejemplo, puedes ajustarlo */
-    border-radius: 30px; /* Bordes redondeados */
-    padding: 10px; /* Añade un poco de espacio interno */
+    background-color: #f8f9fa; 
+    border-radius: 30px; 
+    padding: 10px; 
     height: 440px;
     width: 400px;
     box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
@@ -162,10 +162,127 @@ body {
     display: block;
     margin: 0 auto;
   }
-  
+
+/*------Apartado Promociones-------*/ 
+.contenedor-ofertas {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.contenedor-ofertas h2 {
+    font-size: 10px;
+    color: var(--darkblue); 
+    margin-bottom: 20px;
+}
+
+.botones-filtro {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.boton-oferta {
+    padding: 10px 20px;
+    margin: 0 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    color: #333;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.boton-oferta.activo {
+    background-color: var(--blue); 
+    color: white;
+    font-weight: bold;
+}
+
+.boton-oferta:hover {
+    background-color: #d0d0d0;
+}
+
+.boton-oferta.activo:hover {
+    background-color: var(--darkblue); 
+
+}
+.contenido-ofertas {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+#ofertas-parque{
+    pointer-events: auto;
+    display: none;
+}
+
+.tarjeta-oferta {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    text-align: left; 
+}
+
+.tarjeta-oferta img {
+    width: 100%;
+    height: 200px; 
+    object-fit: cover; 
+    display: block; 
+}
+
+.precio-oferta {
+    background-color: var(--pink); 
+    color: white;
+    font-size: 1.5em;
+    padding: 10px 15px;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    margin-top: -40px; 
+    display: inline-block; 
+    margin-left: 15px; 
+    border-radius: 5px;
+}
+
+.tarjeta-oferta h3 {
+    font-size: 1.3em;
+    margin: 15px 15px 10px 15px;
+    color: var(--blue); 
+}
+
+.tarjeta-oferta p {
+    font-size: 1em;
+    margin: 0 15px 15px 15px;
+    color: #555;
+    text-align: justify; 
+}    
+
+.boton-ver-mas {
+    display: inline-block;
+    background-color: var(--darkblue); 
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin: 15px;
+    transition: background-color 0.3s;
+}
+
+.boton-ver-mas:hover {
+    background-color: #333;
+}
 
 
-/*Menu-Compra de tickets*/
+/*------Apartado compra de tickets -------*/ 
 .div_ticketsZone {
     display: flex;
     margin-left: 200px;
