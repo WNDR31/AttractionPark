@@ -165,9 +165,10 @@ body {
     border: #00408C solid 3px;
     border-radius: 30px;
     background-color: #96ADD6;
-    height: 600px;
+    height: 550px;
     width: 400px;
     box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
 }
 
 .textoCompra{
@@ -179,4 +180,36 @@ body {
     width: 100%;
     border-radius: 27px;
     box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.1);
+}
+
+.h3_tickets {
+    font-weight: bolder;
+}
+
+.text_ticket {
+    margin: 35px;
+    text-align: center;
+}
+
+.btn_ticket {
+    background-color: var(--darkblue);
+    color: var(--background-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    position: absolute;
+    bottom: 40px;
+    transform: translateX(-50%);
+}
+
+.price_ticket {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--background-color);
+    margin-top: 10px;
+    position: absolute;
+    bottom: 80px;
+    transform: translateX(+50%);
 }
