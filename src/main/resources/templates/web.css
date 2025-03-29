@@ -239,5 +239,19 @@ body {
 }
 
 .modal-body {
-    
+    background-color: #F2EEE9;
+}
+
+.p_buy {
+    color: #bebfc0;
+}
+
+.h2_buy {
+    color: #00408C;
+    font-weight: bold;
+}
+
+.h1_buy {
+    color: #E85234;
+    font-weight: bold;
 }
