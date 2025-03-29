@@ -6,7 +6,7 @@
     --red: #E85234;
     --peach: #F9B8AF;
     --pink: #F2D7D3;
-    --background-color: #F2EEE9; /*cream*/
+    --background-color: white; 
 }
 
 * {
@@ -28,7 +28,7 @@ body {
     align-items: center;
     padding: 15px 30px;
     background-color: var(--background-color);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Menú en una sola línea */
@@ -36,7 +36,7 @@ body {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos bajen en pantallas pequeñas */
     list-style: none;
-    gap: 20px;
+    gap: 25px;
 }
 
 #menu-navegacion li {
@@ -47,22 +47,25 @@ body {
     padding: 15px 15px;
     text-decoration: none;
     text-transform: uppercase;
-    color: black;
+    color: var(--darkblue);
     font-weight: bold;
     transition: background-color 0.3s;
 }
 
 #menu-navegacion li:hover,
 #menu-navegacion li.active {
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: var(--blue);
 }
 
-/*------Imagenes carousel pantalla home*-------/
+/* Apartado para el resaltado de menu-comprartickets*/
 
-/*Ajusto tamaños de letra*/
-#album { 
-    margin-bottom: 150px;
+#menu-navegacion li.resaltar-tickets {
+    background-color: var(--peach); 
+    border-radius: 0;
 }
+
+/*------Imagenes carousel pantalla home-------*/
+
 .carousel-caption h1{
     font-size: 55px; 
 }
@@ -90,18 +93,12 @@ body {
   background-color: white;
 }
 
-/*------Apartado tiendas, restaurantes y hoteles -------*/
-
-
-  /* MARKETING CONTENT
-  -------------------------------------------------- */
-  
-  /* Center align the text within the three columns below the carousel */
- 
+/*------Apartado tiendas, restaurantes y hoteles -------*/ 
 #seccion-titulo {
     text-align: center;
     margin-bottom: 100px;
-    font-size: 55px;
+    margin-top: 150px;
+    font-size: 50px;
     color: var(--darkblue);
     font-weight: bold; 
     /* background-color: var(--blue); 
@@ -112,41 +109,58 @@ body {
     margin-bottom: 15px;
     text-align: center;
   }
+  .servicios .row {
+    justify-content: center;
+    gap: 40px;
+  }  
+  .servicios .columnas {
+    margin-bottom: 15px;
+    text-align: center;
+    border:  #00408C solid 3px;
+    background-color: #f8f9fa; /* Un color de fondo gris claro similar al ejemplo, puedes ajustarlo */
+    border-radius: 30px; /* Bordes redondeados */
+    padding: 10px; /* Añade un poco de espacio interno */
+    height: 440px;
+    width: 400px;
+    box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
+    position: relative;
+  }
   .servicios .columnas p {
     font-size: 18px;
-    margin-right: 20px;
-    margin-left: 20px;
-    text-align: justify;
+    margin-right: 10px;
+    margin-left: 10px;
+    text-align: center;
   }
   .servicios .columnas h2.nombre {
-    font-weight: bold; 
+    /*font-weight: bold;*/
     color: var(--blue);      
     margin-top: 5px;   
-    margin-bottom: 5px; 
+    margin-bottom: 15px; 
+    margin-top: 20px;
     font-size: 30px;
   }
   .servicios .col-md-4 {
-    padding-left: 25px;   
-    padding-right: 25px;  
+    padding-left: 14px;   
+    padding-right: 14px;  
   }
-  
   .rounded-circle.mx-auto.d-block {
     background-color: #aaa;
     border: 3px solid #444;
     opacity: 0.9;
     transition: opacity 0.3s ease;
+    object-fit: contain;
   }
   
   .rounded-circle.mx-auto.d-block:hover,
   .rounded-circle.mx-auto.d-block:focus {
     opacity: 1;
   }
-  /* Estilo para los botones "btn-secondary" dentro de las columnas (puedes añadir aquí si quieres personalizar los botones) */
   .servicios .columnas .btn.btn-secondary {
-    /* Ejemplo: Puedes añadir estilos específicos para los botones secundarios si lo deseas */
-    background-color: #6c757d; /* Color de fondo del botón - Gris medio Bootstrap (ejemplo) */
-    border: none;             /* Sin borde (ejemplo) */
-    color: white;             /* Texto del botón - Blanco (ejemplo) */
+    background-color: var(--darkblue); 
+    border: none;             
+    color: white;     
+    display: block;
+    margin: 0 auto;
   }
   
 
@@ -163,6 +177,7 @@ body {
 .div_ticket {
     margin: 20px;
     border: #00408C solid 3px;
+    text-align: center;
     border-radius: 30px;
     background-color: #96ADD6;
     height: 550px;
@@ -175,6 +190,10 @@ body {
     padding: 70px;
     text-align: center;
     color: #103869;
+}
+.textoCompra h3{
+    font-size: 50px;
+    font-weight: bold; 
 }
 
 .buy_image {
