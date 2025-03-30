@@ -38,8 +38,7 @@
             <img src="Imagenes/image5.jpeg" alt="ImagenCompra2" class="buy_image" width="100%">
             <div class="text_ticket">
                 <h3 class="h3_tickets">Entrada General</h3>
-                <p>Acceso a todas las atracciones y espectáculos del parque.</p>
-                <p>Entrada individual.</p>
+                <p>Acceso a todas las atracciones y espectáculos del parque. Entrada individual.</p>
                 <p class="price_ticket">Precio: 50€</p>
                 <div>
                     <button type="button" class="btn_ticket" onclick="mostrarVentanaCompra()">Comprar</button>
@@ -51,8 +50,7 @@
             <img src="Imagenes/imagen6.jpeg" alt="ImagenCompra3" class="buy_image" width="100%">
             <div class="text_ticket">
                 <h3 class="h3_tickets">Entrada VIP</h3>
-                <p>Acceso prioritario a todas las atracciones y espectáculos del parque.</p>
-                <p>Entrada individual.</p>
+                <p>Acceso prioritario a todas las atracciones y espectáculos del parque. Entrada individual.</p>
                 <p class="price_ticket">Precio: 80€</p>
                 <div>
                     <button type="button" class="btn_ticket" onclick="mostrarVentanaCompra()">Comprar</button>
@@ -73,89 +71,91 @@
         </div>
     </div>
     
-        <!--Modal De Compra-->
-        <div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalTitulo"></h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                    </div>
-                    <div class="modal-body">
-                        <h1 class="h1_buy">Formulario de Compra</h1>
-                        <form id="formCompra" action="/buy-page">
-                            <h2 class="h2_buy">Datos Personales:</h2>
-                            <p class="p_buy">Por favor, completa el siguiente formulario para proceder con la compra.</p>
-                            <div>
-                                <div>
-                                    <div class="mb-3">
-                                        <label for="nombre" class="form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="apellidos" class="form-label">Apellidos:</label>
-                                        <input type="text" class="form-control" id="nombre" required>
-                                    </div>
-                                </div>
-                                <div class="mb-3 d-flex">
-                                    <div class="me-3">
-                                        <label for="telefono" class="form-label" width="100%">Número de Teléfono:</label>
-                                        <input type="tel" class="form-control" id="telefono" pattern="[0-9]{9}" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="fechaVisita" class="form-label">Fecha:</label>
-                                        <input type="date" class="form-control" id="fechaVisita" required>
-                                    </div>
-                                </div>
-                                <div>
-                                    <label for="correo" class="form-label">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" id="correo" required>
-                                </div>
-                                
-                            </div>
-                            <br><br><br>
-                            
-                            <h2 class="h2_buy">Tickets:</h2>
-                            <p class="p_buy">Selecciona el tipo de entrada y la cantidad que deseas comprar. Puedes añadir varios tipos de entradas a la vez.</p>
+    <!--Modal De Compra-->
+    <div class="modal fade" id="modalCompra" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitulo"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <h1 class="h1_buy">Formulario de Compra</h1>
+                    <form id="formCompra" action="/buy-page">
+                        <h2 class="h2_buy">Datos Personales:</h2>
+                        <p class="p_buy">Por favor, completa el siguiente formulario para proceder con la compra.</p>
+                        <div>
                             <div>
                                 <div class="mb-3">
-                                    <label for="tipoEntrada" class="form-label">Tipo de Entrada:</label>
-                                    <select class="form-select" id="tipoEntrada" required>
-                                        <option value="" disabled selected>Selecciona un tipo de entrada</option>
-                                        <option value="general">Entrada General - 50€</option>
-                                        <option value="vip">Entrada VIP - 80€</option>
-                                        <option value="familiar">Entrada Familiar - 150€</option>
-                                    </select>
+                                    <label for="nombre" class="form-label">Nombre:</label>
+                                    <input type="text" class="form-control" id="nombre" required>
                                 </div>
-                            </div>  
+                                <div class="mb-3">
+                                    <label for="apellidos" class="form-label">Apellidos:</label>
+                                    <input type="text" class="form-control" id="apellidos" required>
+                                </div>
+                            </div>
+                            <div class="form_2">
+                                <div class="me-3">
+                                    <label for="telefono" class="form-label" width="100%">Número de Teléfono:</label>
+                                    <input type="tel" class="form-control" id="telefono" pattern="[0-9]{9}" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="fechaVisita" class="form-label" width="100%">Fecha:</label>
+                                    <input type="date" class="form-control" id="fechaVisita" required>
+                                </div>
+                            </div>
+                            <div>
+                                <label for="correo" class="form-label">Correo Electrónico:</label>
+                                <input type="email" class="form-control" id="correo" required>
+                            </div>
                             
+                        </div>
+                        <br><br><br>
+                        
+                        <h2 class="h2_buy">Tickets:</h2>
+                        <p class="p_buy">Selecciona el tipo de entrada y la cantidad que deseas comprar. Puedes añadir varios tipos de entradas a la vez.</p>
+                        <div>
                             <div class="mb-3">
-                                <label for="cantidad" class="form-label">Cantidad de Boletos:</label>
-                                <select class="form-select" id="cantidad" required>
-                                    <option value="" disabled selected>Selecciona la cantidad</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                <label for="tipoEntrada" class="form-label">Tipo de Entrada:</label>
+                                <select class="form-select" id="tipoEntrada" required>
+                                    <option value="" disabled selected>Selecciona un tipo de entrada</option>
+                                    <option value="general">Entrada General - 50€</option>
+                                    <option value="vip">Entrada VIP - 80€</option>
+                                    <option value="familiar">Entrada Familiar - 150€</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-success" id="agregarCarrito" onclick="agregarAlCarrito()">Añadir al Carrito</button>
-                                <br><br>
-                                <h2 class="h2_buy">Carrito de la Compra:</h2>
-                                <ul id="carrito" class="list-group mb-3">
-                                    <!--Aquí se agregarán las entradas seleccionadas-->
-                                </ul>
-                            </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" class="btn btn-primary">Finalizar Compra</button>
-                    </div>
+                        </div>  
+                        
+                        <div class="mb-3">
+                            <label for="cantidad" class="form-label">Cantidad de Boletos:</label>
+                            <select class="form-select" id="cantidad" required>
+                                <option value="" disabled selected>Selecciona la cantidad</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                                <option value="5">5</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <button type="button" class="btn btn-success" id="agregarCarrito" onclick="agregarAlCarrito()">Añadir al Carrito</button>
+                            <br><br>
+                            <h2 class="h2_buy">Carrito de la Compra:</h2>
+                            <ul id="carrito" class="list-group mb-3">
+                                <li id="carritoVacio" class="list-group-item">Aún no has añadido ningún ticket al carrito</li>
+                                <!--Aquí se agregarán las entradas seleccionadas-->
+                            </ul>
+                        </div>
+                        
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" id="finalizarCompra" class="btn btn-primary">Finalizar Compra</button>
                 </div>
             </div>
-        </div>    
+        </div>
+    </div>    
 
 </body>
 </html>
