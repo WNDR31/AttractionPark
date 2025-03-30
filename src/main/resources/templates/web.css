@@ -455,6 +455,7 @@ td.event {
     border-bottom-right-radius: 70px;
     border-bottom-left-radius: 70px;
     height: 760px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
 }
 
 .div_ticketsZone {
@@ -520,11 +521,13 @@ td.event {
 .price_ticket {
     font-size: 20px;
     font-weight: bold;
-    color: #103869;
-    position: absolute;
+    color: var(--background-color);
     margin-top: 10px;
+    position: absolute;
     bottom: 80px;
+    text-align: center;
     transform: translateX(+50%);
+    position: absolute;
 }
 
 .ventanaCompra {
@@ -552,6 +555,10 @@ td.event {
 
 .modal-body {
     background-color: #F2EEE9;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 .p_buy {
@@ -568,5 +575,4 @@ td.event {
 .h1_buy {
     color: #E85234;
     font-weight: bold;
-    text-align: center;
 }

@@ -22,6 +22,11 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
         alert("Opciones incorrectas.");
         return;
     }
+    const carritoVacio = document.getElementById('carritoVacio');
+
+    if (carritoVacio) {
+        carritoVacio.remove();
+    }
 
     entradasSeleccionadas.add(tipoEntrada);
 
@@ -43,6 +48,46 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
 });
 
 const entradasSeleccionadas = new Set();
+
+//Validar Finalizar Compra
+document.addEventListener("DOMContentLoaded", function () {
+    document.querySelector(".btn-primary").addEventListener("click", function (event) {
+        event.preventDefault(); // Evita el envío del formulario por defecto
+
+        // Obtener elementos del formulario
+        const nombre = document.getElementById("nombre").value.trim();
+        const apellidos = document.getElementById("apellidos").value.trim();
+        const telefono = document.getElementById("telefono").value.trim();
+        const fechaVisita = document.getElementById("fechaVisita").value.trim();
+        const correo = document.getElementById("correo").value.trim();
+        
+        // Obtener el carrito
+        const carrito = document.getElementById("carrito");
+        const carritoVacio = document.getElementById("carritoVacio");
+        const elementosCarrito = carrito.querySelectorAll("li");
+        
+        // Validar que los campos obligatorios están rellenados
+        if (!nombre || !apellidos || !telefono || !fechaVisita || !correo) {
+            alert("Por favor, completa todos los campos del formulario.");
+            return;
+        }
+        
+        // Validar que el carrito no está vacío
+        if (elementosCarrito.length == 0 || carrito.contains(carritoVacio)) {
+            alert("El carrito de la compra está vacío. Añade al menos un ticket antes de finalizar la compra.");
+            return;
+        }
+        
+        // Mostrar mensaje de confirmación
+        alert("¡Compra realizada con éxito! Recibirás un correo con los detalles de tu compra.");
+        
+        // Opcional: Resetear formulario y vaciar carrito
+        document.getElementById("formCompra").reset();
+        carrito.innerHTML = '<li id="carritoVacio" class="list-group-item">Aún no has añadido ningún ticket al carrito</li>';
+    });
+});
+
+
 
 
 // Función para seleccionar el tipo de promoción
