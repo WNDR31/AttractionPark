@@ -20,47 +20,75 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+#parque{
+  color: var(--darkblue);
+  font-weight: bold;
+  font-size: 24px;
+}
 
-/* Menú de navegación */
+
+/* -------------Menú de navegación-------------- */
+
 #navegacion-principal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: var(--background-color);
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-#menu-navegacion {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos bajen en pantallas pequeñas */
-    list-style: none;
-    gap: 25px;
-}
-
-#menu-navegacion li {
-    border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--background-color, #00408C); 
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; 
+  top: 0;
+  width: 100%; 
+  z-index: 1000;
 }
 
 #menu-navegacion li a {
-    padding: 15px 15px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: var(--darkblue);
-    font-weight: bold;
-    transition: background-color 0.3s;
+  padding: 15px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--darkblue, #333); 
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 #menu-navegacion li:hover,
 #menu-navegacion li.active {
-    background-color: var(--blue);
+  background-color: var(--blue);
+  color: #fff; 
 }
 
-/* Apartado para el resaltado de menu-comprartickets*/
+.resaltar-tickets {
+  background-color: var(--pink); 
+  color: white;
+}
 
-#menu-navegacion li.resaltar-tickets {
-    background-color: var(--peach); 
-    border-radius: 0;
+.resaltar-tickets:hover {
+  background-color: var(--peach); 
+}
+
+.navbar-toggler {
+  border-color: var(--darkblue);
+}
+
+.navbar-brand img {
+  height: 40px; 
+  width: auto;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+@media (max-width: 767px) {
+  #menu-navegacion {
+      flex-direction: column; 
+      text-align: center;
+  }
+  
+  #menu-navegacion li {
+      width: 100%; 
+  }
 }
 
 /*------Imagenes carousel pantalla home-------*/

@@ -88,8 +88,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-
 // Función para seleccionar el tipo de promoción
 function mostrarOfertas(categoria) {
     const botonesOferta = document.querySelectorAll('.boton-oferta');
@@ -153,5 +151,17 @@ setInterval(() => {
     showReview(currentReview);
 }, 1000);
 
+//Suavizar el desplazamiento de horario -> footer
+// Desplazamiento suave al hacer clic en los enlaces con el atributo href que comienza con #
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+  
 
 // Función para crear un calendario

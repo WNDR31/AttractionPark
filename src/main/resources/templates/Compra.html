@@ -11,18 +11,23 @@
 </head>
 <body>
     <!-- Menú de navegación -->
-    <nav id="navegacion-principal">
-        <div>
-            <h1 id="hotel">NOMBRE PARQUE</h1>
+    <nav id="navegacion-principal" class="navbar navbar-expand-lg fixed-top">
+        <div class="container-fluid">
+          <a id="parque" href="PaginaPrincipal.html">LagoonLand</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegacion" aria-controls="menu-navegacion" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="menu-navegacion">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link" href="PaginaPrincipal.html">HOME</a></li>
+              <li class="nav-item"><a class="nav-link" href="PlanificaTuVisita.html">PLANIFICA TU VISITA</a></li>
+              <li class="nav-item"><a class="nav-link" href="DescubreElParque.html">DESCUBRE EL PARQUE</a></li>
+              <li class="nav-item"><a class="nav-link" href="#footer">HORARIOS</a></li>
+              <li class="nav-item"><a class="nav-link resaltar-tickets" href="Compra.html">COMPRA TUS TICKETS</a></li>
+            </ul>
+          </div>
         </div>
-        <ul id="menu-navegacion">
-            <li><a href="PaginaPrincipal.html">HOME</a></li>
-            <li><a href="PlanificaTuVisita.html">PLANIFICA TU VISITA</a></li>
-            <li><a href="DescubreElParque.html">DESCUBRE EL PARQUE</a></li>
-            <li><a href="servicios.html">HORARIOS</a></li> <!--SERVICIOS COMO TIENDAS Y RESTAURACIÓN-->
-            <li><a href="Compra.html">COMPRA TUS TICKETS</a></li>
-        </ul>
-    </nav>
+      </nav>
 
     <div>
         <img src="Imagenes/islands-adventure-orlando.jpg" alt="ImagenCompra1" class="img_compra" width="100%">
