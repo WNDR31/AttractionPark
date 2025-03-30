@@ -84,3 +84,29 @@ function mostrarOfertas(categoria) {
 document.addEventListener('DOMContentLoaded', function() {
     mostrarOfertas('parque'); 
 });
+
+//Apartado de testimonios
+let currentReview = 0;
+
+function showReview(index) {
+    // Ocultar todos los testimonios
+    const reviews = document.querySelectorAll('.review-slide');
+    reviews.forEach((review, i) => {
+        review.classList.remove('active');
+        document.querySelectorAll('.pagination-dot')[i].classList.remove('active');
+    });
+
+    // Mostrar el testimonio seleccionado
+    reviews[index].classList.add('active');
+    document.querySelectorAll('.pagination-dot')[index].classList.add('active');
+}
+
+// Cambiar automáticamente cada 1 segundo
+setInterval(() => {
+    const reviews = document.querySelectorAll('.review-slide');
+    currentReview = (currentReview + 1) % reviews.length;
+    showReview(currentReview);
+}, 1000);
+
+
+// Función para crear un calendario

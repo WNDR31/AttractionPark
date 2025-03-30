@@ -31,7 +31,6 @@ body {
     box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Menú en una sola línea */
 #menu-navegacion {
     display: flex;
     flex-wrap: wrap; /* Permite que los elementos bajen en pantallas pequeñas */
@@ -253,7 +252,7 @@ body {
 }
 
 .tarjeta-oferta p {
-    font-size: 1em;
+    font-size: 15px;
     margin: 0 15px 15px 15px;
     color: #555;
     text-align: left;
@@ -262,8 +261,195 @@ body {
     font-size: 15px;
     font-style: italic;
 }
-/*------Apartado reviews -------*/ 
 
+/*------------Apartado reviews --------------*/ 
+.container-reviews {
+    max-width: 950px;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    margin: 30px auto;
+    font-family: sans-serif;
+    position: relative;
+    border: #00408C solid 3px;
+  }
+  
+  #imagen-reviews {
+    flex: 1;
+    max-width: 40%;
+  }
+  
+  #imagen-reviews img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  #seccion-contenido {
+    flex: 1;
+    padding: 30px;
+    max-width: 60%;
+    position: relative;
+  }
+  
+  #seccion-contenido h2 {
+    font-size: 30px;
+    color: var(--blue);
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  
+  .review-slide {
+    display: none;
+  }
+  
+  .review-slide.active {
+    display: block;
+  }
+  
+  .cliente-opinion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .foto-cliente {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 2px solid #eee;
+  }
+  
+  .foto-cliente img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .cliente-detalles {
+    flex: 1;
+  }
+  
+  .cliente-nombre {
+    font-size: 15px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  
+  .cliente-titulo {
+    font-size: 15px;
+    color: #777;
+    margin: 0;
+  }
+  
+  .testimonios {
+    font-style: italic;
+    font-size: 12px;
+    color: black;
+    margin: 0 0 20px 0;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+  }
+  
+  .paginas-testimonios {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .paginas-testimonios .pagination-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  .paginas-testimonios .pagination-dot.active {
+    background-color: #f06548;
+  }
+  
+  .paginas-testimonios .pagination-dot:hover {
+    background-color: #bbb;
+  }
+  
+
+
+/*------Apartado Footer -------*/ 
+footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.calendar-container {
+    margin-top: 30px;
+    text-align: center;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4b400;
+}
+
+td.saturday {
+    background-color: #0f9d58;
+    color: white;
+}
+
+td.sunday {
+    background-color: #d93025;
+    color: white;
+}
+
+td.event {
+    background-color: #f4c542;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.calendar-header {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
 /*------Apartado compra de tickets -------*/ 
 .img_compra {
     border-bottom-right-radius: 70px;
@@ -315,6 +501,7 @@ body {
 .text_ticket {
     margin: 35px;
     text-align: center;
+    color: #103869;
 }
 
 .btn_ticket {
@@ -333,9 +520,9 @@ body {
 .price_ticket {
     font-size: 20px;
     font-weight: bold;
-    color: var(--background-color);
-    margin-top: 10px;
+    color: #103869;
     position: absolute;
+    margin-top: 10px;
     bottom: 80px;
     transform: translateX(+50%);
 }
@@ -369,14 +556,17 @@ body {
 
 .p_buy {
     color: #bebfc0;
+    text-align: center;
 }
 
 .h2_buy {
     color: #00408C;
     font-weight: bold;
+    text-align: center;
 }
 
 .h1_buy {
     color: #E85234;
     font-weight: bold;
+    text-align: center;
 }
