@@ -51,7 +51,20 @@ function mostrarOfertas(categoria) {
     const ofertasParque = document.getElementById('ofertas-parque');
     const ofertasRestaurantes = document.getElementById('ofertas-restaurantes');
 
-    botonesOferta.forEach(boton => boton.classList.remove('seleccionado'));
+    let botonSeleccionado = null;
+    botonesOferta.forEach(boton => {
+        if (boton.classList.contains('seleccionado')) {
+            botonSeleccionado = boton;
+        }
+        boton.classList.remove('seleccionado');
+    });
+
+    if (botonSeleccionado && botonSeleccionado.getAttribute('data-categoria') === categoria) {
+        // If the same button is clicked again, hide all content
+        ofertasParque.style.display = 'none';
+        ofertasRestaurantes.style.display = 'none';
+        return;
+    }
 
     botonesOferta.forEach(boton => {
         if (boton.getAttribute('data-categoria') === categoria) {

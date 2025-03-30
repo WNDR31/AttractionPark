@@ -173,34 +173,22 @@ body {
     text-align: center;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
-
-.contenedor-ofertas.activo-categoria {
-    background-color: #f0f8ff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    border: 1px solid #b0c4de;
-}
-
-.contenedor-ofertas h2 {
-    font-size: 10px;
-    color: var(--darkblue);
-    margin-bottom: 20px;
-}
-
 .botones-filtro {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    font-size:22px; 
+    padding: 10px 30px; 
 }
-
 .boton-oferta {
     padding: 10px 20px;
     margin: 0 10px;
     border: none;
     border-radius: 5px;
     background-color: #e0e0e0;
-    color: #333;
+    color: #000000;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 20px;
     transition: background-color 0.3s, color 0.3s;
 }
 
