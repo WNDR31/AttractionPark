@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-// Función para seleccionar el tipo de promoción
+//--------------------Función para seleccionar el tipo de promoción----------------
 function mostrarOfertas(categoria) {
     const botonesOferta = document.querySelectorAll('.boton-oferta');
     const ofertasParque = document.getElementById('ofertas-parque');
@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function() {
     mostrarOfertas('parque'); 
 });
 
-//Apartado de testimonios
+//---------------------Apartado de testimonios------------------------------------
 let currentReview = 0;
 
 function showReview(index) {
