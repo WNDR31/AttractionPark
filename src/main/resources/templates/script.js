@@ -46,3 +46,28 @@ const entradasSeleccionadas = new Set();
 
 
 // Función para seleccionar el tipo de promoción
+function mostrarOfertas(categoria) {
+    const botonesOferta = document.querySelectorAll('.boton-oferta');
+    const ofertasParque = document.getElementById('ofertas-parque');
+    const ofertasRestaurantes = document.getElementById('ofertas-restaurantes');
+
+    botonesOferta.forEach(boton => boton.classList.remove('seleccionado'));
+
+    botonesOferta.forEach(boton => {
+        if (boton.getAttribute('data-categoria') === categoria) {
+            boton.classList.add('seleccionado');
+        }
+    });
+
+    if (categoria === 'parque') {
+        ofertasParque.style.display = 'flex'; // or 'block'
+        ofertasRestaurantes.style.display = 'none';
+    } else if (categoria === 'restaurantes') {
+        ofertasParque.style.display = 'none';
+        ofertasRestaurantes.style.display = 'flex'; // or 'block'
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    mostrarOfertas('parque'); 
+});

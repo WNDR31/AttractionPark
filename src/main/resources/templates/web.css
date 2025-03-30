@@ -162,7 +162,6 @@ body {
     display: block;
     margin: 0 auto;
   }
-
 /*------Apartado Promociones-------*/ 
 .contenedor-ofertas {
     max-width: 1200px;
@@ -172,11 +171,18 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.contenedor-ofertas.activo-categoria {
+    background-color: #f0f8ff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border: 1px solid #b0c4de;
 }
 
 .contenedor-ofertas h2 {
     font-size: 10px;
-    color: var(--darkblue); 
+    color: var(--darkblue);
     margin-bottom: 20px;
 }
 
@@ -198,28 +204,27 @@ body {
     transition: background-color 0.3s, color 0.3s;
 }
 
-.boton-oferta.activo {
-    background-color: var(--blue); 
-    color: white;
-    font-weight: bold;
-}
-
 .boton-oferta:hover {
-    background-color: #d0d0d0;
+    background-color: var(--blue);
 }
 
-.boton-oferta.activo:hover {
-    background-color: var(--darkblue); 
-
+.boton-oferta.seleccionado {
+    background-color: var(--darkblue);
+    color: white;
 }
+
 .contenido-ofertas {
-    display: flex;
+    display: flex; 
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
 }
-#ofertas-parque{
-    pointer-events: auto;
+
+#ofertas-parque {
+    display: none; 
+}
+
+#ofertas-restaurantes {
     display: none;
 }
 
@@ -229,58 +234,46 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 300px;
-    text-align: left; 
+    text-align: left;
 }
 
 .tarjeta-oferta img {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
-    display: block; 
+    height: 200px;
+    object-fit: cover;
+    display: block;
 }
 
 .precio-oferta {
-    background-color: var(--pink); 
+    background-color: var(--peach);
     color: white;
-    font-size: 1.5em;
+    font-size: 25px;
     padding: 10px 15px;
     text-align: center;
     font-weight: bold;
     position: relative;
-    margin-top: -40px; 
-    display: inline-block; 
-    margin-left: 15px; 
+    display: inline-block;
+    margin-left: 15px;
     border-radius: 5px;
 }
 
 .tarjeta-oferta h3 {
-    font-size: 1.3em;
+    font-size: 25px;
+    font-style: oblique;
     margin: 15px 15px 10px 15px;
-    color: var(--blue); 
+    color: var(--blue);
 }
 
 .tarjeta-oferta p {
     font-size: 1em;
     margin: 0 15px 15px 15px;
     color: #555;
-    text-align: justify; 
-}    
-
-.boton-ver-mas {
-    display: inline-block;
-    background-color: var(--darkblue); 
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 15px;
-    transition: background-color 0.3s;
+    text-align: left;
 }
-
-.boton-ver-mas:hover {
-    background-color: #333;
+.excepciones{
+    font-size: 15px;
+    font-style: italic;
 }
-
 
 /*------Apartado compra de tickets -------*/ 
 .div_ticketsZone {
