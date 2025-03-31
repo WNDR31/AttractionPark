@@ -1,0 +1,20 @@
+2025-03-31 10:35:12.557746+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"
+Syntax error in SQL statement "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"; SQL statement:
+@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL ) [42000-232]
+2025-03-31 10:35:25.084569+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"
+Syntax error in SQL statement "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"; SQL statement:
+@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL ) [42000-232]
+2025-03-31 10:35:35.337654+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"
+Syntax error in SQL statement "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"; SQL statement:
+@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL ) [42000-232]
+2025-03-31 10:35:47.629599+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"
+Syntax error in SQL statement "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"; SQL statement:
+@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL ) [42000-232]
+2025-03-31 10:40:14.461477+02:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Error de Sintaxis en sentencia SQL "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"
+Syntax error in SQL statement "[*]@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL )"; SQL statement:
+@@ -0,0 +1,81 @@ CREATE TABLE IF NOT EXISTS zone ( id BIGINT AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL ) [42000-232]
