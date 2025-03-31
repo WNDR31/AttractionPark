@@ -1,5 +1,5 @@
-@@ -0,0 +1,81 @@
- CREATE TABLE IF NOT EXISTS zone (
+
+CREATE TABLE IF NOT EXISTS zone (
      id BIGINT AUTO_INCREMENT PRIMARY KEY,
      name VARCHAR(255) NOT NULL
  );
@@ -19,11 +19,9 @@
      name VARCHAR(255) NOT NULL,
      description TEXT,
      height DOUBLE,
-     length DOUBLE,
      duration INT,
      speed DOUBLE,
      min_height INT,
-     min_height_with_adult INT,
      image_url1 VARCHAR(255),
      image_url2 VARCHAR(255),
      image_url3 VARCHAR(255),
