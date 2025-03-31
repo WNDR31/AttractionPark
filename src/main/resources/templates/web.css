@@ -20,48 +20,75 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
+#parque{
+  color: var(--darkblue);
+  font-weight: bold;
+  font-size: 24px;
+}
 
-/* Menú de navegación */
+
+/* -------------Menú de navegación-------------- */
+
 #navegacion-principal {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 30px;
-    background-color: var(--background-color);
-    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* Menú en una sola línea */
-#menu-navegacion {
-    display: flex;
-    flex-wrap: wrap; /* Permite que los elementos bajen en pantallas pequeñas */
-    list-style: none;
-    gap: 25px;
-}
-
-#menu-navegacion li {
-    border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 30px;
+  background-color: var(--background-color, #00408C); 
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+  position: fixed; 
+  top: 0;
+  width: 100%; 
+  z-index: 1000;
 }
 
 #menu-navegacion li a {
-    padding: 15px 15px;
-    text-decoration: none;
-    text-transform: uppercase;
-    color: var(--darkblue);
-    font-weight: bold;
-    transition: background-color 0.3s;
+  padding: 15px 15px;
+  text-decoration: none;
+  text-transform: uppercase;
+  color: var(--darkblue, #333); 
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 #menu-navegacion li:hover,
 #menu-navegacion li.active {
-    background-color: var(--blue);
+  background-color: var(--blue);
+  color: #fff; 
 }
 
-/* Apartado para el resaltado de menu-comprartickets*/
+.resaltar-tickets {
+  background-color: var(--pink); 
+  color: white;
+}
 
-#menu-navegacion li.resaltar-tickets {
-    background-color: var(--peach); 
-    border-radius: 0;
+.resaltar-tickets:hover {
+  background-color: var(--peach); 
+}
+
+.navbar-toggler {
+  border-color: var(--darkblue);
+}
+
+.navbar-brand img {
+  height: 40px; 
+  width: auto;
+}
+
+.navbar-collapse {
+  flex-grow: 0;
+}
+
+@media (max-width: 767px) {
+  #menu-navegacion {
+      flex-direction: column; 
+      text-align: center;
+  }
+  
+  #menu-navegacion li {
+      width: 100%; 
+  }
 }
 
 /*------Imagenes carousel pantalla home-------*/
@@ -162,7 +189,6 @@ body {
     display: block;
     margin: 0 auto;
   }
-
 /*------Apartado Promociones-------*/ 
 .contenedor-ofertas {
     max-width: 1200px;
@@ -172,54 +198,48 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     text-align: center;
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
-
-.contenedor-ofertas h2 {
-    font-size: 10px;
-    color: var(--darkblue); 
-    margin-bottom: 20px;
-}
-
 .botones-filtro {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
+    font-size:22px; 
+    padding: 10px 30px; 
 }
-
 .boton-oferta {
     padding: 10px 20px;
     margin: 0 10px;
     border: none;
     border-radius: 5px;
     background-color: #e0e0e0;
-    color: #333;
+    color: #000000;
     cursor: pointer;
-    font-size: 1em;
+    font-size: 20px;
     transition: background-color 0.3s, color 0.3s;
 }
 
-.boton-oferta.activo {
-    background-color: var(--blue); 
-    color: white;
-    font-weight: bold;
-}
-
 .boton-oferta:hover {
-    background-color: #d0d0d0;
+    background-color: var(--blue);
 }
 
-.boton-oferta.activo:hover {
-    background-color: var(--darkblue); 
-
+.boton-oferta.seleccionado {
+    background-color: var(--darkblue);
+    color: white;
 }
+
 .contenido-ofertas {
-    display: flex;
+    display: flex; 
     flex-wrap: wrap;
     justify-content: center;
     gap: 25px;
 }
-#ofertas-parque{
-    pointer-events: auto;
+
+#ofertas-parque {
+    display: none; 
+}
+
+#ofertas-restaurantes {
     display: none;
 }
 
@@ -229,60 +249,243 @@ body {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     overflow: hidden;
     width: 300px;
-    text-align: left; 
+    text-align: left;
 }
 
 .tarjeta-oferta img {
     width: 100%;
-    height: 200px; 
-    object-fit: cover; 
-    display: block; 
+    height: 200px;
+    object-fit: cover;
+    display: block;
 }
 
 .precio-oferta {
-    background-color: var(--pink); 
+    background-color: var(--peach);
     color: white;
-    font-size: 1.5em;
+    font-size: 25px;
     padding: 10px 15px;
     text-align: center;
     font-weight: bold;
     position: relative;
-    margin-top: -40px; 
-    display: inline-block; 
-    margin-left: 15px; 
+    display: inline-block;
+    margin-left: 15px;
     border-radius: 5px;
 }
 
 .tarjeta-oferta h3 {
-    font-size: 1.3em;
+    font-size: 25px;
+    font-style: oblique;
     margin: 15px 15px 10px 15px;
-    color: var(--blue); 
+    color: var(--blue);
 }
 
 .tarjeta-oferta p {
-    font-size: 1em;
+    font-size: 15px;
     margin: 0 15px 15px 15px;
     color: #555;
-    text-align: justify; 
-}    
+    text-align: left;
+}
+.excepciones{
+    font-size: 15px;
+    font-style: italic;
+}
 
-.boton-ver-mas {
+/*------------Apartado reviews --------------*/ 
+.container-reviews {
+    max-width: 950px;
+    display: flex;
+    align-items: stretch;
+    padding: 0;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+    margin: 30px auto;
+    font-family: sans-serif;
+    position: relative;
+    border: #00408C solid 3px;
+  }
+  
+  #imagen-reviews {
+    flex: 1;
+    max-width: 40%;
+  }
+  
+  #imagen-reviews img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+  
+  #seccion-contenido {
+    flex: 1;
+    padding: 30px;
+    max-width: 60%;
+    position: relative;
+  }
+  
+  #seccion-contenido h2 {
+    font-size: 30px;
+    color: var(--blue);
+    margin-bottom: 25px;
+    font-weight: bold;
+  }
+  
+  .review-slide {
+    display: none;
+  }
+  
+  .review-slide.active {
+    display: block;
+  }
+  
+  .cliente-opinion {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .foto-cliente {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+    border: 2px solid #eee;
+  }
+  
+  .foto-cliente img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  .cliente-detalles {
+    flex: 1;
+  }
+  
+  .cliente-nombre {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+    margin-bottom: 5px;
+  }
+  
+  .cliente-titulo {
+    font-size: 16px;
+    color: #777;
+    margin: 0;
+  }
+  
+  .testimonios {
+    font-style: italic;
+    font-size: 15px;
+    color: black;
+    margin: 0 0 20px 0;
+    padding-left: 20px;
+    border-left: 2px solid #eee;
+  }
+  
+  .paginas-testimonios {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+  
+  .paginas-testimonios .pagination-dot {
     display: inline-block;
-    background-color: var(--darkblue); 
-    color: white;
-    padding: 10px 20px;
-    text-decoration: none;
-    border-radius: 5px;
-    margin: 15px;
-    transition: background-color 0.3s;
-}
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ddd;
+    cursor: pointer;
+  }
+  
+  .paginas-testimonios .pagination-dot.active {
+    background-color: var(--darkblue);
+  }
+  
+  .paginas-testimonios .pagination-dot:hover {
+    background-color: #bbb;
+  }
+  
 
-.boton-ver-mas:hover {
+
+/*------Apartado Footer -------*/ 
+footer {
     background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
 }
 
+.calendar-container {
+    margin-top: 30px;
+    text-align: center;
+}
 
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f4b400;
+}
+
+td.saturday {
+    background-color: #0f9d58;
+    color: white;
+}
+
+td.sunday {
+    background-color: #d93025;
+    color: white;
+}
+
+td.event {
+    background-color: #f4c542;
+}
+
+.btn {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #45a049;
+}
+
+.calendar-header {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
 /*------Apartado compra de tickets -------*/ 
+.img_compra {
+    border-bottom-right-radius: 70px;
+    border-bottom-left-radius: 70px;
+    height: 760px;
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+}
+
 .div_ticketsZone {
     display: flex;
     margin-left: 200px;
@@ -296,11 +499,12 @@ body {
     border: #00408C solid 3px;
     text-align: center;
     border-radius: 30px;
-    background-color: #96ADD6;
+    background-color: var(--background-color);
     height: 550px;
     width: 400px;
     box-shadow: 0px 0px 10px 10px rgba(0, 0, 0, 0.1);
     position: relative;
+    color: #103869;
 }
 
 .textoCompra{
@@ -326,6 +530,7 @@ body {
 .text_ticket {
     margin: 35px;
     text-align: center;
+    color: #103869;
 }
 
 .btn_ticket {
@@ -348,7 +553,9 @@ body {
     margin-top: 10px;
     position: absolute;
     bottom: 80px;
+    text-align: center;
     transform: translateX(+50%);
+    position: absolute;
 }
 
 .ventanaCompra {
@@ -376,15 +583,21 @@ body {
 
 .modal-body {
     background-color: #F2EEE9;
+    padding-left: 200px;
+    padding-right: 200px;
+    padding-top: 70px;
+    padding-bottom: 70px;
 }
 
 .p_buy {
     color: #bebfc0;
+    text-align: center;
 }
 
 .h2_buy {
     color: #00408C;
     font-weight: bold;
+    text-align: center;
 }
 
 .h1_buy {
