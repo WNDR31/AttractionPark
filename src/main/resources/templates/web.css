@@ -549,7 +549,7 @@ td.event {
 .price_ticket {
     font-size: 20px;
     font-weight: bold;
-    color: var(--background-color);
+    color: var(--darkblue);
     margin-top: 10px;
     position: absolute;
     bottom: 80px;
@@ -603,4 +603,9 @@ td.event {
 .h1_buy {
     color: #E85234;
     font-weight: bold;
+    text-align: center;
+}
+
+.form_2 {
+  display: flex;
 }
