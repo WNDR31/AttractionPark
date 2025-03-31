@@ -90,68 +90,67 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //--------------------Función para seleccionar el tipo de promoción----------------
 function mostrarOfertas(categoria) {
+    console.log('Función mostrarOfertas llamada con categoría:', categoria); // NUEVA LÍNEA
     const botonesOferta = document.querySelectorAll('.boton-oferta');
     const ofertasParque = document.getElementById('ofertas-parque');
     const ofertasRestaurantes = document.getElementById('ofertas-restaurantes');
 
-    let botonSeleccionado = null;
     botonesOferta.forEach(boton => {
-        if (boton.classList.contains('seleccionado')) {
-            botonSeleccionado = boton;
-        }
         boton.classList.remove('seleccionado');
     });
 
-    if (botonSeleccionado && botonSeleccionado.getAttribute('data-categoria') === categoria) {
-        // If the same button is clicked again, hide all content
-        ofertasParque.style.display = 'none';
+    if (categoria === 'parque') {
+        if (ofertasParque.style.display === 'flex') {
+            ofertasParque.style.display = 'none';
+            return;
+        }
+        ofertasParque.style.display = 'flex';
         ofertasRestaurantes.style.display = 'none';
-        return;
+    } else if (categoria === 'restaurantes') {
+        if (ofertasRestaurantes.style.display === 'flex') {
+            ofertasRestaurantes.style.display = 'none';
+            return;
+        }
+        ofertasParque.style.display = 'none';
+        ofertasRestaurantes.style.display = 'flex';
     }
 
     botonesOferta.forEach(boton => {
         if (boton.getAttribute('data-categoria') === categoria) {
             boton.classList.add('seleccionado');
+            console.log('Clase "seleccionado" añadida al botón de:', categoria); // NUEVA LÍNEA
         }
     });
-
-    if (categoria === 'parque') {
-        ofertasParque.style.display = 'flex'; // or 'block'
-        ofertasRestaurantes.style.display = 'none';
-    } else if (categoria === 'restaurantes') {
-        ofertasParque.style.display = 'none';
-        ofertasRestaurantes.style.display = 'flex'; // or 'block'
-    }
 }
 
 document.addEventListener('DOMContentLoaded', function() {
-    mostrarOfertas('parque'); 
+    console.log('Evento DOMContentLoaded disparado'); // NUEVA LÍNEA
+    mostrarOfertas('parque');
 });
 
 //---------------------Apartado de testimonios------------------------------------
 let currentReview = 0;
 
 function showReview(index) {
-    // Ocultar todos los testimonios
     const reviews = document.querySelectorAll('.review-slide');
+    const dots = document.querySelectorAll('.pagination-dot');
+
+    if (reviews.length === 0 || dots.length === 0) {
+        console.warn('No se encontraron elementos .review-slide o .pagination-dot');
+        return;
+    }
+
     reviews.forEach((review, i) => {
         review.classList.remove('active');
-        document.querySelectorAll('.pagination-dot')[i].classList.remove('active');
+        dots[i].classList.remove('active');
     });
 
-    // Mostrar el testimonio seleccionado
     reviews[index].classList.add('active');
-    document.querySelectorAll('.pagination-dot')[index].classList.add('active');
+    dots[index].classList.add('active');
 }
 
-// Cambiar automáticamente cada 1 segundo
-setInterval(() => {
-    const reviews = document.querySelectorAll('.review-slide');
-    currentReview = (currentReview + 1) % reviews.length;
-    showReview(currentReview);
-}, 1000);
 
-//Suavizar el desplazamiento de horario -> footer
+//-----------------------------Suavizar el desplazamiento de horario -> footer------------------------------------------
 // Desplazamiento suave al hacer clic en los enlaces con el atributo href que comienza con #
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
@@ -162,6 +161,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       });
     });
   });
-  
 
-// Función para crear un calendario
+
+//-----------------------------Calendario footer------------------------------------------
