@@ -6,8 +6,10 @@ import jakarta.persistence.*;
 public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+   
     private Long id;
     private String name;
+    @Column(length = 1000) 
     private String description;
     private Double height;
     private Integer duration;
