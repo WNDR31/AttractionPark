@@ -1,7 +1,8 @@
-package com.example.demo.repositories;
+package com.example.demo.repository;
 
-import com.example.demo.entities.Zone;  // Asegúrate de importar correctamente Zone
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.demo.entity.Zone;
 
 public interface ZoneRepository extends JpaRepository<Zone, Long> {
 }

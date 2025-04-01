@@ -1,4 +1,4 @@
-package com.example.demo.entities;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
@@ -46,9 +46,6 @@ public class Attraction {
     public Double getHeight() { return height; }
     public void setHeight(Double height) { this.height = height; }
 
-    public Double getLength() { return length; }
-    public void setLength(Double length) { this.length = length; }
-
     public Integer getDuration() { return duration; }
     public void setDuration(Integer duration) { this.duration = duration; }
 
@@ -58,8 +55,6 @@ public class Attraction {
     public Integer getMinHeight() { return minHeight; }
     public void setMinHeight(Integer minHeight) { this.minHeight = minHeight; }
 
-    public Integer getMinHeightWithAdult() { return minHeightWithAdult; }
-    public void setMinHeightWithAdult(Integer minHeightWithAdult) { this.minHeightWithAdult = minHeightWithAdult; }
 
     public String getImageUrl1() { return imageUrl1; }
     public void setImageUrl1(String imageUrl1) { this.imageUrl1 = imageUrl1; }

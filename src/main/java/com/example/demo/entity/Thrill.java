@@ -1,25 +1,21 @@
-
-package com.example.demo.entities;
+package com.example.demo.entity;
 
 import jakarta.persistence.*;
 
 @Entity
-public class Zone {
+public class Thrill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     private String name;
 
-    // Constructor vacío
-    public Zone() {}
+    public Thrill() {}
 
-    // Constructor con parámetros
-    public Zone(String name) {
+    public Thrill(String name) {
         this.name = name;
     }
 
-    // Getters y Setters
     public Long getId() {
         return id;
     }

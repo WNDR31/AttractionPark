@@ -1,6 +1,6 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Reservation;
+import com.example.demo.entity.Reservation;
 import com.example.demo.services.ReservationService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

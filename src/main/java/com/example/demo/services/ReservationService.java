@@ -1,7 +1,8 @@
 package com.example.demo.services;
 
-import com.example.demo.entities.Reservation;
-import com.example.demo.repositories.ReservationRepository;
+import com.example.demo.entity.Reservation;
+import com.example.demo.repository.ReservationRepository;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
