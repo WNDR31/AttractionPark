@@ -3,6 +3,14 @@ package com.example.demo.config;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.List;
+import com.example.demo.repository.AttractionRepository;
+import com.example.demo.repository.ThrillRepository;
+import com.example.demo.repository.ZoneRepository;
+import com.example.demo.repository.TypeRepository;
+import com.example.demo.entity.Zone;
+import com.example.demo.entity.Attraction;
+import com.example.demo.entity.Thrill;
+import com.example.demo.entity.Type;
 
 @Component
 public class DataLoader implements CommandLineRunner {
