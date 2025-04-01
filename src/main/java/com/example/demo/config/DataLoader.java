@@ -76,7 +76,7 @@ public class DataLoader implements CommandLineRunner {
         attraction1.setName("BlueStreak");
         attraction1.setDescription("Una montaña rusa de madera clásica y la más antigua en funcionamiento en Cedar Point. Ofrece un recorrido de 1 minuto y 30 segundos con una altura de 78 pies y una velocidad de hasta 40 mph. Su diseño tradicional de ida y vuelta proporciona múltiples colinas y una emocionante experiencia de airtime");
         attraction1.setHeight(78.0);
-        attraction1.setDuration(2558);
+        attraction1.setDuration(90);
         attraction1.setSpeed(40.0);
         attraction1.setMinHeight(48);
         attraction1.setImageUrl1("bluestreak1.png");
