@@ -35,21 +35,41 @@ public class DataLoader implements CommandLineRunner {
         // Insertar datos en la base de datos
 
         // Crear Zonas
-        Zone zone1 = new Zone("Fantasy Land");
-        Zone zone2 = new Zone("Adventure World");
-        zoneRepository.saveAll(List.of(zone1, zone2));
+        System.out.println("Insertando zonas de prueba...");
+        Zone zone1 = new Zone("FRONTIER TOWN");
+        Zone zone2 = new Zone("CAMP SNOOPY");
+        Zone zone3 = new Zone("GEMINI MIDWAY");
+        Zone zone4 = new Zone("FRONTIER TRAIL");
+        Zone zone5 = new Zone("MILLENNIUM MIDWAY");
+        Zone zone6 = new Zone("MAIN MIDWAY");
+        Zone zone7 = new Zone("PLANET SNOOPY™");
+        Zone zone8 = new Zone("KIDDY KINGDOM");
+        Zone zone9 = new Zone("BOARDWALK");
+
+        zoneRepository.saveAll(List.of(zone1, zone2, zone3, zone4, zone5, zone6, zone7, zone8, zone9));
+        System.out.println("Zonas insertadas correctamente.");
 
         // Crear Intensidades (Thrill)
-        Thrill thrill1 = new Thrill("Alta");
-        Thrill thrill2 = new Thrill("Media");
-        Thrill thrill3 = new Thrill("Baja");
-        thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3));
+        System.out.println("Insertando niveles de intensidad...");
+        Thrill thrill1 = new Thrill("Low");
+        Thrill thrill2 = new Thrill("Moderate");
+        Thrill thrill3 = new Thrill("Aggressive");
+        Thrill thrill4 = new Thrill("Mild");
+        Thrill thrill5 = new Thrill("High");
+
+        thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3, thrill4, thrill5));
+        System.out.println("Intensidades insertadas correctamente.");
 
         // Crear Tipos de Atracción
-        Type type1 = new Type("Montaña Rusa");
-        Type type2 = new Type("Carrusel");
-        Type type3 = new Type("Torre de caída");
-        typeRepository.saveAll(List.of(type1, type2, type3));
+        System.out.println("Insertando tipos de atracciones...");
+        Type type1 = new Type("Roller coasters");
+        Type type2 = new Type("Thrill rides");
+        Type type3 = new Type("Family rides");
+        Type type4 = new Type("Water Ride");
+        Type type5 = new Type("Children rides");
+
+        typeRepository.saveAll(List.of(type1, type2, type3, type4, type5));
+        System.out.println("Tipos de atracciones insertados correctamente.");
 
         // Crear Atracciones
         Attraction attraction1 = new Attraction();
