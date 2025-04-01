@@ -76,4 +76,11 @@ public class Attraction {
 
     public Type getType() { return type; } // Getter para Type
     public void setType(Type type) { this.type = type; } // Setter para Type
+    public Integer getLine() {
+        return line;
+    }
+    
+    public void setLine(Integer line) {
+        this.line = line;
+    }
 }
