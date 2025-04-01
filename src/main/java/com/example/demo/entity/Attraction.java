@@ -17,7 +17,7 @@ public class Attraction {
     private String imageUrl2;
     private String imageUrl3;
     private String videoUrl;
-    private Integer cola; 
+    private Integer line; 
     
     @ManyToOne
     @JoinColumn(name = "zone_id")
