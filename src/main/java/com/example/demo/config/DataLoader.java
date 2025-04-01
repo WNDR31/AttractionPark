@@ -73,37 +73,23 @@ public class DataLoader implements CommandLineRunner {
 
         // Crear Atracciones
         Attraction attraction1 = new Attraction();
-        attraction1.setName("Dragon Coaster");
-        attraction1.setDescription("Una montaña rusa extrema con giros de 360°.");
-        attraction1.setHeight(30.5);
-        attraction1.setDuration(120);
-        attraction1.setSpeed(100.0);
-        attraction1.setMinHeight(140);
-        attraction1.setImageUrl1("dragon1.jpg");
-        attraction1.setImageUrl2("dragon2.jpg");
-        attraction1.setImageUrl3("dragon3.jpg");
-        attraction1.setVideoUrl("dragon.mp4");
-        attraction1.setZone(zone1);
+        attraction1.setName("BlueStreak");
+        attraction1.setDescription("Una montaña rusa de madera clásica y la más antigua en funcionamiento en Cedar Point. Ofrece un recorrido de 1 minuto y 30 segundos con una altura de 78 pies y una velocidad de hasta 40 mph. Su diseño tradicional de ida y vuelta proporciona múltiples colinas y una emocionante experiencia de airtime");
+        attraction1.setHeight(78.0);
+        attraction1.setDuration(2558);
+        attraction1.setSpeed(40.0);
+        attraction1.setMinHeight(48);
+        attraction1.setImageUrl1("bluestreak1.png");
+        attraction1.setImageUrl2("bluestreak2.jng");
+        attraction1.setImageUrl3("bluestreak3.jpeg");
+        attraction1.setVideoUrl("https://www.youtube.com/embed/t5aeLbY4bE8?si=G7qcOJd7ATmSEPcr");
+        attraction1.setZone(zone6);
         attraction1.setIntensity(thrill1);
         attraction1.setType(type1);
 
-        Attraction attraction2 = new Attraction();
-        attraction2.setName("Magic Carousel");
-        attraction2.setDescription("Un carrusel encantado para todas las edades.");
-        attraction2.setHeight(5.0);
-        attraction2.setDuration(180);
-        attraction2.setSpeed(5.0);
-        attraction2.setMinHeight(0);
-        attraction2.setImageUrl1("carousel1.jpg");
-        attraction2.setImageUrl2("carousel2.jpg");
-        attraction2.setImageUrl3("carousel3.jpg");
-        attraction2.setVideoUrl("carousel.mp4");
-        attraction2.setZone(zone2);
-        attraction2.setIntensity(thrill3);
-        attraction2.setType(type2);
 
         // Guardar Atracciones en la base de datos
-        attractionRepository.saveAll(List.of(attraction1, attraction2));
+        attractionRepository.saveAll(List.of(attraction1));
 
         System.out.println("✅ Datos insertados correctamente en la base de datos.");
     }
