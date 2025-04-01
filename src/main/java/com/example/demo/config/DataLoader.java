@@ -86,7 +86,7 @@ public class DataLoader implements CommandLineRunner {
         attraction1.setZone(zone6);
         attraction1.setIntensity(thrill1);
         attraction1.setType(type1);
-        attraction1.setLine(40);
+        attraction1.setLine(40); // Tiempo de espera en minutos
         
 
 
