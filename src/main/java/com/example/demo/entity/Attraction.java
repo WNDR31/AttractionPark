@@ -7,7 +7,6 @@ public class Attraction {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String name;
     private String description;
     private Double height;
@@ -18,7 +17,8 @@ public class Attraction {
     private String imageUrl2;
     private String imageUrl3;
     private String videoUrl;
-
+    private Integer cola; 
+    
     @ManyToOne
     @JoinColumn(name = "zone_id")
     private Zone zone;
