@@ -211,7 +211,7 @@ public class DataLoader implements CommandLineRunner {
         attraction9.setImageUrl1("snoopydeep1.jpg");
         attraction9.setImageUrl2("snoopydeep2.jpg");
         attraction9.setImageUrl3("snoopydeep3.jpg");
-        attraction9.setVideoUrl("https://www.youtube.com/embed/t5aeLbY4bE8?si=G7qcOJd7ATmSEPcr");
+        attraction9.setVideoUrl("https://youtu.be/YuHJgrh9Qpo?si=1oTUAi6X19t0Jw7l");
         attraction9.setZone(zone7); 
         attraction9.setIntensity(thrill1);
         attraction9.setType(type3);
@@ -431,19 +431,48 @@ public class DataLoader implements CommandLineRunner {
         attraction22.setImageUrl2("wildernessrun2.jpg");
         attraction22.setImageUrl3("wildernessrun3.jpg");
         attraction22.setVideoUrl("https://youtu.be/gkVt5uryylQ");
-        attraction22.setZone(zone2); // CAMP SNOOPY
-        attraction22.setIntensity(thrill1); // Low (usando thrill1 que corresponde a "Low")
-        attraction22.setType(type5); // Children rides
-        attraction22.setLine(10); // Tiempo de espera reducido para atracciones infantiles
+        attraction22.setZone(zone2); 
+        attraction22.setIntensity(thrill2); 
+        attraction22.setType(type5);
+        attraction22.setLine(10);
 
-// Guardar atracciones
-attractionRepository.saveAll(List.of(attraction20, attraction21, attraction22));
-System.out.println("Atracciones 20, 21 y 22 insertadas correctamente.");
-    
+        // Atracción 23 - Kiddy Kingdom Carousel
+        Attraction attraction23 = new Attraction();
+        attraction23.setName("Kiddy Kingdom Carousel");
+        attraction23.setDescription("Kiddy Kingdom Carousel es un carrusel tradicional con animales y vehículos para montar. Es una atracción clásica de la zona, ideal para los más pequeños.");
+        attraction23.setHeight(0.0);
+        attraction23.setDuration(180); // 3 minutos = 180 segundos
+        attraction23.setSpeed(0.0);
+        attraction23.setMinHeight(36);
+        attraction23.setImageUrl1("kiddiecarousel1.jpg");
+        attraction23.setImageUrl2("kiddiecarousel2.jpg");
+        attraction23.setImageUrl3("kiddiecarousel3.jpg");
+        attraction23.setVideoUrl("https://youtu.be/YyUm5gO4eTg?si=isdcgLlTV_U_bLJN");
+        attraction23.setZone(zone8); 
+        attraction23.setIntensity(thrill1); // Low
+        attraction23.setType(type5); 
+        attraction23.setLine(10); // Tiempo de espera reducido para atracciones infantiles
+
+        // Atracción 24 - Roto Whip
+        Attraction attraction24 = new Attraction();
+        attraction24.setName("Roto Whip");
+        attraction24.setDescription("Roto Whip es un paseo giratorio en el que los niños se suben a carritos que giran rápidamente, ofreciendo un recorrido más dinámico y emocionante que otros paseos suaves.");
+        attraction24.setHeight(10.0);
+        attraction24.setDuration(120); // 2 minutos = 120 segundos
+        attraction24.setSpeed(5.0);
+        attraction24.setMinHeight(36);
+        attraction24.setImageUrl1("roto-whip1.jpg");
+        attraction24.setImageUrl2("roto-whip2.jpg");
+        attraction24.setImageUrl3("roto-whip3.jpg");
+        attraction24.setVideoUrl("https://youtu.be/8oHSwt3WUbc?si=iTBFH5E_ryMoWxUg");
+        attraction24.setZone(zone8); 
+        attraction24.setIntensity(thrill2); 
+        attraction24.setType(type5); 
+        attraction24.setLine(10); // Tiempo de espera reducido para atracciones infantiles
+
         
         // Guardar Atracciones en la base de datos
-        attractionRepository.saveAll(List.of(attraction1, attraction2, attraction3, attraction4, attraction5, attraction6, attraction7, attraction8, attraction9, attraction10, attraction11));
-
-        System.out.println("✅ Datos insertados correctamente en la base de datos.");
+        attractionRepository.saveAll(List.of( attraction1,  attraction2,  attraction3,  attraction4,  attraction5, attraction6,  attraction7,  attraction8,  attraction9,  attraction10, attraction11, attraction12, attraction13, attraction14, attraction15, attraction16, attraction17, attraction18, attraction19, attraction20, attraction21, attraction22, attraction23, attraction24 ));
+        System.out.println("Todas las atracciones (1-24) han sido insertadas correctamente.");
     }
 }
