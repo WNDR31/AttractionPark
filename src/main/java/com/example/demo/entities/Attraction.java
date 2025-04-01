@@ -11,11 +11,9 @@ public class Attraction {
     private String name;
     private String description;
     private Double height;
-    private Double length;
     private Integer duration;
     private Double speed;
     private Integer minHeight;
-    private Integer minHeightWithAdult;
     private String imageUrl1;
     private String imageUrl2;
     private String imageUrl3;
