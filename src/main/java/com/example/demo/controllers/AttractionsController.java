@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @Controller
@@ -95,35 +96,42 @@ public class AttractionsController {
         loadFilterData(model);
         return "attractionsgalery";
     }
-
-    // Filtro combinado
-    @GetMapping("/attractions/filter")
-    public String filterAttractions(
-            @RequestParam(required = false) String zone,
-            @RequestParam(required = false) String intensity,
-            @RequestParam(required = false) String type,
-            Model model) {
         
-        List<Attraction> filteredAttractions;
-        
-        if ((zone == null || zone.isEmpty()) && 
-            (intensity == null || intensity.isEmpty()) && 
-            (type == null || type.isEmpty())) {
-            // Si no hay filtros, mostrar todas
-            filteredAttractions = attractionRepository.findAll();
-        } else {
-            // Aplicar filtros combinados
-            filteredAttractions = attractionRepository.findByCombinedFilters(
-                zone != null && !zone.isEmpty() ? zone : null,
-                intensity != null && !intensity.isEmpty() ? intensity : null,
-                type != null && !type.isEmpty() ? type : null
-            );
-        }
-        
-        model.addAttribute("attractions", filteredAttractions);
-        loadFilterData(model);
-        return "attractionsgalery";
+    @GetMapping("/map")
+    public String showParkMap(Model model) {
+        return "map"; // Renderiza el mapa completo
     }
+
+    @GetMapping("/attractions/filter")
+public String filterAttractions(
+        @RequestParam(required = false) String zone,
+        @RequestParam(required = false) String intensity,
+        @RequestParam(required = false) String type,
+        Model model) {
+    
+    // Añade estos atributos para mantener los filtros seleccionados
+    model.addAttribute("selectedZone", zone);
+    model.addAttribute("selectedIntensity", intensity);
+    model.addAttribute("selectedType", type);
+    
+    List<Attraction> filteredAttractions;
+    
+    if ((zone == null || zone.isEmpty()) && 
+        (intensity == null || intensity.isEmpty()) && 
+        (type == null || type.isEmpty())) {
+        filteredAttractions = attractionRepository.findAll();
+    } else {
+        filteredAttractions = attractionRepository.findByCombinedFilters(
+            zone != null && !zone.isEmpty() ? zone : null,
+            intensity != null && !intensity.isEmpty() ? intensity : null,
+            type != null && !type.isEmpty() ? type : null
+        );
+    }
+    
+    model.addAttribute("attractions", filteredAttractions);
+    loadFilterData(model);
+    return "attractionsgalery";
+}
 
     // Método para cargar datos de filtros
     private void loadFilterData(Model model) {

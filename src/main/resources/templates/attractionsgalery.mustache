@@ -21,6 +21,32 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background-color: #f9f9f9;
             color: #333;
+            scroll-behavior: smooth; /* Transición suave al desplazarse */
+        }
+
+        /* Botón del mapa flotante */
+        .map-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background-color: var(--secondary-color);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 20px;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .map-button:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
         }
 
         .header-gallery {
@@ -50,6 +76,7 @@
             padding: 25px;
             box-shadow: var(--box-shadow);
             margin-bottom: 40px;
+            transition: all 0.4s ease-out; /* Transición más suave */
         }
 
         .filter-label {
@@ -72,6 +99,19 @@
             padding: 10px 15px;
             font-size: 0.95rem;
             transition: all 0.3s;
+        }
+
+        /* Estilo para selectores con opción seleccionada */
+        .form-select:not([value=""]) {
+            border-color: var(--accent-color);
+            background-color: rgba(52, 152, 219, 0.05);
+        }
+
+        /* Estilo para opciones seleccionadas */
+        .form-select option[value]:checked {
+            font-weight: bold;
+            color: var(--accent-color);
+            background-color: rgba(52, 152, 219, 0.1);
         }
 
         .form-select:hover {
@@ -123,13 +163,24 @@
         }
 
         .attraction-card {
-            margin-bottom: 40px; /* Aumentado de 30px a 40px */
+            margin-bottom: 40px;
             border: none;
             border-radius: var(--border-radius);
             overflow: hidden;
             box-shadow: var(--box-shadow);
             transition: all 0.3s ease;
             background-color: white;
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Transición para las tarjetas */
+        }
+
+        .attraction-card.hidden {
+            opacity: 0;
+            transform: translateY(20px);
+            height: 0;
+            margin-bottom: 0;
+            overflow: hidden;
         }
 
         .attraction-card:hover {
@@ -142,7 +193,7 @@
             height: 220px;
             object-fit: cover;
             transition: transform 0.5s ease;
-            background-color: #f8f9fa; /* Fondo para imágenes transparentes */
+            background-color: #f8f9fa;
         }
 
         .attraction-card:hover img {
@@ -216,6 +267,14 @@
             color: var(--dark-gray);
             font-size: 1.1rem;
             grid-column: 1 / -1;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+
+        .no-results.show {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .no-results i {
@@ -232,6 +291,41 @@
             margin-top: 50px;
         }
 
+        /* Animación de carga */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(52, 152, 219, 0.2);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
         @media (max-width: 768px) {
             .header-gallery h1 {
                 font-size: 2rem;
@@ -241,14 +335,28 @@
                 justify-content: center !important;
                 margin-top: 15px;
             }
+
+            .map-button {
+                padding: 10px 15px;
+                font-size: 0.9rem;
+                top: 15px;
+                right: 15px;
+            }
         }
     </style>
 </head>
 <body>
-<!-- Imagen de Cabecera -->
-    <div>
-        <img src="/bluestreak1.jpeg" alt="Blue Streak" class="img-fluid" width="100%">
-    </div>
+<!-- Botón del mapa flotante -->
+<a href="http://localhost:8080/map" class="map-button">
+    <i class="fas fa-map-marked-alt"></i>
+    <span class="d-none d-sm-inline">Ver Mapa</span>
+</a>
+
+<!-- Overlay de carga -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+
 <!-- Encabezado con estilo -->
 <div class="header-gallery">
     <div class="container">
@@ -259,7 +367,7 @@
 
 <div class="container">
     <!-- Sección de Filtros mejorada -->
-    <div class="filter-section">
+    <div class="filter-section" id="filterSection">
         <form id="filterForm" action="/attractions/filter" method="get">
             <div class="row g-3">
                 <div class="col-md-4">
@@ -299,7 +407,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="d-flex justify-content-end gap-2 filter-actions">
-                        <button type="submit" class="btn btn-filter">
+                        <button type="submit" class="btn btn-filter" id="applyFilters">
                             <i class="fas fa-filter"></i> Aplicar Filtros
                         </button>
                         <button type="button" id="resetButton" class="btn btn-reset">
@@ -312,9 +420,9 @@
     </div>
 
     <!-- Galería de Atracciones -->
-    <div class="row">
+    <div class="row" id="attractionsContainer">
         {{#attractions}}
-            <div class="col-lg-4 col-md-6 mb-4"> <!-- Añadido mb-4 para más espacio -->
+            <div class="col-lg-4 col-md-6 mb-4 attraction-item" data-zone="{{zone.name}}" data-intensity="{{intensity.name}}" data-type="{{type.name}}">
                 <div class="attraction-card h-100">
                     <img src="/{{imageUrl1}}" alt="{{name}}" class="img-fluid" 
                      onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
@@ -348,7 +456,7 @@
         {{/attractions}}
 
         {{^attractions}}
-            <div class="no-results">
+            <div class="no-results show">
                 <i class="fas fa-search"></i>
                 <p>No se encontraron atracciones que coincidan con los filtros seleccionados.</p>
                 <a href="/attractionsgalery" class="btn btn-reset mt-3">
@@ -372,22 +480,128 @@
     document.addEventListener('DOMContentLoaded', function() {
         const resetButton = document.getElementById('resetButton');
         const filterForm = document.getElementById('filterForm');
+        const applyFilters = document.getElementById('applyFilters');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const attractionsContainer = document.getElementById('attractionsContainer');
+        const noResults = document.querySelector('.no-results');
         
+        // Función para mostrar u ocultar el overlay de carga
+        function setLoading(loading) {
+            if (loading) {
+                loadingOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                loadingOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Función para animar el filtrado
+        function animateFilterChange() {
+            // Guardar la posición actual del scroll
+            const scrollPosition = window.scrollY;
+            const filterSection = document.getElementById('filterSection');
+            
+            // Aplicar animación de transición
+            filterSection.style.opacity = '0.7';
+            filterSection.style.transform = 'translateY(-10px)';
+            
+            // Mostrar overlay de carga
+            setLoading(true);
+            
+            // Esperar un momento para que se vea la animación
+            setTimeout(() => {
+                filterSection.style.opacity = '1';
+                filterSection.style.transform = 'translateY(0)';
+                
+                // Restaurar la posición del scroll después de la animación
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'instant' // Usamos 'instant' para evitar animación de scroll
+                });
+                
+                // Ocultar overlay después de un breve tiempo
+                setTimeout(() => {
+                    setLoading(false);
+                }, 300);
+            }, 300);
+        }
+        
+        // Manejar el envío del formulario
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            animateFilterChange();
+            
+            // Simular un retraso para la transición (en producción sería la llamada AJAX)
+            setTimeout(() => {
+                // Aquí iría tu lógica de filtrado real
+                this.submit();
+            }, 500);
+        });
+        
+        // Manejar el botón de reset
         resetButton.addEventListener('click', function() {
+            // Guardar posición del scroll
+            const scrollPosition = window.scrollY;
+            
+            // Animación de reset
+            animateFilterChange();
+            
             // Resetear los valores de los select
             const selects = filterForm.querySelectorAll('select');
             selects.forEach(select => {
                 select.value = '';
+                select.dispatchEvent(new Event('change'));
             });
             
             // Enviar el formulario (esto recargará la página sin filtros)
-            filterForm.submit();
+            setTimeout(() => {
+                filterForm.submit();
+            }, 500);
         });
-
+        
+        // Actualizar estilos de los selectores al cargar la página
+        document.querySelectorAll('.form-select').forEach(select => {
+            if(select.value !== '') {
+                select.classList.add('selected');
+            }
+            
+            // Escuchar cambios en los selectores
+            select.addEventListener('change', function() {
+                if(this.value !== '') {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                }
+            });
+        });
+        
         // Asegurar que las imágenes PNG se muestren correctamente
         document.querySelectorAll('.attraction-card img').forEach(img => {
             if(img.src.toLowerCase().endsWith('.png')) {
-                img.style.backgroundColor = '#f8f9fa'; // Fondo para PNG transparentes
+                img.style.backgroundColor = '#f8f9fa';
+            }
+        });
+        
+        // Prevenir el comportamiento predeterminado del formulario si no hay cambios
+        filterForm.addEventListener('submit', function(e) {
+            const formData = new FormData(this);
+            let hasFilters = false;
+            
+            for (const [key, value] of formData.entries()) {
+                if (value !== '') {
+                    hasFilters = true;
+                    break;
+                }
+            }
+            
+            if (!hasFilters) {
+                e.preventDefault();
+                // Animación sutil para indicar que no hay cambios
+                filterForm.classList.add('no-changes');
+                setTimeout(() => {
+                    filterForm.classList.remove('no-changes');
+                }, 1000);
             }
         });
     });

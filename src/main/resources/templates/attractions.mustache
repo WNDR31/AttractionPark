@@ -217,6 +217,81 @@
             margin-top: 50px;
         }
 
+        /* Estilos para el tiempo de espera dinámico */
+        .wait-time-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .wait-time-value {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .wait-time-unit {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .wait-time-animation {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-left: 8px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            opacity: 0.7;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .dot-1 { animation-delay: 0s; }
+        .dot-2 { animation-delay: 0.3s; }
+        .dot-3 { animation-delay: 0.6s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Animación cuando cambia el tiempo */
+        .wait-time-change {
+            animation: timeChange 0.5s ease-in-out;
+        }
+
+        @keyframes timeChange {
+            0% { transform: scale(1); color: var(--secondary-color); }
+            50% { transform: scale(1.2); color: #e74c3c; }
+            100% { transform: scale(1); color: var(--secondary-color); }
+        }
+
+        /* Indicador de tendencia */
+        .trend-indicator {
+            margin-left: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .trend-up {
+            color: #e74c3c;
+        }
+
+        .trend-down {
+            color: #2ecc71;
+        }
+
+        .trend-stable {
+            color: var(--dark-gray);
+        }
+
         @media (max-width: 768px) {
             .header-detail h1 {
                 font-size: 2rem;
@@ -329,7 +404,18 @@
                     {{#attraction.line}}
                     <div class="spec-item">
                         <div class="spec-label">Tiempo de espera</div>
-                        <div class="spec-value">{{attraction.line}} minutos</div>
+                        <div class="spec-value">
+                            <div class="wait-time-container">
+                                <span class="wait-time-value">{{attraction.line}}</span>
+                                <span class="wait-time-unit">minutos</span>
+                                <div class="wait-time-animation">
+                                    <div class="pulse-dot dot-1"></div>
+                                    <div class="pulse-dot dot-2"></div>
+                                    <div class="pulse-dot dot-3"></div>
+                                </div>
+                                <span class="trend-indicator trend-stable"><i class="fas fa-equals"></i></span>
+                            </div>
+                        </div>
                     </div>
                     {{/attraction.line}}
                 </div>
@@ -389,6 +475,85 @@
             }
         });
         {{/attraction.imageUrl2}}
+
+        // Función para simular cambios en el tiempo de espera
+        function simulateLiveWaitTime() {
+            const waitTimeElement = document.querySelector('.wait-time-value');
+            const trendIndicator = document.querySelector('.trend-indicator');
+            if (!waitTimeElement || !trendIndicator) return;
+            
+            // Valor inicial desde la base de datos
+            let currentTime = parseInt(waitTimeElement.textContent);
+            let lastChange = 0;
+            
+            // Actualizar cada 1-2 minutos (para simular)
+            setInterval(() => {
+                // Generar un cambio aleatorio (-5 a +10 minutos)
+                const change = Math.floor(Math.random() * 16) - 5;
+                let newTime = currentTime + change;
+                
+                // Mantener dentro de límites razonables (5-120 minutos)
+                newTime = Math.max(5, Math.min(newTime, 120));
+                
+                // Solo actualizar si hay cambio
+                if (newTime !== currentTime) {
+                    lastChange = newTime - currentTime;
+                    currentTime = newTime;
+                    
+                    // Actualizar indicador de tendencia
+                    updateTrendIndicator(lastChange);
+                    
+                    // Aplicar animación
+                    waitTimeElement.classList.add('wait-time-change');
+                    setTimeout(() => {
+                        waitTimeElement.textContent = newTime;
+                        waitTimeElement.classList.remove('wait-time-change');
+                    }, 250);
+                    
+                    // Cambiar color según la tendencia
+                    if (lastChange > 0) {
+                        waitTimeElement.style.color = '#e74c3c'; // Rojo - aumentando
+                    } else if (lastChange < 0) {
+                        waitTimeElement.style.color = '#2ecc71'; // Verde - disminuyendo
+                    }
+                    
+                    // Volver al color original después de 2 segundos
+                    setTimeout(() => {
+                        waitTimeElement.style.color = 'var(--secondary-color)';
+                    }, 2000);
+                }
+            }, 60000); // Actualizar cada minuto (ajustable)
+        }
+
+        // Función para actualizar el indicador de tendencia
+        function updateTrendIndicator(change) {
+            const trendIndicator = document.querySelector('.trend-indicator');
+            if (!trendIndicator) return;
+            
+            // Limpiar clases anteriores
+            trendIndicator.classList.remove('trend-up', 'trend-down', 'trend-stable');
+            
+            // Determinar nueva tendencia
+            if (change > 0) {
+                trendIndicator.classList.add('trend-up');
+                trendIndicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            } else if (change < 0) {
+                trendIndicator.classList.add('trend-down');
+                trendIndicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
+            } else {
+                trendIndicator.classList.add('trend-stable');
+                trendIndicator.innerHTML = '<i class="fas fa-equals"></i>';
+            }
+            
+            // Animación
+            trendIndicator.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                trendIndicator.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // Iniciar la simulación del tiempo de espera
+        simulateLiveWaitTime();
     });
 </script>
 </body>

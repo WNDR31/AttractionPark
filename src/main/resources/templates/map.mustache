@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa Completo - Cedar Point</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #e74c3c;
+            --accent: #3498db;
+            --light: #ecf0f1;
+            --dark: #7f8c8d;
+        }
+        
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f8f9fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .map-header {
+            background: linear-gradient(135deg, var(--primary) 0%, #1a252f 100%);
+            color: white;
+            padding: 1.5rem 0;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .map-wrapper {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            padding: 1rem;
+            position: relative;
+        }
+        
+        .map-container {
+            width: 100%;
+            height: 0;
+            padding-bottom: 70%;
+            position: relative;
+            overflow: hidden;
+            background-color: #f0f0f0;
+            border-radius: 8px;
+        }
+        
+        .map-svg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .map-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+        
+        .map-zone {
+            fill: rgba(52, 152, 219, 0.2);
+            stroke: var(--accent);
+            stroke-width: 2;
+            transition: all 0.3s;
+            cursor: pointer;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .map-zone:hover {
+            fill: rgba(231, 76, 60, 0.3);
+            stroke: var(--secondary);
+            stroke-width: 3;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+        }
+        
+        .zone-label {
+            font-size: 1rem;
+            font-weight: 700;
+            fill: var(--primary);
+            pointer-events: none;
+            text-anchor: middle;
+            dominant-baseline: middle;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+        }
+        
+        .zone-icon {
+            pointer-events: none;
+            text-anchor: middle;
+        }
+        
+        .map-actions {
+            display: flex;
+            justify-content: center;
+            margin-top: 1.5rem;
+        }
+        
+        .btn-map {
+            padding: 0.75rem 1.5rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: var(--secondary);
+            border-color: var(--secondary);
+        }
+        
+        .btn-primary:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+        }
+        
+        .map-footer {
+            background-color: var(--primary);
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: 2rem;
+        }
+        
+        .map-legend {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .zone-tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.85);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 600;
+            pointer-events: none;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.2s;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+        }
+        
+        /* Estilos para los iconos de zonas */
+        .icon-wrapper {
+            pointer-events: none;
+        }
+        
+        .icon-bg {
+            fill: white;
+            stroke: var(--primary);
+            stroke-width: 1.5;
+            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+        }
+        
+        .icon-fg {
+            fill: var(--secondary);
+        }
+        
+        .main-container {
+            padding: 0 15px;
+        }
+        
+        @media (max-width: 992px) {
+            .map-container {
+                padding-bottom: 90%;
+            }
+            
+            .zone-label {
+                font-size: 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .map-header {
+                padding: 1rem 0;
+            }
+            
+            .map-container {
+                padding-bottom: 100%;
+            }
+            
+            .zone-label {
+                font-size: 0.8rem;
+            }
+            
+            .zone-icon {
+                font-size: 0.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Encabezado -->
+    <header class="map-header">
+        <div class="container">
+            <h1 class="display-5">
+                <i class="fas fa-map-marked-alt me-3"></i>Mapa Interactivo de Cedar Point
+            </h1>
+            <p class="lead">Selecciona una zona para explorar sus atracciones</p>
+        </div>
+    </header>
+
+    <!-- Mapa Principal -->
+    <main class="container main-container">
+        <div class="map-wrapper">
+            <div class="map-container">
+             <svg class="map-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
+                <!-- Imagen de fondo del mapa -->
+                <image href="/map.jpg" width="1200" height="800" class="map-bg"/>
+                
+                <!-- 1. FRONTIER TOWN -->
+                <a href="/attractions/zone?name=FRONTIER+TOWN" class="zone-link">
+                    <path class="map-zone" d="M400,30 L700,30 L700,130 L400,130 Z"/>
+                    <g class="icon-wrapper" transform="translate(550, 70)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="550" y="110">FRONTIER TOWN</text>
+                </a>
+                
+                <!-- 2. CAMP SNOOPY -->
+                <a href="/attractions/zone?name=CAMP+SNOOPY" class="zone-link">
+                    <path class="map-zone" d="M450,160 L600,160 L600,260 L450,260 Z"/>
+                    <g class="icon-wrapper" transform="translate(525, 200)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="525" y="240">CAMP SNOOPY</text>
+                </a>
+                
+                <!-- 3. GEMINI MIDWAY -->
+                <a href="/attractions/zone?name=GEMINI+MIDWAY" class="zone-link">
+                    <path class="map-zone" d="M650,220 L800,220 L800,320 L650,320 Z"/>
+                    <g class="icon-wrapper" transform="translate(725, 260)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="725" y="300">GEMINI MIDWAY</text>
+                </a>
+                
+                <!-- 4. FRONTIER TRAIL (devuelto a su posición original) -->
+                <a href="/attractions/zone?name=FRONTIER+TRAIL" class="zone-link">
+                    <path class="map-zone" d="M300,320 L450,320 L450,420 L300,420 Z"/>
+                    <g class="icon-wrapper" transform="translate(375, 360)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="375" y="400">FRONTIER TRAIL</text>
+                </a>
+                
+                <!-- 5. MILLENNIUM MIDWAY (bajado un poco) -->
+                <a href="/attractions/zone?name=MILLENNIUM+MIDWAY" class="zone-link">
+                    <path class="map-zone" d="M500,400 L650,400 L650,500 L500,500 Z"/>
+                    <g class="icon-wrapper" transform="translate(575, 440)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="575" y="480">MILLENNIUM MIDWAY</text>
+                </a>
+                
+                <!-- 6. MAIN MIDWAY (mantenido igual) -->
+                <a href="/attractions/zone?name=MAIN+MIDWAY" class="zone-link">
+                    <path class="map-zone" d="M400,650 L600,650 L600,750 L400,750 Z"/>
+                    <g class="icon-wrapper" transform="translate(500, 690)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="500" y="730">MAIN MIDWAY</text>
+                </a>
+                
+                <!-- 7. PLANET SNOOPY™ -->
+                <a href="/attractions/zone?name=PLANET+SNOOPY" class="zone-link">
+                    <path class="map-zone" d="M700,400 L850,400 L850,500 L700,500 Z"/>
+                    <g class="icon-wrapper" transform="translate(775, 440)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="775" y="480">PLANET SNOOPY™</text>
+                </a>
+                
+                <!-- 8. KIDDY KINGDOM -->
+                <a href="/attractions/zone?name=KIDDY+KINGDOM" class="zone-link">
+                    <path class="map-zone" d="M700,650 L850,650 L850,750 L700,750 Z"/>
+                    <g class="icon-wrapper" transform="translate(775, 690)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="775" y="730">KIDDY KINGDOM</text>
+                </a>
+                
+                <!-- 9. LAKESIDE MIDWAY (bajado un poco) -->
+                <a href="/attractions/zone?name=LAKESIDE+MIDWAY" class="zone-link">
+                    <path class="map-zone" d="M800,520 L950,520 L950,620 L800,620 Z"/>
+                    <g class="icon-wrapper" transform="translate(875, 560)">
+                        <circle class="icon-bg" cx="0" cy="0" r="24"/>
+                        <text class="zone-icon icon-fg" x="0" y="5" font-family="FontAwesome" font-size="20"></text>
+                    </g>
+                    <text class="zone-label" x="875" y="600">LAKESIDE MIDWAY</text>
+                </a>
+            </svg>
+                <div class="zone-tooltip" id="zoneTooltip"></div>
+            </div>
+            
+            <div class="map-legend">
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(52, 152, 219, 0.2); border-color: #3498db;"></div>
+                    <span>Zona del parque</span>
+                </div>
+                <div class="legend-item">
+                    <div class="legend-color" style="background-color: rgba(231, 76, 60, 0.3); border-color: #e74c3c;"></div>
+                    <span>Zona seleccionada</span>
+                </div>
+                <div class="legend-item">
+                    <i class="fas fa-info-circle" style="color: #e74c3c;"></i>
+                    <span>Haz clic en cualquier zona para ver detalles</span>
+                </div>
+            </div>
+            
+            <div class="map-actions">
+                <a href="/attractionsgalery" class="btn btn-primary btn-map">
+                    <i class="fas fa-list me-2"></i>Ver todas las atracciones
+                </a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Pie de página -->
+    <footer class="map-footer">
+        <div class="container text-center">
+            <p class="mb-0">© 2023 Cedar Point. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tooltip = document.getElementById('zoneTooltip');
+            const zones = document.querySelectorAll('.map-zone');
+            
+            // Verificar si se cargó la imagen
+            const mapImage = document.querySelector('.map-bg');
+            mapImage.onload = function() {
+                console.log('Imagen del mapa cargada correctamente');
+            };
+            mapImage.onerror = function() {
+                console.error('Error al cargar la imagen del mapa');
+                alert('No se pudo cargar el mapa. Por favor verifica la ruta de la imagen.');
+            };
+            
+            // Interacción con las zonas
+            zones.forEach(zone => {
+                zone.addEventListener('mouseenter', function(e) {
+                    this.style.fill = 'rgba(231, 76, 60, 0.3)';
+                    this.style.stroke = '#e74c3c';
+                    this.style.strokeWidth = '3px';
+                    this.style.filter = 'drop-shadow(0 4px 8px rgba(0,0,0,0.15))';
+                    
+                    // Mostrar tooltip
+                    const zoneName = this.parentNode.querySelector('.zone-label').textContent;
+                    tooltip.textContent = `Ver ${zoneName} →`;
+                    tooltip.style.opacity = '1';
+                });
+                
+                zone.addEventListener('mousemove', function(e) {
+                    tooltip.style.left = `${e.clientX + 15}px`;
+                    tooltip.style.top = `${e.clientY - 15}px`;
+                });
+                
+                zone.addEventListener('mouseleave', function() {
+                    this.style.fill = 'rgba(52, 152, 219, 0.2)';
+                    this.style.stroke = '#3498db';
+                    this.style.strokeWidth = '2px';
+                    this.style.filter = 'drop-shadow(0 2px 4px rgba(0,0,0,0.1))';
+                    tooltip.style.opacity = '0';
+                });
+                
+                zone.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const zoneUrl = this.parentNode.getAttribute('href');
+                    console.log('Navegando a:', zoneUrl);
+                    window.location.href = zoneUrl;
+                });
+            });
+            
+            // Ajuste para móviles
+            function adjustForMobile() {
+                const labels = document.querySelectorAll('.zone-label');
+                const icons = document.querySelectorAll('.zone-icon');
+                
+                if (window.innerWidth < 768) {
+                    labels.forEach(label => {
+                        label.style.fontSize = '0.8rem';
+                    });
+                    icons.forEach(icon => {
+                        icon.style.fontSize = '0.8em';
+                    });
+                } else if (window.innerWidth < 992) {
+                    labels.forEach(label => {
+                        label.style.fontSize = '1rem';
+                    });
+                    icons.forEach(icon => {
+                        icon.style.fontSize = '1em';
+                    });
+                } else {
+                    labels.forEach(label => {
+                        label.style.fontSize = '1.2rem';
+                    });
+                    icons.forEach(icon => {
+                        icon.style.fontSize = '1.2em';
+                    });
+                }
+            }
+            
+            window.addEventListener('resize', adjustForMobile);
+            adjustForMobile();
+        });
+    </script>
+</body>
+</html>
