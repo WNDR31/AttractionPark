@@ -636,6 +636,18 @@ display: flex;
 }
 
 /*------Apartado Planifica tu Visita -------*/ 
+
 .img-services {
   width: 100%;
 }
+
+.div-sub-body {
+  margin: 200px;
+  justify-content: space-between;
+}
+
+.h1-plan {
+  color: #103869;
+  font-weight: bolder;
+}
+
