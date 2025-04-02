@@ -641,8 +641,21 @@ display: flex;
   width: 100%;
 }
 
+.text-plan {
+    margin: 20px;
+    text-align: center;
+    color: #103869;
+}
+
+.text-plan h3{
+  font-size: 50px;
+  font-weight: bold; 
+}
+
 .div-sub-body {
-  margin: 200px;
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-bottom: 200px;
   justify-content: space-between;
 }
 
