@@ -4,417 +4,96 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Galería de Atracciones</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
     <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #3498db;
-            --light-gray: #ecf0f1;
-            --dark-gray: #7f8c8d;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background-color: #f9f9f9;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1.5rem 0;
-            text-align: center;
-            margin-bottom: 2rem;
-            border-radius: var(--border-radius);
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 2rem;
-        }
-
-        .attraction-filters {
-            background: #ffffff;
-            padding: 1.5rem;
-            border-radius: var(--border-radius);
-            box-shadow: var(--box-shadow);
-            margin-bottom: 2rem;
-        }
-
-        .filter-form {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 1.5rem;
-            align-items: end;
-        }
-
-        .filter-group {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .filter-label {
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
-            font-size: 0.9rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-icon {
-            margin-right: 8px;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .filter-select {
-            padding: 0.7rem 1rem;
-            border: 1px solid #ddd;
-            border-radius: var(--border-radius);
-            background-color: #fff;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-            appearance: none;
-            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%237f8c8d'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
-            background-repeat: no-repeat;
-            background-position: right 0.7rem center;
-            background-size: 1rem;
-        }
-
-        .filter-select:hover {
-            border-color: var(--accent-color);
-        }
-
-        .filter-select:focus {
-            outline: none;
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
-        }
-
-        .filter-actions {
-            display: flex;
-            gap: 0.8rem;
-            align-self: flex-end;
-        }
-
-        .filter-button {
-            padding: 0.7rem 1.2rem;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: all 0.3s;
-        }
-
-        .filter-button.apply {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .filter-button.apply:hover {
-            background-color: #1a252f;
-        }
-
-        .filter-button.reset {
-            background-color: var(--light-gray);
-            color: var(--primary-color);
-            border: 1px solid #ddd;
-        }
-
-        .filter-button.reset:hover {
-            background-color: #e9ecef;
-        }
-
-        .attractions-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-        }
-
         .attraction-card {
-            background: white;
-            border-radius: var(--border-radius);
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
             overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: transform 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
-
-        .attraction-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .attraction-image {
-            height: 180px;
-            overflow: hidden;
-        }
-
-        .attraction-image img {
+        .attraction-card img {
             width: 100%;
-            height: 100%;
+            height: 200px;
             object-fit: cover;
-            transition: transform 0.5s ease;
         }
-
-        .attraction-card:hover .attraction-image img {
-            transform: scale(1.05);
+        .card-body {
+            padding: 15px;
         }
-
-        .attraction-info {
-            padding: 1.2rem;
-        }
-
-        .attraction-name {
-            margin: 0 0 0.5rem 0;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .attraction-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-            margin-bottom: 0.8rem;
-            font-size: 0.85rem;
-        }
-
-        .attraction-meta span {
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            color: var(--dark-gray);
-        }
-
-        .attraction-meta i {
-            color: var(--secondary-color);
-        }
-
-        .attraction-description {
-            color: #555;
-            font-size: 0.9rem;
-            margin-bottom: 1rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .attraction-link {
-            display: inline-block;
-            padding: 0.5rem 1rem;
-            background-color: var(--accent-color);
-            color: white;
-            text-decoration: none;
-            border-radius: var(--border-radius);
-            font-size: 0.9rem;
-            transition: background-color 0.3s;
-        }
-
-        .attraction-link:hover {
-            background-color: #2980b9;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 2rem;
-            grid-column: 1 / -1;
-            color: var(--dark-gray);
-        }
-
-        @media (max-width: 768px) {
-            .filter-form {
-                grid-template-columns: 1fr;
-            }
-            
-            .filter-actions {
-                justify-content: flex-end;
-            }
-            
-            .attractions-grid {
-                grid-template-columns: 1fr;
-            }
+        .filters {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
-    <!-- Sección de Filtros -->
-    <section class="attraction-filters">
-        <form id="filterForm" class="filter-form">
-            <!-- Filtro por Zona -->
-            <div class="filter-group">
-                <label for="zone" class="filter-label">
-                    <i class="filter-icon fas fa-map-marked-alt"></i> Zona
-                </label>
-                <select name="zone" id="zone" class="filter-select">
-                    <option value="">Todas las zonas</option>
-                    {{#zones}}
-                    <option value="{{name}}">{{name}}</option>
-                    {{/zones}}
-                </select>
-            </div>
 
-            <!-- Filtro por Intensidad -->
-            <div class="filter-group">
-                <label for="intensity" class="filter-label">
-                    <i class="filter-icon fas fa-bolt"></i> Intensidad
-                </label>
-                <select name="intensity" id="intensity" class="filter-select">
-                    <option value="">Todas las intensidades</option>
-                    {{#intensities}}
-                    <option value="{{name}}">{{name}}</option>
-                    {{/intensities}}
-                </select>
-            </div>
+<div class="container">
+    <h1 class="my-4 text-center">Galería de Atracciones</h1>
 
-            <!-- Filtro por Tipo -->
-            <div class="filter-group">
-                <label for="type" class="filter-label">
-                    <i class="filter-icon fas fa-tag"></i> Tipo
-                </label>
-                <select name="type" id="type" class="filter-select">
-                    <option value="">Todos los tipos</option>
-                    {{#types}}
-                    <option value="{{name}}">{{name}}</option>
-                    {{/types}}
-                </select>
+    <!-- Filtros -->
+    <div class="filters">
+        <form action="/attractions/filter" method="get">
+            <div class="row">
+                <div class="col-md-4">
+                    <label for="zone" class="form-label">Zona</label>
+                    <select class="form-select" id="zone" name="zone">
+                        <option value="">Seleccione Zona</option>
+                        {{#zones}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/zones}}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="intensity" class="form-label">Intensidad</label>
+                    <select class="form-select" id="intensity" name="intensity">
+                        <option value="">Seleccione Intensidad</option>
+                        {{#intensities}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/intensities}}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="type" class="form-label">Tipo</label>
+                    <select class="form-select" id="type" name="type">
+                        <option value="">Seleccione Tipo</option>
+                        {{#types}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/types}}
+                    </select>
+                </div>
             </div>
-
-            <div class="filter-actions">
-                <button type="button" class="filter-button apply" onclick="applyFilters()">
-                    <i class="fas fa-filter"></i> Filtrar
-                </button>
-                <button type="button" class="filter-button reset" onclick="resetFilters()">
-                    <i class="fas fa-undo"></i> Limpiar
-                </button>
-            </div>
+            <button type="submit" class="btn btn-primary mt-3">Aplicar Filtros</button>
         </form>
-    </section>
+    </div>
 
     <!-- Galería de Atracciones -->
-    <section class="attractions-gallery">
-        <h2 id="galleryTitle">Nuestras Atracciones</h2>
-        
-        <!-- Mostrar estadísticas de filtros aplicados -->
-        <div id="appliedFilters" class="applied-filters" style="margin-bottom: 1rem;">
-            <p style="font-size: 0.9rem; color: var(--dark-gray);">
-                Filtros aplicados: 
-                <span id="zoneFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
-                <span id="intensityFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
-                <span id="typeFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
-            </p>
-        </div>
-
-        <div id="attractionsGrid" class="attractions-grid">
-            <!-- Mensaje cuando no hay resultados -->
-            <div id="noResults" class="no-results" style="display: none;">
-                <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                <p>No se encontraron atracciones con los filtros seleccionados.</p>
-                <button class="filter-button reset" onclick="resetFilters()">
-                    <i class="fas fa-undo"></i> Mostrar todas
-                </button>
+    <div class="row">
+        {{#attractions}}
+            <div class="col-md-4">
+                <div class="attraction-card">
+                    <img src="{{imageUrl1}}" alt="{{name}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{name}}</h5>
+                        <p class="card-text">{{description}}</p>
+                        <p><strong>Altura:</strong> {{height}} pies</p>
+                        <p><strong>Duración:</strong> {{duration}} segundos</p>
+                        <p><strong>Velocidad:</strong> {{speed}} mph</p>
+                        <p><strong>Tipo:</strong> {{type.name}}</p>
+                        <p><strong>Intensidad:</strong> {{intensity.name}}</p>
+                        <p><strong>Zona:</strong> {{zone.name}}</p>
+                        <a href="/attractions/{{id}}" class="btn btn-info">Ver más</a>
+                    </div>
+                </div>
             </div>
+        {{/attractions}}
 
-            <!-- Tarjetas de atracciones dinámicas -->
-            <script id="attractionTemplate" type="x-tmpl-mustache">
-                {{#attractions}}
-                <article class="attraction-card">
-                    <div class="attraction-image">
-                        <img src="{{imageUrl1}}" alt="Imagen de {{name}}">
-                    </div>
-                    <div class="attraction-info">
-                        <h3 class="attraction-name">{{name}}</h3>
-                        <div class="attraction-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> {{zone.name}}</span>
-                            <span><i class="fas fa-bolt"></i> {{intensity.name}}</span>
-                            <span><i class="fas fa-tag"></i> {{type.name}}</span>
-                        </div>
-                        <p class="attraction-description">{{description}}</p>
-                        <a href="/attractions/{{id}}" class="attraction-link">Ver detalles</a>
-                    </div>
-                </article>
-                {{/attractions}}
-            </script>
-        </div>
-    </section>
+        {{^attractions}}
+            <p class="text-center">No se encontraron atracciones que coincidan con los filtros seleccionados.</p>
+        {{/attractions}}
+    </div>
+</div>
 
-    <footer style="background-color: var(--primary-color); color: white; text-align: center; padding: 1.5rem; margin-top: 3rem;">
-        <div class="container">
-            <p>© 2023 Parque de Atracciones. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
-    <script>
-        // Datos de ejemplo
-        const data = {
-            zones: [{name: 'Zona 1'}, {name: 'Zona 2'}],
-            intensities: [{name: 'Alta'}, {name: 'Media'}, {name: 'Baja'}],
-            types: [{name: 'Montaña Rusa'}, {name: 'Acuática'}, {name: 'Infantil'}],
-            attractions: [
-                {id: 1, name: 'Atracción 1', zone: {name: 'Zona 1'}, intensity: {name: 'Alta'}, type: {name: 'Montaña Rusa'}, description: 'Descripción de la atracción 1', imageUrl1: 'https://via.placeholder.com/400x250?text=Atracción+1'},
-                {id: 2, name: 'Atracción 2', zone: {name: 'Zona 2'}, intensity: {name: 'Media'}, type: {name: 'Acuática'}, description: 'Descripción de la atracción 2', imageUrl1: 'https://via.placeholder.com/400x250?text=Atracción+2'}
-            ]
-        };
-
-        // Función para aplicar filtros
-        function applyFilters() {
-            const zone = document.getElementById('zone').value;
-            const intensity = document.getElementById('intensity').value;
-            const type = document.getElementById('type').value;
-
-            const filteredAttractions = data.attractions.filter(attraction => {
-                return (!zone || attraction.zone.name === zone) &&
-                       (!intensity || attraction.intensity.name === intensity) &&
-                       (!type || attraction.type.name === type);
-            });
-
-            document.getElementById('zoneFilter').textContent = zone ? `Zona: ${zone}` : '';
-            document.getElementById('intensityFilter').textContent = intensity ? `Intensidad: ${intensity}` : '';
-            document.getElementById('typeFilter').textContent = type ? `Tipo: ${type}` : '';
-
-            const template = document.getElementById('attractionTemplate').innerHTML;
-            const rendered = Mustache.render(template, {attractions: filteredAttractions});
-            document.getElementById('attractionsGrid').innerHTML = rendered;
-
-            document.getElementById('noResults').style.display = filteredAttractions.length ? 'none' : 'block';
-            document.getElementById('galleryTitle').textContent = filteredAttractions.length ? 'Nuestras Atracciones' : 'No se encontraron atracciones';
-        }
-
-        // Función para resetear filtros
-        function resetFilters() {
-            document.getElementById('filterForm').reset();
-            applyFilters();
-        }
-
-        // Inicializar la galería con todas las atracciones
-        document.addEventListener('DOMContentLoaded', function() {
-            // Renderizar los selects con los datos disponibles
-            const zonesTemplate = document.getElementById('zone').innerHTML;
-            const intensitiesTemplate = document.getElementById('intensity').innerHTML;
-            const typesTemplate = document.getElementById('type').innerHTML;
-            
-            document.getElementById('zone').innerHTML = Mustache.render(zonesTemplate, {zones: data.zones});
-            document.getElementById('intensity').innerHTML = Mustache.render(intensitiesTemplate, {intensities: data.intensities});
-            document.getElementById('type').innerHTML = Mustache.render(typesTemplate, {types: data.types});
-            
-            applyFilters();
-        });
-    </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
