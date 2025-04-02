@@ -245,8 +245,10 @@
     </style>
 </head>
 <body>
-<img src="https://images.app.goo.gl/JtnqG1JsA8sKUMXX7">
-<img src="demo\src\main\resources\templates\Imagenes\wildmouse2.jpg">
+<!-- Imagen de Cabecera -->
+    <div>
+        <img src="/bluestreak1.jpeg" alt="Blue Streak" class="img-fluid" width="100%">
+    </div>
 <!-- Encabezado con estilo -->
 <div class="header-gallery">
     <div class="container">
@@ -314,7 +316,8 @@
         {{#attractions}}
             <div class="col-lg-4 col-md-6 mb-4"> <!-- Añadido mb-4 para más espacio -->
                 <div class="attraction-card h-100">
-                    <img src= "C:\Users\lucia\Desktop\DISTRIBUIDOS\AttractionPark\demo\src\main\resources\templates\Imagenes\wildmouse2.jpg" alt="{{name}}" class="img-fluid" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
+                    <img src="/{{imageUrl1}}" alt="{{name}}" class="img-fluid" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
                     <div class="card-body">
                         <h5 class="card-title">{{name}}</h5>
                         
