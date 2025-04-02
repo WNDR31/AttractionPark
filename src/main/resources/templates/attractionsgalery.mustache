@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería de Atracciones</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-gray: #ecf0f1;
+            --dark-gray: #7f8c8d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .header-gallery {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            padding: 80px 0 40px;
+            margin-bottom: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-gallery h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .header-gallery h1 i {
+            margin-right: 15px;
+            color: var(--secondary-color);
+        }
+
+        .filter-section {
+            background-color: white;
+            border-radius: var(--border-radius);
+            padding: 25px;
+            box-shadow: var(--box-shadow);
+            margin-bottom: 40px;
+        }
+
+        .filter-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+
+        .filter-label i {
+            margin-right: 8px;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+        }
+
+        .form-select {
+            border: 2px solid #ddd;
+            border-radius: var(--border-radius);
+            padding: 10px 15px;
+            font-size: 0.95rem;
+            transition: all 0.3s;
+        }
+
+        .form-select:hover {
+            border-color: var(--accent-color);
+        }
+
+        .form-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+        }
+
+        .btn-filter {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-filter:hover {
+            background-color: #1a252f;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .btn-reset {
+            background-color: var(--light-gray);
+            color: var(--primary-color);
+            border: 1px solid #ddd;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .btn-reset:hover {
+            background-color: #e9ecef;
+        }
+
+        .attraction-card {
+            margin-bottom: 30px;
+            border: none;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .attraction-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .attraction-card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .attraction-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .card-body {
+            padding: 20px;
+        }
+
+        .card-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+
+        .card-text {
+            color: #666;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .attraction-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+        }
+
+        .meta-item i {
+            color: var(--secondary-color);
+            margin-right: 5px;
+            font-size: 0.9rem;
+        }
+
+        .btn-details {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            text-decoration: none;
+        }
+
+        .btn-details:hover {
+            background-color: #2980b9;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            color: var(--dark-gray);
+            font-size: 1.1rem;
+            grid-column: 1 / -1;
+        }
+
+        .no-results i {
+            font-size: 2.5rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .header-gallery h1 {
+                font-size: 2rem;
+            }
+            
+            .filter-actions {
+                justify-content: center !important;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Encabezado con estilo -->
+<div class="header-gallery">
+    <div class="container">
+        <h1><i class="fas fa-theater-masks"></i> Galería de Atracciones</h1>
+        <p class="lead">Descubre las emocionantes atracciones de nuestro parque</p>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Sección de Filtros mejorada -->
+    <div class="filter-section">
+        <form id="filterForm" action="/attractions/filter" method="get">
+            <div class="row g-3">
+                <div class="col-md-4">
+                    <label for="zone" class="filter-label">
+                        <i class="fas fa-map-marked-alt"></i> Zona
+                    </label>
+                    <select class="form-select" id="zone" name="zone">
+                        <option value="">Todas las zonas</option>
+                        {{#zones}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/zones}}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="intensity" class="filter-label">
+                        <i class="fas fa-bolt"></i> Intensidad
+                    </label>
+                    <select class="form-select" id="intensity" name="intensity">
+                        <option value="">Todas las intensidades</option>
+                        {{#intensities}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/intensities}}
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="type" class="filter-label">
+                        <i class="fas fa-tag"></i> Tipo
+                    </label>
+                    <select class="form-select" id="type" name="type">
+                        <option value="">Todos los tipos</option>
+                        {{#types}}
+                            <option value="{{name}}">{{name}}</option>
+                        {{/types}}
+                    </select>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+                    <div class="d-flex justify-content-end gap-2 filter-actions">
+                        <button type="submit" class="btn btn-filter">
+                            <i class="fas fa-filter"></i> Aplicar Filtros
+                        </button>
+                        <button type="button" id="resetButton" class="btn btn-reset">
+                            <i class="fas fa-undo"></i> Limpiar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Galería de Atracciones -->
+    <div class="row">
+        {{#attractions}}
+            <div class="col-lg-4 col-md-6">
+                <div class="attraction-card h-100">
+                    <img src="{{imageUrl1}}" alt="{{name}}" class="img-fluid">
+                    <div class="card-body">
+                        <h5 class="card-title">{{name}}</h5>
+                        <p class="card-text">{{description}}</p>
+                        
+                        <div class="attraction-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-ruler-vertical"></i> {{height}} pies
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-clock"></i> {{duration}} seg
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-tachometer-alt"></i> {{speed}} mph
+                            </span>
+                            {{#type.name}}
+                            <span class="meta-item">
+                                <i class="fas fa-tag"></i> {{type.name}}
+                            </span>
+                            {{/type.name}}
+                            {{#intensity.name}}
+                            <span class="meta-item">
+                                <i class="fas fa-bolt"></i> {{intensity.name}}
+                            </span>
+                            {{/intensity.name}}
+                            {{#zone.name}}
+                            <span class="meta-item">
+                                <i class="fas fa-map-marker-alt"></i> {{zone.name}}
+                            </span>
+                            {{/zone.name}}
+                        </div>
+                        
+                        <a href="/attractions/{{id}}" class="btn btn-details">
+                            <i class="fas fa-info-circle"></i> Ver detalles
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {{/attractions}}
+
+        {{^attractions}}
+            <div class="no-results">
+                <i class="fas fa-search"></i>
+                <p>No se encontraron atracciones que coincidan con los filtros seleccionados.</p>
+                <a href="/attractions" class="btn btn-reset mt-3">
+                    <i class="fas fa-undo"></i> Mostrar todas
+                </a>
+            </div>
+        {{/attractions}}
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container text-center">
+        <p class="mb-0">© 2023 Parque de Atracciones. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const resetButton = document.getElementById('resetButton');
+        const filterForm = document.getElementById('filterForm');
+        
+        resetButton.addEventListener('click', function() {
+            // Resetear los valores de los select
+            const selects = filterForm.querySelectorAll('select');
+            selects.forEach(select => {
+                select.value = '';
+            });
+            
+            // Enviar el formulario (esto recargará la página sin filtros)
+            filterForm.submit();
+            
+            // Alternativa si prefieres recargar directamente a la página principal:
+            // window.location.href = '/attractions';
+        });
+    });
+</script>
+</body>
+</html>
