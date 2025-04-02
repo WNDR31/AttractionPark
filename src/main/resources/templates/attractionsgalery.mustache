@@ -10,7 +10,7 @@
             --primary-color: #2c3e50;
             --secondary-color: #e74c3c;
             --accent-color: #3498db;
-            --light-gray: #ecf0f1;
+         --light-gray: #ecf0f1;
             --dark-gray: #7f8c8d;
             --border-radius: 8px;
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -252,116 +252,158 @@
         }
     </style>
 </head>
+</head>
 <body>
-    <header>
-        <div class="container">
-            <h1><i class="fas fa-theater-masks"></i> Galería de Atracciones</h1>
+    <!-- Sección de Filtros -->
+    <section class="attraction-filters">
+        <form id="filterForm" class="filter-form">
+            <!-- Filtro por Zona -->
+            <div class="filter-group">
+                <label for="zone" class="filter-label">
+                    <i class="filter-icon fas fa-map-marked-alt"></i> Zona
+                </label>
+                <select name="zone" id="zone" class="filter-select">
+                    <option value="">Todas las zonas</option>
+                    {{#zones}}
+                    <option value="{{name}}">{{name}}</option>
+                    {{/zones}}
+                </select>
+            </div>
+
+            <!-- Filtro por Intensidad -->
+            <div class="filter-group">
+                <label for="intensity" class="filter-label">
+                    <i class="filter-icon fas fa-bolt"></i> Intensidad
+                </label>
+                <select name="intensity" id="intensity" class="filter-select">
+                    <option value="">Todas las intensidades</option>
+                    {{#intensities}}
+                    <option value="{{name}}">{{name}}</option>
+                    {{/intensities}}
+                </select>
+            </div>
+
+            <!-- Filtro por Tipo -->
+            <div class="filter-group">
+                <label for="type" class="filter-label">
+                    <i class="filter-icon fas fa-tag"></i> Tipo
+                </label>
+                <select name="type" id="type" class="filter-select">
+                    <option value="">Todos los tipos</option>
+                    {{#types}}
+                    <option value="{{name}}">{{name}}</option>
+                    {{/types}}
+                </select>
+            </div>
+
+            <div class="filter-actions">
+                <button type="button" class="filter-button apply" onclick="applyFilters()">
+                    <i class="fas fa-filter"></i> Filtrar
+                </button>
+                <button type="button" class="filter-button reset" onclick="resetFilters()">
+                    <i class="fas fa-undo"></i> Limpiar
+                </button>
+            </div>
+        </form>
+    </section>
+
+    <!-- Galería de Atracciones -->
+    <section class="attractions-gallery">
+        <h2 id="galleryTitle">Nuestras Atracciones</h2>
+        
+        <!-- Mostrar estadísticas de filtros aplicados -->
+        <div id="appliedFilters" class="applied-filters" style="margin-bottom: 1rem;">
+            <p style="font-size: 0.9rem; color: var(--dark-gray);">
+                Filtros aplicados: 
+                <span id="zoneFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
+                <span id="intensityFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
+                <span id="typeFilter" class="filter-tag" style="background: var(--light-gray); padding: 0.3rem 0.6rem; border-radius: 1rem; margin-right: 0.5rem;"></span>
+            </p>
         </div>
-    </header>
 
-    <main class="container">
-        <!-- Sección de Filtros -->
-        <section class="attraction-filters">
-            <form action="/attractions/filter" method="get" class="filter-form">
-                <!-- Filtro por Zona -->
-                <div class="filter-group">
-                    <label for="zone" class="filter-label">
-                        <i class="filter-icon fas fa-map-marked-alt"></i> Zona
-                    </label>
-                    <select name="zone" id="zone" class="filter-select">
-                        <option value="">Todas las zonas</option>
-                        <option th:each="zone : ${zones}" 
-                                th:value="${zone.name}"
-                                th:text="${zone.name}"></option>
-                    </select>
-                </div>
+        <div id="attractionsGrid" class="attractions-grid">
+            <!-- Mensaje cuando no hay resultados -->
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                <p>No se encontraron atracciones con los filtros seleccionados.</p>
+                <button class="filter-button reset" onclick="resetFilters()">
+                    <i class="fas fa-undo"></i> Mostrar todas
+                </button>
+            </div>
 
-                <!-- Filtro por Intensidad -->
-                <div class="filter-group">
-                    <label for="intensity" class="filter-label">
-                        <i class="filter-icon fas fa-bolt"></i> Intensidad
-                    </label>
-                    <select name="intensity" id="intensity" class="filter-select">
-                        <option value="">Todas las intensidades</option>
-                        <option th:each="intensity : ${intensities}" 
-                                th:value="${intensity.name}"
-                                th:text="${intensity.name}"></option>
-                    </select>
-                </div>
-
-                <!-- Filtro por Tipo -->
-                <div class="filter-group">
-                    <label for="type" class="filter-label">
-                        <i class="filter-icon fas fa-tag"></i> Tipo
-                    </label>
-                    <select name="type" id="type" class="filter-select">
-                        <option value="">Todos los tipos</option>
-                        <option th:each="type : ${types}" 
-                                th:value="${type.name}"
-                                th:text="${type.name}"></option>
-                    </select>
-                </div>
-
-                <div class="filter-actions">
-                    <button type="submit" class="filter-button apply">
-                        <i class="fas fa-filter"></i> Filtrar
-                    </button>
-                    <button type="reset" class="filter-button reset">
-                        <i class="fas fa-undo"></i> Limpiar
-                    </button>
-                </div>
-            </form>
-        </section>
-
-        <!-- Galería de Atracciones -->
-        <section class="attractions-gallery">
-            <h2 th:text="${attractions.isEmpty() ? 'No se encontraron atracciones' : 'Nuestras Atracciones'}"></h2>
-            <div class="attractions-grid">
-                <!-- Mensaje cuando no hay resultados -->
-                <div th:if="${attractions.isEmpty()}" class="no-results">
-                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
-                    <p>No se encontraron atracciones con los filtros seleccionados.</p>
-                    <a href="/attractionsgalery" class="filter-button reset">
-                        <i class="fas fa-undo"></i> Mostrar todas
-                    </a>
-                </div>
-
-                <!-- Tarjetas de atracciones dinámicas -->
-                <article th:each="attraction : ${attractions}" class="attraction-card">
+            <!-- Tarjetas de atracciones dinámicas -->
+            <script id="attractionTemplate" type="x-tmpl-mustache">
+                {{#attractions}}
+                <article class="attraction-card">
                     <div class="attraction-image">
-                        <img th:src="${attraction.imageUrl1 != null ? attraction.imageUrl1 : 'https://via.placeholder.com/400x250?text=Atracción'}" 
-                             th:alt="${'Imagen de ' + attraction.name}">
+                        <img src="{{imageUrl1}}" alt="Imagen de {{name}}">
                     </div>
                     <div class="attraction-info">
-                        <h3 class="attraction-name" th:text="${attraction.name}">Nombre Atracción</h3>
+                        <h3 class="attraction-name">{{name}}</h3>
                         <div class="attraction-meta">
-                            <span th:if="${attraction.zone != null}">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <span th:text="${attraction.zone.name}">Zona</span>
-                            </span>
-                            <span th:if="${attraction.intensity != null}">
-                                <i class="fas fa-bolt"></i>
-                                <span th:text="${attraction.intensity.name}">Intensidad</span>
-                            </span>
-                            <span th:if="${attraction.type != null}">
-                                <i class="fas fa-tag"></i>
-                                <span th:text="${attraction.type.name}">Tipo</span>
-                            </span>
+                            <span><i class="fas fa-map-marker-alt"></i> {{zone.name}}</span>
+                            <span><i class="fas fa-bolt"></i> {{intensity.name}}</span>
+                            <span><i class="fas fa-tag"></i> {{type.name}}</span>
                         </div>
-                        <p class="attraction-description" th:text="${attraction.description}">
-                            Descripción de la atracción.
-                        </p>
-                        <a th:href="@{/attractions/} + ${attraction.id}" class="attraction-link">Ver detalles</a>
+                        <p class="attraction-description">{{description}}</p>
+                        <a href="/attractions/{{id}}" class="attraction-link">Ver detalles</a>
                     </div>
                 </article>
-            </div>
-        </section>
-    </main>
+                {{/attractions}}
+            </script>
+        </div>
+    </section>
 
     <footer style="background-color: var(--primary-color); color: white; text-align: center; padding: 1.5rem; margin-top: 3rem;">
         <div class="container">
             <p>© 2023 Parque de Atracciones. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <script>
+        // Datos de ejemplo
+        const data = {
+            zones: [{name: 'Zona 1'}, {name: 'Zona 2'}],
+            intensities: [{name: 'Alta'}, {name: 'Media'}, {name: 'Baja'}],
+            types: [{name: 'Montaña Rusa'}, {name: 'Acuática'}, {name: 'Infantil'}],
+            attractions: [
+                {id: 1, name: 'Atracción 1', zone: {name: 'Zona 1'}, intensity: {name: 'Alta'}, type: {name: 'Montaña Rusa'}, description: 'Descripción de la atracción 1', imageUrl1: 'https://via.placeholder.com/400x250?text=Atracción+1'},
+                {id: 2, name: 'Atracción 2', zone: {name: 'Zona 2'}, intensity: {name: 'Media'}, type: {name: 'Acuática'}, description: 'Descripción de la atracción 2', imageUrl1: 'https://via.placeholder.com/400x250?text=Atracción+2'}
+            ]
+        };
+
+        // Función para aplicar filtros
+        function applyFilters() {
+            const zone = document.getElementById('zone').value;
+            const intensity = document.getElementById('intensity').value;
+            const type = document.getElementById('type').value;
+
+            const filteredAttractions = data.attractions.filter(attraction => {
+                return (!zone || attraction.zone.name === zone) &&
+                       (!intensity || attraction.intensity.name === intensity) &&
+                       (!type || attraction.type.name === type);
+            });
+
+            document.getElementById('zoneFilter').textContent = zone ? `Zona: ${zone}` : '';
+            document.getElementById('intensityFilter').textContent = intensity ? `Intensidad: ${intensity}` : '';
+            document.getElementById('typeFilter').textContent = type ? `Tipo: ${type}` : '';
+
+            const template = document.getElementById('attractionTemplate').innerHTML;
+            const rendered = Mustache.render(template, {attractions: filteredAttractions});
+            document.getElementById('attractionsGrid').innerHTML = rendered;
+
+            document.getElementById('noResults').style.display = filteredAttractions.length ? 'none' : 'block';
+            document.getElementById('galleryTitle').textContent = filteredAttractions.length ? 'Nuestras Atracciones' : 'No se encontraron atracciones';
+        }
+
+        // Función para resetear filtros
+        function resetFilters() {
+            document.getElementById('filterForm').reset();
+            applyFilters();
+        }
+
+        // Inicializar la galería con todas las atracciones
+        applyFilters();
+    </script>
 </body>
 </html>
