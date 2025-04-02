@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +10,7 @@
             --primary-color: #2c3e50;
             --secondary-color: #e74c3c;
             --accent-color: #3498db;
-         --light-gray: #ecf0f1;
+            --light-gray: #ecf0f1;
             --dark-gray: #7f8c8d;
             --border-radius: 8px;
             --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -252,7 +252,6 @@
         }
     </style>
 </head>
-</head>
 <body>
     <!-- Sección de Filtros -->
     <section class="attraction-filters">
@@ -360,6 +359,7 @@
         </div>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/4.2.0/mustache.min.js"></script>
     <script>
         // Datos de ejemplo
         const data = {
@@ -403,7 +403,18 @@
         }
 
         // Inicializar la galería con todas las atracciones
-        applyFilters();
+        document.addEventListener('DOMContentLoaded', function() {
+            // Renderizar los selects con los datos disponibles
+            const zonesTemplate = document.getElementById('zone').innerHTML;
+            const intensitiesTemplate = document.getElementById('intensity').innerHTML;
+            const typesTemplate = document.getElementById('type').innerHTML;
+            
+            document.getElementById('zone').innerHTML = Mustache.render(zonesTemplate, {zones: data.zones});
+            document.getElementById('intensity').innerHTML = Mustache.render(intensitiesTemplate, {intensities: data.intensities});
+            document.getElementById('type').innerHTML = Mustache.render(typesTemplate, {types: data.types});
+            
+            applyFilters();
+        });
     </script>
 </body>
 </html>
