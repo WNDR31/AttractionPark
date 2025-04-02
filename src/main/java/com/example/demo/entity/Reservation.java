@@ -17,6 +17,14 @@ public class Reservation {
 
     public Reservation() {}
 
+    public Reservation(String n, String s, String p, LocalDate d, String e){
+        name=n;
+        surname=s;
+        phone=p;
+        date=d;
+        email=e;
+    }
+
     // Getters and Setters
     public Long getId() {
         return id;

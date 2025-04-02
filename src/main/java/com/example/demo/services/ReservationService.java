@@ -19,6 +19,21 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
+    /*
+    //Crear una nueva reserva
+    public Reservation createReservation(Reservation reservation) {
+       return reservationRepository.save(reservation); // Usa el repositorio para guardar la entidad
+    }
+    
+    */
+    public Reservation createReservation(Reservation reservation) {
+        System.out.println("**** ReservationService.createReservation() INICIADO ****"); // LOG ANTES DE GUARDAR
+        Reservation savedReservation = reservationRepository.save(reservation);
+        System.out.println("**** ReservationService.createReservation() RESERVACIÓN GUARDADA: " + savedReservation); // LOG DESPUÉS DE GUARDAR
+        System.out.println("**** ReservationService.createReservation() FINALIZADO ****"); // LOG AL FINAL
+        return savedReservation;
+    }
+
     // Actualización parcial con PATCH
     @Transactional
     public Reservation updateReservation(Long id, Map<String, Object> updates) {

@@ -79,7 +79,7 @@
                     </div>
                     <div class="modal-body">
                         <h1 class="h1_buy">Formulario de Compra</h1>
-                        <form id="formCompra" action="/buy-page">
+                        <form id="formCompra" method="post" action="ReservationController">
                             <h2 class="h2_buy">Datos Personales:</h2>
                             <p class="p_buy">Por favor, completa el siguiente formulario para proceder con la compra.</p>
                             <div>
@@ -144,12 +144,13 @@
                                     <li id="carritoVacio" class="list-group-item">Aún no has añadido ningún ticket al carrito</li>
                                     <!--Aquí se agregarán las entradas seleccionadas-->
                                 </ul>
+                                <input type="submit" class="btn btn-primary" id="comprarTickets">
                             </div>
-                            
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                        <button type="button" id="finalizarCompra" class="btn btn-primary">Finalizar Compra</button>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <!--<button type="button" id="finalizarCompra" class="btn btn-primary">Finalizar Compra</button>-->
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
