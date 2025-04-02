@@ -123,7 +123,7 @@
         }
 
         .attraction-card {
-            margin-bottom: 30px;
+            margin-bottom: 40px; /* Aumentado de 30px a 40px */
             border: none;
             border-radius: var(--border-radius);
             overflow: hidden;
@@ -142,6 +142,7 @@
             height: 220px;
             object-fit: cover;
             transition: transform 0.5s ease;
+            background-color: #f8f9fa; /* Fondo para imágenes transparentes */
         }
 
         .attraction-card:hover img {
@@ -244,7 +245,8 @@
     </style>
 </head>
 <body>
-
+<img src="https://images.app.goo.gl/JtnqG1JsA8sKUMXX7">
+<img src="demo\src\main\resources\templates\Imagenes\wildmouse2.jpg">
 <!-- Encabezado con estilo -->
 <div class="header-gallery">
     <div class="container">
@@ -310,23 +312,13 @@
     <!-- Galería de Atracciones -->
     <div class="row">
         {{#attractions}}
-            <div class="col-lg-4 col-md-6">
+            <div class="col-lg-4 col-md-6 mb-4"> <!-- Añadido mb-4 para más espacio -->
                 <div class="attraction-card h-100">
-                    <img src="{{imageUrl1}}" alt="{{name}}" class="img-fluid">
+                    <img src= "C:\Users\lucia\Desktop\DISTRIBUIDOS\AttractionPark\demo\src\main\resources\templates\Imagenes\wildmouse2.jpg" alt="{{name}}" class="img-fluid" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
                     <div class="card-body">
                         <h5 class="card-title">{{name}}</h5>
-                        <p class="card-text">{{description}}</p>
                         
                         <div class="attraction-meta">
-                            <span class="meta-item">
-                                <i class="fas fa-ruler-vertical"></i> {{height}} pies
-                            </span>
-                            <span class="meta-item">
-                                <i class="fas fa-clock"></i> {{duration}} seg
-                            </span>
-                            <span class="meta-item">
-                                <i class="fas fa-tachometer-alt"></i> {{speed}} mph
-                            </span>
                             {{#type.name}}
                             <span class="meta-item">
                                 <i class="fas fa-tag"></i> {{type.name}}
@@ -356,7 +348,7 @@
             <div class="no-results">
                 <i class="fas fa-search"></i>
                 <p>No se encontraron atracciones que coincidan con los filtros seleccionados.</p>
-                <a href="/attractions" class="btn btn-reset mt-3">
+                <a href="/attractionsgalery" class="btn btn-reset mt-3">
                     <i class="fas fa-undo"></i> Mostrar todas
                 </a>
             </div>
@@ -387,9 +379,13 @@
             
             // Enviar el formulario (esto recargará la página sin filtros)
             filterForm.submit();
-            
-            // Alternativa si prefieres recargar directamente a la página principal:
-            // window.location.href = '/attractions';
+        });
+
+        // Asegurar que las imágenes PNG se muestren correctamente
+        document.querySelectorAll('.attraction-card img').forEach(img => {
+            if(img.src.toLowerCase().endsWith('.png')) {
+                img.style.backgroundColor = '#f8f9fa'; // Fondo para PNG transparentes
+            }
         });
     });
 </script>
