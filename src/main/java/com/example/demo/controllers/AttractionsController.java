@@ -45,7 +45,7 @@ public class AttractionsController {
         Attraction attraction = attractionRepository.findById(id)
             .orElseThrow(() -> new IllegalArgumentException("Atracción no encontrada con id: " + id));
         model.addAttribute("attraction", attraction);
-        return "attraction-details";
+        return "attractions";
     }
 
     // Atracciones por zona (ID)
