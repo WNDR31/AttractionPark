@@ -6,10 +6,17 @@ import java.util.List;
 import com.example.demo.entity.Attraction;
 
 @Repository
+
 public interface AttractionRepository extends JpaRepository<Attraction, Long> {
-    // Encuentra atracciones por zona
+    // Métodos existentes para zona
     List<Attraction> findByZoneId(Long zoneId);
+    List<Attraction> findByZoneName(String name);
     
-    // O si prefieres por nombre de zona:
-    List<Attraction> findByZoneName(String zoneName);
+    // Nuevos métodos para tipo
+    List<Attraction> findByTypeId(Long typeId);
+    List<Attraction> findByTypeName(String name);
+    
+    // Nuevos métodos para intensidad
+    List<Attraction> findByIntensityId(Long intensityId);
+    List<Attraction> findByIntensityName(String name);
 }

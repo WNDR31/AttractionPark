@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -230,6 +230,13 @@
             background-color: #2980b9;
         }
 
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            grid-column: 1 / -1;
+            color: var(--dark-gray);
+        }
+
         @media (max-width: 768px) {
             .filter-form {
                 grid-template-columns: 1fr;
@@ -263,15 +270,9 @@
                     </label>
                     <select name="zone" id="zone" class="filter-select">
                         <option value="">Todas las zonas</option>
-                        <option value="FRONTIER TOWN">FRONTIER TOWN</option>
-                        <option value="CAMP SNOOPY">CAMP SNOOPY</option>
-                        <option value="GEMINI MIDWAY">GEMINI MIDWAY</option>
-                        <option value="FRONTIER TRAIL">FRONTIER TRAIL</option>
-                        <option value="MILLENNIUM MIDWAY">MILLENNIUM MIDWAY</option>
-                        <option value="MAIN MIDWAY">MAIN MIDWAY</option>
-                        <option value="PLANET SNOOPY™">PLANET SNOOPY™</option>
-                        <option value="KIDDY KINGDOM">KIDDY KINGDOM</option>
-                        <option value="LAKESIDE MIDWAY">LAKESIDE MIDWAY</option>
+                        <option th:each="zone : ${zones}" 
+                                th:value="${zone.name}"
+                                th:text="${zone.name}"></option>
                     </select>
                 </div>
 
@@ -282,11 +283,9 @@
                     </label>
                     <select name="intensity" id="intensity" class="filter-select">
                         <option value="">Todas las intensidades</option>
-                        <option value="Low">Low</option>
-                        <option value="Moderate">Moderate</option>
-                        <option value="Aggressive">Aggressive</option>
-                        <option value="Mild">Mild</option>
-                        <option value="High">High</option>
+                        <option th:each="intensity : ${intensities}" 
+                                th:value="${intensity.name}"
+                                th:text="${intensity.name}"></option>
                     </select>
                 </div>
 
@@ -297,11 +296,9 @@
                     </label>
                     <select name="type" id="type" class="filter-select">
                         <option value="">Todos los tipos</option>
-                        <option value="Roller coasters">Roller coasters</option>
-                        <option value="Thrill rides">Thrill rides</option>
-                        <option value="Family rides">Family rides</option>
-                        <option value="Water Ride">Water Ride</option>
-                        <option value="Children rides">Children rides</option>
+                        <option th:each="type : ${types}" 
+                                th:value="${type.name}"
+                                th:text="${type.name}"></option>
                     </select>
                 </div>
 
@@ -318,49 +315,45 @@
 
         <!-- Galería de Atracciones -->
         <section class="attractions-gallery">
-            <h2>Nuestras Atracciones</h2>
+            <h2 th:text="${attractions.isEmpty() ? 'No se encontraron atracciones' : 'Nuestras Atracciones'}"></h2>
             <div class="attractions-grid">
-                <!-- Ejemplo de tarjeta de atracción (esto se generaría dinámicamente) -->
-                <article class="attraction-card">
+                <!-- Mensaje cuando no hay resultados -->
+                <div th:if="${attractions.isEmpty()}" class="no-results">
+                    <i class="fas fa-info-circle" style="font-size: 2rem; margin-bottom: 1rem;"></i>
+                    <p>No se encontraron atracciones con los filtros seleccionados.</p>
+                    <a href="/attractionsgalery" class="filter-button reset">
+                        <i class="fas fa-undo"></i> Mostrar todas
+                    </a>
+                </div>
+
+                <!-- Tarjetas de atracciones dinámicas -->
+                <article th:each="attraction : ${attractions}" class="attraction-card">
                     <div class="attraction-image">
-                        <img src="https://via.placeholder.com/400x250?text=Montaña+Rusa" alt="Montaña Rusa">
+                        <img th:src="${attraction.imageUrl1 != null ? attraction.imageUrl1 : 'https://via.placeholder.com/400x250?text=Atracción'}" 
+                             th:alt="${'Imagen de ' + attraction.name}">
                     </div>
                     <div class="attraction-info">
-                        <h3 class="attraction-name">Gran Montaña Rusa</h3>
+                        <h3 class="attraction-name" th:text="${attraction.name}">Nombre Atracción</h3>
                         <div class="attraction-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> FRONTIER TOWN</span>
-                            <span><i class="fas fa-bolt"></i> High</span>
-                            <span><i class="fas fa-tag"></i> Roller coasters</span>
+                            <span th:if="${attraction.zone != null}">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span th:text="${attraction.zone.name}">Zona</span>
+                            </span>
+                            <span th:if="${attraction.intensity != null}">
+                                <i class="fas fa-bolt"></i>
+                                <span th:text="${attraction.intensity.name}">Intensidad</span>
+                            </span>
+                            <span th:if="${attraction.type != null}">
+                                <i class="fas fa-tag"></i>
+                                <span th:text="${attraction.type.name}">Tipo</span>
+                            </span>
                         </div>
-                        <p class="attraction-description">
-                            Una emocionante montaña rusa con giros de 360° y caídas vertiginosas. 
-                            Perfecta para los amantes de la adrenalina.
+                        <p class="attraction-description" th:text="${attraction.description}">
+                            Descripción de la atracción.
                         </p>
-                        <a href="/attractions/1" class="attraction-link">Ver detalles</a>
+                        <a th:href="@{/attractions/} + ${attraction.id}" class="attraction-link">Ver detalles</a>
                     </div>
                 </article>
-
-                <!-- Otra tarjeta de ejemplo -->
-                <article class="attraction-card">
-                    <div class="attraction-image">
-                        <img src="https://via.placeholder.com/400x250?text=Atracción+Familiar" alt="Atracción Familiar">
-                    </div>
-                    <div class="attraction-info">
-                        <h3 class="attraction-name">Río Aventura</h3>
-                        <div class="attraction-meta">
-                            <span><i class="fas fa-map-marker-alt"></i> CAMP SNOOPY</span>
-                            <span><i class="fas fa-bolt"></i> Moderate</span>
-                            <span><i class="fas fa-tag"></i> Family rides</span>
-                        </div>
-                        <p class="attraction-description">
-                            Un paseo en bote por un río artificial con sorpresas en cada curva. 
-                            Diversión para toda la familia.
-                        </p>
-                        <a href="/attractions/2" class="attraction-link">Ver detalles</a>
-                    </div>
-                </article>
-
-                <!-- Más tarjetas se generarían aquí dinámicamente -->
             </div>
         </section>
     </main>
