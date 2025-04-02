@@ -10,9 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
-
+@CrossOrigin(origins = "*")
 @RestController // ¡CORRECTO PARA API REST!
 @RequestMapping("/reservations") // ¡CORRECTO!
+
 public class ReservationController {
 
     private final ReservationService reservationService; // ¡USA EL SERVICIO, NO EL REPOSITORIO DIRECTAMENTE!
@@ -23,7 +24,7 @@ public class ReservationController {
         this.reservationService = reservationService;
     }
 
-
+    
     @PostMapping // **¡CORRECTO! POST PARA CREAR UNA NUEVA RESERVA**
     public ResponseEntity<Reservation> createReservation(@RequestBody Reservation reservation){ // **¡@RequestBody PARA RECIBIR DATOS JSON EN EL CUERPO DE LA SOLICITUD!**
         log.info("Recibida solicitud para crear reserva: {}", reservation); // Log más informativo
@@ -31,6 +32,7 @@ public class ReservationController {
         log.info("Reserva creada y guardada con ID: {}", savedReservation.getId()); // Log más informativo
         return new ResponseEntity<>(savedReservation, HttpStatus.CREATED); // **¡CORRECTO! DEVUELVE LA RESERVA CREADA Y CÓDIGO 201 CREATED**
     }
+    
 
 
     // PATCH para actualización parcial (ESTO ESTÁ BIEN, LO DEJO COMO ESTABA COMENTADO PERO LO DESCOMENTARÉ)
@@ -49,7 +51,5 @@ public class ReservationController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
-        */
-
+    }*/
 }

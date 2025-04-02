@@ -49,6 +49,8 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
 
 const entradasSeleccionadas = new Set();
 
+
+/*
 //Validar Finalizar Compra
 document.addEventListener("DOMContentLoaded", function () {
     document.querySelector(".btn-primary").addEventListener("click", function (event) {
@@ -86,7 +88,49 @@ document.addEventListener("DOMContentLoaded", function () {
         carrito.innerHTML = '<li id="carritoVacio" class="list-group-item">Aún no has añadido ningún ticket al carrito</li>';
     });
 });
+*/
 
+//-----------------------------Enviar formulario de compra------------------------------------------
+document.getElementById('formCompra').addEventListener('submit', function(event) {
+    console.log("¡Función de envío del formulario INICIADA!");
+    event.preventDefault(); // Evita el envío normal del formulario
+
+    const nombre = document.getElementById('nombre').value;
+    const apellidos = document.getElementById('apellidos').value;
+    const telefono = document.getElementById('telefono').value;
+    const fechaVisita = document.getElementById('fechaVisita').value;
+    const correo = document.getElementById('correo').value;
+
+    const reservationData = {
+        name: nombre,
+        surname: apellidos,
+        phone: telefono,
+        date: fechaVisita,
+        email: correo
+    };
+
+    fetch('/reservations', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reservationData)
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error en la petición: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Reserva creada:', data);
+        alert('Reserva creada con éxito!');
+    })
+    .catch(error => {
+        console.error('Error al crear la reserva:', error);
+        alert('Error al crear la reserva. Consulta la consola para más detalles.');
+    });
+});
 
 //--------------------Función para seleccionar el tipo de promoción----------------
 function mostrarOfertas(categoria) {
@@ -163,4 +207,4 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
 
-//-----------------------------Calendario footer------------------------------------------
+
