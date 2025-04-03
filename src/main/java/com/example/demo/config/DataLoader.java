@@ -95,10 +95,10 @@ public class DataLoader implements CommandLineRunner {
         attraction2.setDuration(90); //seconds 
         attraction2.setSpeed(60.0); //mph 
         attraction2.setMinHeight(48);
-        attraction2.setImageUrl1("PowerTower.jpg");
+        attraction2.setImageUrl1("foto1.jpg");
         attraction2.setImageUrl2("powertower2.jpg");
         attraction2.setImageUrl3("powertower3.jpg");
-        attraction2.setVideoUrl("https://youtu.be/OyOEWslMzhA?si=Ed1TmC5YAYlPw3jq");
+        attraction2.setVideoUrl("https://www.youtube.com/embed/OyOEWslMzhA?si=BNCtifyY1vomkPUY");
         attraction2.setZone(zone3); 
         attraction2.setIntensity(thrill5);
         attraction2.setType(type2);
