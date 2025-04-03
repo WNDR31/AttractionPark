@@ -109,7 +109,7 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
         email: correo
     };
 
-    fetch('/reservations', {
+    fetch('http://localhost:8080/reservations', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
