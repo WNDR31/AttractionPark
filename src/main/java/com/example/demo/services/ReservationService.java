@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Map;
 import java.util.Optional;
+import java.util.List;
 
 import java.time.LocalDate;
 
@@ -55,5 +56,13 @@ public class ReservationService {
         } else {
             throw new RuntimeException("Reservation not found");
         }
+    }
+    //Metodo para obtener todas las reservas
+    public List<Reservation> getAllReservations() {
+        System.out.println("**** ReservationService.getAllReservations() INICIADO ****"); // Log al inicio
+        List<Reservation> allReservations = reservationRepository.findAll(); // Usa findAll() del repositorio
+        System.out.println("**** ReservationService.getAllReservations() RESERVACIONES ENCONTRADAS: " + allReservations.size()); // Log con la cantidad
+        System.out.println("**** ReservationService.getAllReservations() FINALIZADO ****"); // Log al final
+        return allReservations;
     }
 }
