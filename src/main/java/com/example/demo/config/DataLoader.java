@@ -481,6 +481,12 @@ public class DataLoader implements CommandLineRunner {
         attractionRepository.saveAll(List.of( attraction1,  attraction2,  attraction3,  attraction4,  attraction5, attraction6,  attraction7,  attraction8,  attraction9,  attraction10, attraction11, attraction12, attraction13, attraction14, attraction15, attraction16, attraction17, attraction18, attraction19, attraction20, attraction21, attraction22, attraction23, attraction24 ));
         System.out.println("Todas las atracciones (1-24) han sido insertadas correctamente.");
 
+        System.out.println("DataLoader.run() se está ejecutando...");
+
+        //Borrar la tabla de hoteles para evitar repetecion de datos
+        System.out.println("Limpiando la tabla de hoteles..."); 
+        hotelRepository.deleteAll(); 
+        System.out.println("Tabla de hoteles limpiada."); 
         // Crear Hoteles (Hoteles)
         System.out.println("Insertando hoteles...");
         Hotel hotel1 = new Hotel();
