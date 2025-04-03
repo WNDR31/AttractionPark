@@ -47,7 +47,30 @@
       <div class="div-sub-body">
         <!-- Hoteles -->
         <div id="hoteles">
-          <h1 class="h1-plan">Hoteles</h1>
+          <div class="container py-5">
+            <h1 class="text-center mb-4">Hoteles Disponibles</h1>
+            <div class="row">
+                <!-- Iterar sobre los hoteles -->
+                <th:block th:each="hotel : ${hoteles}">
+                    <div class="col-md-4 mb-4">
+                        <div class="card hotel-card">
+                            <!-- Imagen del hotel -->
+                            <img th:src="@{${hotel.coverImage}}" class="hotel-image" alt="Imagen del hotel">
+                            <div class="card-body hotel-details">
+                                <h5 class="card-title" th:text="${hotel.name}">Nombre del hotel</h5>
+                                <p class="card-text hotel-description" th:text="${hotel.shortDescription}">Descripción corta</p>
+                                <p><strong>Estrellas:</strong> <span th:text="${hotel.stars}">5 estrellas</span></p>
+                                <p><strong>Tema:</strong> <span th:text="${hotel.theme}">Tema</span></p>
+                                <p><strong>Tipos de habitaciones:</strong> <span th:text="${hotel.roomTypes}">Tipos de habitación</span></p>
+                            </div>
+                            <div class="card-footer text-center">
+                                <a th:href="@{${hotel.videoUrl}}" class="btn btn-primary" target="_blank">Ver Video</a>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
         </div>
         <br><br>
 
