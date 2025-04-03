@@ -1,5 +1,3 @@
-
-
 :root {
     --darkblue: #00408C;
     --blue: #96ADD6;
@@ -27,66 +25,7 @@ body {
 }
 
 
-/* -------------Menú de navegación-------------- */
 
-#navegacion-principal {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px 30px;
-  background-color: var(--background-color, #00408C); 
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
-  position: fixed; 
-  top: 0;
-  width: 100%; 
-  z-index: 1000;
-}
-
-#menu-navegacion li a {
-  padding: 15px 15px;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: var(--darkblue); 
-  font-weight: bold;
-  font-size: 16px;
-  transition: background-color 0.3s ease, color 0.3s ease; 
-}
-
-#menu-navegacion li:hover,
-#menu-navegacion li.active {
-  background-color: var(--blue);
-  border-radius: 15px;
-}
-
-.resaltar-tickets {
-  background-color: var(--pink); 
-  border-radius: 15px;
-}
-
-.resaltar-tickets:hover {
-  background-color: var(--peach); 
-  border-radius: 15px;
-}
-
-.navbar-toggler {
-  border-color: var(--darkblue);
-  border-radius: 15px;
-}
-
-.navbar-collapse {
-  flex-grow: 0;
-}
-
-@media (max-width: 767px) {
-  #menu-navegacion {
-      flex-direction: column; 
-      text-align: center;
-  }
-  
-  #menu-navegacion li {
-      width: 100%; 
-  }
-}
 
 /*---------------------------Imagenes carousel pantalla home-----------------------*/
 
@@ -638,3 +577,63 @@ display: flex;
 .img-services {
   width: 100%;
 }
+/* -------------Menú de navegación-------------- */
+
+#navegacion-principal {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 30px;
+    background-color: var(--background-color, #00408C); 
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.1);
+    position: fixed; 
+    top: 0;
+    width: 100%; 
+    z-index: 1000;
+  }
+  
+  #menu-navegacion li a {
+    padding: 15px 15px;
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--darkblue); 
+    font-weight: bold;
+    font-size: 16px;
+    transition: background-color 0.3s ease, color 0.3s ease; 
+  }
+  
+  #menu-navegacion li:hover,
+  #menu-navegacion li.active {
+    background-color: var(--blue);
+    border-radius: 15px;
+  }
+  
+  .resaltar-tickets {
+    background-color: var(--pink); 
+    border-radius: 15px;
+  }
+  
+  .resaltar-tickets:hover {
+    background-color: var(--peach); 
+    border-radius: 15px;
+  }
+  
+  .navbar-toggler {
+    border-color: var(--darkblue);
+    border-radius: 15px;
+  }
+  
+  .navbar-collapse {
+    flex-grow: 0;
+  }
+  
+  @media (max-width: 767px) {
+    #menu-navegacion {
+        flex-direction: column; 
+        text-align: center;
+    }
+    
+    #menu-navegacion li {
+        width: 100%; 
+    }
+  }
