@@ -4,11 +4,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import com.example.demo.repository.AttractionRepository;
+import com.example.demo.repository.HotelRepository;
 import com.example.demo.repository.ThrillRepository;
 import com.example.demo.repository.ZoneRepository;
 import com.example.demo.repository.TypeRepository;
 import com.example.demo.entity.Zone;
 import com.example.demo.entity.Attraction;
+import com.example.demo.entity.Hotel;
 import com.example.demo.entity.Thrill;
 import com.example.demo.entity.Type;
 
@@ -19,15 +21,19 @@ public class DataLoader implements CommandLineRunner {
     private final ThrillRepository thrillRepository;
     private final TypeRepository typeRepository;
     private final ZoneRepository zoneRepository;
+    private final HotelRepository hotelRepository;
+    
 
     public DataLoader(AttractionRepository attractionRepository,
                       ThrillRepository thrillRepository,
                       TypeRepository typeRepository,
-                      ZoneRepository zoneRepository) {
+                      ZoneRepository zoneRepository,
+                      HotelRepository hotelRepository) {
         this.attractionRepository = attractionRepository;
         this.thrillRepository = thrillRepository;
         this.typeRepository = typeRepository;
         this.zoneRepository = zoneRepository;
+        this.hotelRepository = hotelRepository;
     }
 
     @Override
@@ -474,5 +480,49 @@ public class DataLoader implements CommandLineRunner {
         // Guardar Atracciones en la base de datos
         attractionRepository.saveAll(List.of( attraction1,  attraction2,  attraction3,  attraction4,  attraction5, attraction6,  attraction7,  attraction8,  attraction9,  attraction10, attraction11, attraction12, attraction13, attraction14, attraction15, attraction16, attraction17, attraction18, attraction19, attraction20, attraction21, attraction22, attraction23, attraction24 ));
         System.out.println("Todas las atracciones (1-24) han sido insertadas correctamente.");
+
+        // Crear Intensidades (Thrill)
+        System.out.println("Insertando hoteles...");
+        Hotel hotel1 = new Hotel();
+        hotel1.setName("Hotel Playa Dorada");
+        hotel1.setSlogan("Vive la experiencia de un paraíso tropical.");
+        hotel1.setShortDescription("Un lugar ideal para unas vacaciones de lujo junto al mar.");
+        hotel1.setDescription("Hotel de lujo con acceso directo a la playa, piscina infinita y restaurantes gourmet.");
+        hotel1.setTheme("Tropical");
+        hotel1.setRoomTypes("Suite, Doble, Familia");
+        hotel1.setParkAccessDetails("Acceso a parque temático cercano.");
+        hotel1.setStars("5");
+        hotel1.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Playa+Dorada");
+        hotel1.setVideoUrl("https://www.youtube.com/watch?v=examplevideo1");
+
+        Hotel hotel2 = new Hotel();
+        hotel2.setName("Hotel Montaña Mágica");
+        hotel2.setSlogan("Una escapatoria única entre las montañas.");
+        hotel2.setShortDescription("Disfruta de la naturaleza en su máxima expresión.");
+        hotel2.setDescription("Un retiro en las montañas con vistas impresionantes, spa y actividades al aire libre.");
+        hotel2.setTheme("Montaña");
+        hotel2.setRoomTypes("Doble, Suite");
+        hotel2.setParkAccessDetails("Acceso a rutas de senderismo.");
+        hotel2.setStars("4");
+        hotel2.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Montaña+Mágica");
+        hotel2.setVideoUrl("https://www.youtube.com/watch?v=examplevideo2");
+
+        Hotel hotel3 = new Hotel();
+        hotel3.setName("Hotel Ciudad Imperial");
+        hotel3.setSlogan("El lujo y la comodidad en el corazón de la ciudad.");
+        hotel3.setShortDescription("Disfruta de un alojamiento exclusivo en el centro de la ciudad.");
+        hotel3.setDescription("Confort, ubicación privilegiada y un ambiente moderno. Ideal para negocios y turismo.");
+        hotel3.setTheme("Ciudad");
+        hotel3.setRoomTypes("Doble, Ejecutiva, Penthouse");
+        hotel3.setParkAccessDetails("Estacionamiento subterráneo.");
+        hotel3.setStars("5");
+        hotel3.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Ciudad+Imperial");
+        hotel3.setVideoUrl("https://www.youtube.com/watch?v=examplevideo3");
+
+        hotelRepository.save(hotel1);
+        hotelRepository.save(hotel2);
+        hotelRepository.save(hotel3);        
+        
+        System.out.println("Hoteles insertados correctamente.");
     }
 }
