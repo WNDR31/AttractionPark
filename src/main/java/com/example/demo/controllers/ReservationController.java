@@ -37,7 +37,6 @@ public class ReservationController {
         Reservation updatedReservation = reservationService.updateReservation(id, updates);
         return ResponseEntity.ok(updatedReservation);
     }
-
     @GetMapping 
     public ResponseEntity<List<Reservation>> getAllReservations() {
         log.info("Solicitud para obtener todas las reservas");
