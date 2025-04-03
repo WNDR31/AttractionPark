@@ -15,9 +15,11 @@ public class VisitPlanController {
     @Autowired
     private HotelRepository hotelRepository;
 
-    @GetMapping("Hoteles")
+    @GetMapping("/planifica-tu-visita")
     public String mostrarHoteles(Model model) {
+        
         List<Hotel> hoteles = hotelRepository.findAll();
+        System.out.println("Número de hoteles encontrados:" + hoteles.size());
         model.addAttribute("hoteles", hoteles);
         return "PlanificaTuVisita";  // Nombre de la vista HTML
     }
