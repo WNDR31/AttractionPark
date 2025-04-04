@@ -1,31 +1,553 @@
-<!DOCTYPE html> <!--plantilla para atracciones--> 
+<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atracciones</title>
+    <title>{{attraction.name}} - Detalles</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/css/lightgallery.min.css">
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #e74c3c;
+            --accent-color: #3498db;
+            --light-gray: #ecf0f1;
+            --dark-gray: #7f8c8d;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .header-detail {
+            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
+            color: white;
+            padding: 60px 0 30px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-detail h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header-detail h1 i {
+            margin-right: 15px;
+            color: var(--secondary-color);
+        }
+
+        .breadcrumb {
+            background-color: rgba(255,255,255,0.1);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .breadcrumb-item a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .attraction-detail-card {
+            background-color: white;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .detail-header {
+            position: relative;
+        }
+
+        .main-image {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .gallery-thumbnails {
+            display: flex;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            object-fit: cover;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+        }
+
+        .detail-body {
+            padding: 30px;
+        }
+
+        .detail-title {
+            color: var(--primary-color);
+            font-weight: 700;
+            font-size: 2rem;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--light-gray);
+            padding-bottom: 15px;
+        }
+
+        .detail-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            font-size: 1rem;
+            color: var(--dark-gray);
+            background-color: var(--light-gray);
+            padding: 8px 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .meta-item i {
+            color: var(--secondary-color);
+            margin-right: 8px;
+            font-size: 1rem;
+        }
+
+        .detail-section {
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            color: var(--primary-color);
+            font-weight: 600;
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title i {
+            color: var(--secondary-color);
+            margin-right: 10px;
+        }
+
+        .specs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .spec-item {
+            background-color: var(--light-gray);
+            padding: 15px;
+            border-radius: var(--border-radius);
+        }
+
+        .spec-label {
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .spec-value {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin-top: 20px;
+            border-radius: var(--border-radius);
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .btn-back {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+
+        .btn-back:hover {
+            background-color: #1a252f;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .footer {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        /* Estilos para el tiempo de espera dinámico */
+        .wait-time-container {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .wait-time-value {
+            font-weight: 700;
+            color: var(--secondary-color);
+            font-size: 1.3rem;
+            transition: color 0.3s ease;
+        }
+
+        .wait-time-unit {
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+
+        .wait-time-animation {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            margin-left: 8px;
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--secondary-color);
+            opacity: 0.7;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        .dot-1 { animation-delay: 0s; }
+        .dot-2 { animation-delay: 0.3s; }
+        .dot-3 { animation-delay: 0.6s; }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(0.8); opacity: 0.5; }
+            50% { transform: scale(1.2); opacity: 1; }
+        }
+
+        /* Animación cuando cambia el tiempo */
+        .wait-time-change {
+            animation: timeChange 0.5s ease-in-out;
+        }
+
+        @keyframes timeChange {
+            0% { transform: scale(1); color: var(--secondary-color); }
+            50% { transform: scale(1.2); color: #e74c3c; }
+            100% { transform: scale(1); color: var(--secondary-color); }
+        }
+
+        /* Indicador de tendencia */
+        .trend-indicator {
+            margin-left: 5px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .trend-up {
+            color: #e74c3c;
+        }
+
+        .trend-down {
+            color: #2ecc71;
+        }
+
+        .trend-stable {
+            color: var(--dark-gray);
+        }
+
+        @media (max-width: 768px) {
+            .header-detail h1 {
+                font-size: 2rem;
+            }
+            
+            .main-image {
+                height: 250px;
+            }
+            
+            .specs-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 <body>
-    <h1>Atracciones</h1>
-    <table border="1">
-        <tr>
-            <th>Nombre</th>
-            <th>Descripción</th>
-            <th>Altura</th>
-            <th>Duración</th>
-            <th>Zona</th>
-            <th>Intensidad</th>
-        </tr>
-        {{#attractions}}
-        <tr>
-            <td>{{name}}</td>
-            <td>{{description}}</td>
-            <td>{{height}}</td>
-            <td>{{duration}}</td>
-            <td>{{zone.name}}</td>
-            <td>{{intensity.name}}</td>
-        </tr>
-        {{/attractions}}
-    </table>
+<!-- Encabezado con breadcrumb -->
+<div class="header-detail">
+    <div class="container">
+        <h1><i class="fas fa-{{#attraction.type.name}}theater-masks{{/attraction.type.name}}"></i> {{attraction.name}}</h1>
+    </div>
+</div>
+
+<div class="container">
+    <!-- Tarjeta de detalle principal -->
+    <div class="attraction-detail-card">
+        <div class="detail-header">
+            <img src="/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="main-image" 
+                 onerror="this.onerror=null;this.src='https://via.placeholder.com/800x400?text=Imagen+no+disponible';">
+            
+            {{#attraction.imageUrl2}}
+            <div class="gallery-thumbnails">
+                <img src="/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="thumbnail" 
+                     onclick="changeMainImage(this.src)" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+1';">
+                <img src="/{{attraction.imageUrl2}}" alt="{{attraction.name}}" class="thumbnail" 
+                     onclick="changeMainImage(this.src)" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+2';">
+                {{#attraction.imageUrl3}}
+                <img src="/{{attraction.imageUrl3}}" alt="{{attraction.name}}" class="thumbnail" 
+                     onclick="changeMainImage(this.src)" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+3';">
+                {{/attraction.imageUrl3}}
+            </div>
+            {{/attraction.imageUrl2}}
+        </div>
+        
+        <div class="detail-body">
+            <h2 class="detail-title">{{attraction.name}}</h2>
+            
+            <div class="detail-meta">
+                {{#attraction.type.name}}
+                <div class="meta-item">
+                    <i class="fas fa-tag"></i> {{attraction.type.name}}
+                </div>
+                {{/attraction.type.name}}
+                {{#attraction.intensity.name}}
+                <div class="meta-item">
+                    <i class="fas fa-bolt"></i> {{attraction.intensity.name}}
+                </div>
+                {{/attraction.intensity.name}}
+                {{#attraction.zone.name}}
+                <div class="meta-item">
+                    <i class="fas fa-map-marker-alt"></i> {{attraction.zone.name}}
+                </div>
+                {{/attraction.zone.name}}
+                {{#attraction.minHeight}}
+                <div class="meta-item">
+                    <i class="fas fa-ruler-vertical"></i> Altura mínima: {{attraction.minHeight}} cm
+                </div>
+                {{/attraction.minHeight}}
+            </div>
+            
+            <div class="detail-section">
+                <h3 class="section-title"><i class="fas fa-align-left"></i> Descripción</h3>
+                <p>{{attraction.description}}</p>
+            </div>
+            
+            <div class="detail-section">
+                <h3 class="section-title"><i class="fas fa-info-circle"></i> Especificaciones</h3>
+                <div class="specs-grid">
+                    {{#attraction.height}}
+                    <div class="spec-item">
+                        <div class="spec-label">Altura</div>
+                        <div class="spec-value">{{attraction.height}} m</div>
+                    </div>
+                    {{/attraction.height}}
+                    
+                    {{#attraction.duration}}
+                    <div class="spec-item">
+                        <div class="spec-label">Duración</div>
+                        <div class="spec-value">{{attraction.duration}} segundos</div>
+                    </div>
+                    {{/attraction.duration}}
+                    
+                    {{#attraction.speed}}
+                    <div class="spec-item">
+                        <div class="spec-label">Velocidad máxima</div>
+                        <div class="spec-value">{{attraction.speed}} km/h</div>
+                    </div>
+                    {{/attraction.speed}}
+                    
+                    {{#attraction.line}}
+                    <div class="spec-item">
+                        <div class="spec-label">Tiempo de espera</div>
+                        <div class="spec-value">
+                            <div class="wait-time-container">
+                                <span class="wait-time-value">{{attraction.line}}</span>
+                                <span class="wait-time-unit">minutos</span>
+                                <div class="wait-time-animation">
+                                    <div class="pulse-dot dot-1"></div>
+                                    <div class="pulse-dot dot-2"></div>
+                                    <div class="pulse-dot dot-3"></div>
+                                </div>
+                                <span class="trend-indicator trend-stable"><i class="fas fa-equals"></i></span>
+                            </div>
+                        </div>
+                    </div>
+                    {{/attraction.line}}
+                </div>
+            </div>
+            
+            {{#attraction.videoUrl}}
+            <div class="detail-section">
+                <h3 class="section-title"><i class="fas fa-video"></i> Video</h3>
+                <div class="video-container">
+                    <iframe src="{{attraction.videoUrl}}" frameborder="0" allowfullscreen></iframe>
+                </div>
+            </div>
+            {{/attraction.videoUrl}}
+            
+            <a href="/attractionsgalery" class="btn btn-back">
+                <i class="fas fa-arrow-left"></i> Volver a la galería
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <div class="container text-center">
+        <p class="mb-0">© 2025 LagoonLand. Todos los derechos reservados.</p>
+    </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightgallery/2.7.1/lightgallery.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Cambiar imagen principal al hacer clic en miniaturas
+        window.changeMainImage = function(newSrc) {
+            document.querySelector('.main-image').src = newSrc;
+        };
+        
+        // Inicializar lightgallery si hay múltiples imágenes
+        {{#attraction.imageUrl2}}
+        const gallery = document.querySelector('.gallery-thumbnails');
+        gallery.addEventListener('click', function(e) {
+            if(e.target.tagName === 'IMG') {
+                const lightGallery = window.lightGallery(gallery, {
+                    dynamic: true,
+                    dynamicEl: [
+                        {src: '/{{attraction.imageUrl1}}', thumb: '/{{attraction.imageUrl1}}'},
+                        {src: '/{{attraction.imageUrl2}}', thumb: '/{{attraction.imageUrl2}}'},
+                        {{#attraction.imageUrl3}}
+                        {src: '/{{attraction.imageUrl3}}', thumb: '/{{attraction.imageUrl3}}'},
+                        {{/attraction.imageUrl3}}
+                    ],
+                    download: false,
+                    zoom: true
+                });
+                lightGallery.openGallery(Array.from(gallery.children).indexOf(e.target));
+            }
+        });
+        {{/attraction.imageUrl2}}
+
+        // Función para simular cambios en el tiempo de espera
+        function simulateLiveWaitTime() {
+            const waitTimeElement = document.querySelector('.wait-time-value');
+            const trendIndicator = document.querySelector('.trend-indicator');
+            if (!waitTimeElement || !trendIndicator) return;
+            
+            // Valor inicial desde la base de datos
+            let currentTime = parseInt(waitTimeElement.textContent);
+            let lastChange = 0;
+            
+            // Actualizar cada 1-2 minutos (para simular)
+            setInterval(() => {
+                // Generar un cambio aleatorio (-5 a +10 minutos)
+                const change = Math.floor(Math.random() * 16) - 5;
+                let newTime = currentTime + change;
+                
+                // Mantener dentro de límites razonables (5-120 minutos)
+                newTime = Math.max(5, Math.min(newTime, 120));
+                
+                // Solo actualizar si hay cambio
+                if (newTime !== currentTime) {
+                    lastChange = newTime - currentTime;
+                    currentTime = newTime;
+                    
+                    // Actualizar indicador de tendencia
+                    updateTrendIndicator(lastChange);
+                    
+                    // Aplicar animación
+                    waitTimeElement.classList.add('wait-time-change');
+                    setTimeout(() => {
+                        waitTimeElement.textContent = newTime;
+                        waitTimeElement.classList.remove('wait-time-change');
+                    }, 250);
+                    
+                    // Cambiar color según la tendencia
+                    if (lastChange > 0) {
+                        waitTimeElement.style.color = '#e74c3c'; // Rojo - aumentando
+                    } else if (lastChange < 0) {
+                        waitTimeElement.style.color = '#2ecc71'; // Verde - disminuyendo
+                    }
+                    
+                    // Volver al color original después de 2 segundos
+                    setTimeout(() => {
+                        waitTimeElement.style.color = 'var(--secondary-color)';
+                    }, 2000);
+                }
+            }, 60000); // Actualizar cada minuto (ajustable)
+        }
+
+        // Función para actualizar el indicador de tendencia
+        function updateTrendIndicator(change) {
+            const trendIndicator = document.querySelector('.trend-indicator');
+            if (!trendIndicator) return;
+            
+            // Limpiar clases anteriores
+            trendIndicator.classList.remove('trend-up', 'trend-down', 'trend-stable');
+            
+            // Determinar nueva tendencia
+            if (change > 0) {
+                trendIndicator.classList.add('trend-up');
+                trendIndicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
+            } else if (change < 0) {
+                trendIndicator.classList.add('trend-down');
+                trendIndicator.innerHTML = '<i class="fas fa-arrow-down"></i>';
+            } else {
+                trendIndicator.classList.add('trend-stable');
+                trendIndicator.innerHTML = '<i class="fas fa-equals"></i>';
+            }
+            
+            // Animación
+            trendIndicator.style.transform = 'scale(1.5)';
+            setTimeout(() => {
+                trendIndicator.style.transform = 'scale(1)';
+            }, 300);
+        }
+
+        // Iniciar la simulación del tiempo de espera
+        simulateLiveWaitTime();
+    });
+</script>
 </body>
-</html> 
+</html>

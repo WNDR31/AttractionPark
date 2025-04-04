@@ -6,247 +6,38 @@
     <title>Galería de Atracciones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #2c3e50;
-            --secondary-color: #e74c3c;
-            --accent-color: #3498db;
-            --light-gray: #ecf0f1;
-            --dark-gray: #7f8c8d;
-            --border-radius: 8px;
-            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f9f9f9;
-            color: #333;
-        }
-
-        .header-gallery {
-            background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
-            color: white;
-            padding: 80px 0 40px;
-            margin-bottom: 40px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .header-gallery h1 {
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-
-        .header-gallery h1 i {
-            margin-right: 15px;
-            color: var(--secondary-color);
-        }
-
-        .filter-section {
-            background-color: white;
-            border-radius: var(--border-radius);
-            padding: 25px;
-            box-shadow: var(--box-shadow);
-            margin-bottom: 40px;
-        }
-
-        .filter-label {
-            font-weight: 600;
-            color: var(--primary-color);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-        }
-
-        .filter-label i {
-            margin-right: 8px;
-            color: var(--secondary-color);
-            font-size: 0.9rem;
-        }
-
-        .form-select {
-            border: 2px solid #ddd;
-            border-radius: var(--border-radius);
-            padding: 10px 15px;
-            font-size: 0.95rem;
-            transition: all 0.3s;
-        }
-
-        .form-select:hover {
-            border-color: var(--accent-color);
-        }
-
-        .form-select:focus {
-            border-color: var(--accent-color);
-            box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
-        }
-
-        .btn-filter {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            font-weight: 600;
-            border-radius: var(--border-radius);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-filter:hover {
-            background-color: #1a252f;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .btn-reset {
-            background-color: var(--light-gray);
-            color: var(--primary-color);
-            border: 1px solid #ddd;
-            padding: 10px 20px;
-            font-weight: 600;
-            border-radius: var(--border-radius);
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .btn-reset:hover {
-            background-color: #e9ecef;
-        }
-
-        .attraction-card {
-            margin-bottom: 40px; /* Aumentado de 30px a 40px */
-            border: none;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--box-shadow);
-            transition: all 0.3s ease;
-            background-color: white;
-        }
-
-        .attraction-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
-        }
-
-        .attraction-card img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-            background-color: #f8f9fa; /* Fondo para imágenes transparentes */
-        }
-
-        .attraction-card:hover img {
-            transform: scale(1.05);
-        }
-
-        .card-body {
-            padding: 20px;
-        }
-
-        .card-title {
-            color: var(--primary-color);
-            font-weight: 700;
-            font-size: 1.3rem;
-            margin-bottom: 15px;
-        }
-
-        .card-text {
-            color: #666;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        .attraction-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 15px;
-        }
-
-        .meta-item {
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem;
-            color: var(--dark-gray);
-        }
-
-        .meta-item i {
-            color: var(--secondary-color);
-            margin-right: 5px;
-            font-size: 0.9rem;
-        }
-
-        .btn-details {
-            background-color: var(--accent-color);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            transition: all 0.3s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            text-decoration: none;
-        }
-
-        .btn-details:hover {
-            background-color: #2980b9;
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 50px;
-            color: var(--dark-gray);
-            font-size: 1.1rem;
-            grid-column: 1 / -1;
-        }
-
-        .no-results i {
-            font-size: 2.5rem;
-            color: var(--secondary-color);
-            margin-bottom: 15px;
-            display: block;
-        }
-
-        .footer {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 30px 0;
-            margin-top: 50px;
-        }
-
-        @media (max-width: 768px) {
-            .header-gallery h1 {
-                font-size: 2rem;
-            }
-            
-            .filter-actions {
-                justify-content: center !important;
-                margin-top: 15px;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="/nav.css"> 
 </head>
 <body>
-<img src="https://images.app.goo.gl/JtnqG1JsA8sKUMXX7">
-<img src="demo\src\main\resources\templates\Imagenes\wildmouse2.jpg">
+<!-- Menú de navegación -->
+<nav id="navegacion-principal" class="navbar navbar-expand-lg fixed-top">
+    <div class="container-fluid">
+        <a id="parque" class="navbar-brand" href="PaginaPrincipal.html">LagoonLand</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegacion" aria-controls="menu-navegacion" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="menu-navegacion">
+            <ul id="menu-navegacion" class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item"><a class="nav-link" href="PaginaPrincipal.html">HOME</a></li>
+                <li class="nav-item"><a class="nav-link" href="PlanificaTuVisita.html">PLANIFICA TU VISITA</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/attractionsgalery">DESCUBRE EL PARQUE</a></li>
+                <li class="nav-item"><a class="nav-link" href="#footer">HORARIOS</a></li>
+                <li class="nav-item"><a class="nav-link resaltar-tickets" href="Compra.html">COMPRA TUS TICKETS</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- Botón del mapa flotante -->
+<a href="http://localhost:8080/map" class="map-button">
+    <i class="fas fa-map-marked-alt"></i>
+    <span class="d-none d-sm-inline">Ver Mapa</span>
+</a>
+
+<!-- Overlay de carga -->
+<div class="loading-overlay" id="loadingOverlay">
+    <div class="spinner"></div>
+</div>
+
 <!-- Encabezado con estilo -->
 <div class="header-gallery">
     <div class="container">
@@ -257,7 +48,7 @@
 
 <div class="container">
     <!-- Sección de Filtros mejorada -->
-    <div class="filter-section">
+    <div class="filter-section" id="filterSection">
         <form id="filterForm" action="/attractions/filter" method="get">
             <div class="row g-3">
                 <div class="col-md-4">
@@ -297,7 +88,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <div class="d-flex justify-content-end gap-2 filter-actions">
-                        <button type="submit" class="btn btn-filter">
+                        <button type="submit" class="btn btn-filter" id="applyFilters">
                             <i class="fas fa-filter"></i> Aplicar Filtros
                         </button>
                         <button type="button" id="resetButton" class="btn btn-reset">
@@ -310,11 +101,12 @@
     </div>
 
     <!-- Galería de Atracciones -->
-    <div class="row">
+    <div class="row" id="attractionsContainer">
         {{#attractions}}
-            <div class="col-lg-4 col-md-6 mb-4"> <!-- Añadido mb-4 para más espacio -->
+            <div class="col-lg-4 col-md-6 mb-4 attraction-item" data-zone="{{zone.name}}" data-intensity="{{intensity.name}}" data-type="{{type.name}}">
                 <div class="attraction-card h-100">
-                    <img src= "C:\Users\lucia\Desktop\DISTRIBUIDOS\AttractionPark\demo\src\main\resources\templates\Imagenes\wildmouse2.jpg" alt="{{name}}" class="img-fluid" onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
+                    <img src="/{{imageUrl1}}" alt="{{name}}" class="img-fluid" 
+                     onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
                     <div class="card-body">
                         <h5 class="card-title">{{name}}</h5>
                         
@@ -345,7 +137,7 @@
         {{/attractions}}
 
         {{^attractions}}
-            <div class="no-results">
+            <div class="no-results show">
                 <i class="fas fa-search"></i>
                 <p>No se encontraron atracciones que coincidan con los filtros seleccionados.</p>
                 <a href="/attractionsgalery" class="btn btn-reset mt-3">
@@ -356,38 +148,156 @@
     </div>
 </div>
 
-<!-- Footer -->
-<footer class="footer">
-    <div class="container text-center">
-        <p class="mb-0">© 2023 Parque de Atracciones. Todos los derechos reservados.</p>
-    </div>
-</footer>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/js/bootstrap.bundle.min.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
         const resetButton = document.getElementById('resetButton');
         const filterForm = document.getElementById('filterForm');
+        const applyFilters = document.getElementById('applyFilters');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        const attractionsContainer = document.getElementById('attractionsContainer');
+        const noResults = document.querySelector('.no-results');
         
+        // Función para mostrar u ocultar el overlay de carga
+        function setLoading(loading) {
+            if (loading) {
+                loadingOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                loadingOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+        
+        // Función para animar el filtrado
+        function animateFilterChange() {
+            // Guardar la posición actual del scroll
+            const scrollPosition = window.scrollY;
+            const filterSection = document.getElementById('filterSection');
+            
+            // Aplicar animación de transición
+            filterSection.style.opacity = '0.7';
+            filterSection.style.transform = 'translateY(-10px)';
+            
+            // Mostrar overlay de carga
+            setLoading(true);
+            
+            // Esperar un momento para que se vea la animación
+            setTimeout(() => {
+                filterSection.style.opacity = '1';
+                filterSection.style.transform = 'translateY(0)';
+                
+                // Restaurar la posición del scroll después de la animación
+                window.scrollTo({
+                    top: scrollPosition,
+                    behavior: 'instant' // Usamos 'instant' para evitar animación de scroll
+                });
+                
+                // Ocultar overlay después de un breve tiempo
+                setTimeout(() => {
+                    setLoading(false);
+                }, 300);
+            }, 300);
+        }
+        
+        // Manejar el envío del formulario
+        filterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            animateFilterChange();
+            
+            // Simular un retraso para la transición (en producción sería la llamada AJAX)
+            setTimeout(() => {
+                // Aquí iría tu lógica de filtrado real
+                this.submit();
+            }, 500);
+        });
+        
+        // Manejar el botón de reset
         resetButton.addEventListener('click', function() {
+            // Guardar posición del scroll
+            const scrollPosition = window.scrollY;
+            
+            // Animación de reset
+            animateFilterChange();
+            
             // Resetear los valores de los select
             const selects = filterForm.querySelectorAll('select');
             selects.forEach(select => {
                 select.value = '';
+                select.dispatchEvent(new Event('change'));
             });
             
             // Enviar el formulario (esto recargará la página sin filtros)
-            filterForm.submit();
+            setTimeout(() => {
+                filterForm.submit();
+            }, 500);
         });
-
+        
+        // Actualizar estilos de los selectores al cargar la página
+        document.querySelectorAll('.form-select').forEach(select => {
+            if(select.value !== '') {
+                select.classList.add('selected');
+            }
+            
+            // Escuchar cambios en los selectores
+            select.addEventListener('change', function() {
+                if(this.value !== '') {
+                    this.classList.add('selected');
+                } else {
+                    this.classList.remove('selected');
+                }
+            });
+        });
+        
         // Asegurar que las imágenes PNG se muestren correctamente
         document.querySelectorAll('.attraction-card img').forEach(img => {
             if(img.src.toLowerCase().endsWith('.png')) {
-                img.style.backgroundColor = '#f8f9fa'; // Fondo para PNG transparentes
+                img.style.backgroundColor = '#f8f9fa';
+            }
+        });
+        
+        // Prevenir el comportamiento predeterminado del formulario si no hay cambios
+        filterForm.addEventListener('submit', function(e) {
+            const formData = new FormData(this);
+            let hasFilters = false;
+            
+            for (const [key, value] of formData.entries()) {
+                if (value !== '') {
+                    hasFilters = true;
+                    break;
+                }
+            }
+            
+            if (!hasFilters) {
+                e.preventDefault();
+                // Animación sutil para indicar que no hay cambios
+                filterForm.classList.add('no-changes');
+                setTimeout(() => {
+                    filterForm.classList.remove('no-changes');
+                }, 1000);
             }
         });
     });
 </script>
+<footer id="footer">
+      <div class="container-footer">
+        <div class="footer-section footer-contacto">
+          <h3>Contacto</h3>
+          <p>Correo: contacto@parqueLagoonLand.com</p>
+          <p>Teléfono: +34 123 456 789</p>
+        </div>
+        <div class="footer-section footer-horario"> 
+          <h3>Horarios</h3>
+          <p>Lunes a Viernes: 10:00 - 20:00</p>
+          <p>Sábados y Domingos: 10:00 - 22:00</p>
+        </div>
+        <div class="footer-section"> 
+          <h3>Calendario</h3>
+          <iframe src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Europe%2FParis&showPrint=0&showTitle=0&showCalendars=0&showTz=0&mode=MONTH&src=ZXMuc3BhaW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23F09300" style="border-width:0" width="500" height="400" frameborder="0" scrolling="no"></iframe>
+        </div>
+      </div>
+      <p class="footer-copyright">© 2025 LagoonLand. Todos los derechos reservados.</p>
+    </footer>
 </body>
 </html>

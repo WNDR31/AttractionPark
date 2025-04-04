@@ -93,9 +93,9 @@ public class DataLoader implements CommandLineRunner {
         attraction1.setDuration(90);
         attraction1.setSpeed(40.0);
         attraction1.setMinHeight(48);
-        attraction1.setImageUrl1("bluestreak1.png");
-        attraction1.setImageUrl2("bluestreak2.jng");
-        attraction1.setImageUrl3("bluestreak3.jpeg");
+        attraction1.setImageUrl1("bluestreak1.jpeg");
+        attraction1.setImageUrl2("bluestreak4.jpg");
+        attraction1.setImageUrl3("bluestreak5.jpg");
         attraction1.setVideoUrl("https://www.youtube.com/embed/t5aeLbY4bE8?si=G7qcOJd7ATmSEPcr");
         attraction1.setZone(zone6);
         attraction1.setIntensity(thrill4);
@@ -109,10 +109,10 @@ public class DataLoader implements CommandLineRunner {
         attraction2.setDuration(90); //seconds 
         attraction2.setSpeed(60.0); //mph 
         attraction2.setMinHeight(48);
-        attraction2.setImageUrl1("PowerTower.jpg");
+        attraction2.setImageUrl1("foto1.jpg");
         attraction2.setImageUrl2("powertower2.jpg");
         attraction2.setImageUrl3("powertower3.jpg");
-        attraction2.setVideoUrl("https://youtu.be/OyOEWslMzhA?si=Ed1TmC5YAYlPw3jq");
+        attraction2.setVideoUrl("https://www.youtube.com/embed/OyOEWslMzhA?si=BNCtifyY1vomkPUY");
         attraction2.setZone(zone3); 
         attraction2.setIntensity(thrill5);
         attraction2.setType(type2);

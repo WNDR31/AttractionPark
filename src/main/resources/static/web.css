@@ -1,5 +1,6 @@
 
 
+
 :root {
     --darkblue: #00408C;
     --blue: #96ADD6;
@@ -17,9 +18,7 @@
 
 body {
     background-color: white;
-    font-family: "Montserrat", Tahoma, Verdana, sans-serif;
-    margin: 0;
-
+    font-family: "Montserrat", Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #parque{
