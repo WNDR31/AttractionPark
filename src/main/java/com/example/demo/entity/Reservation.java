@@ -14,8 +14,8 @@ public class Reservation {
     private String phone;
     private LocalDate date;
     private String email;
-    private String tipoEntrada;
-    private int cantidad;
+    private String entryType;
+    private int quantity;
 
     public Reservation() {}
 
@@ -25,8 +25,8 @@ public class Reservation {
         phone = p;
         date = d;
         email = e;
-        tipoEntrada = t;
-        cantidad = c;
+        entryType = t;
+        quantity = c;
     }
 
 
@@ -80,20 +80,20 @@ public class Reservation {
     }
 
     
-    public String getTipoEntrada() {
-        return tipoEntrada;
+    public String getEntryType() {
+        return entryType;
     }
 
-    public void setTipoEntrada(String tipoEntrada) {
-        this.tipoEntrada = tipoEntrada;
+    public void setEntryType(String tipoEntrada) {
+        this.entryType = tipoEntrada;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setQuantity(int cantidad) {
+        this.quantity = cantidad;
     }
 
 
@@ -107,8 +107,8 @@ public class Reservation {
                 ", phone='" + phone + '\'' +
                 ", date=" + date +
                 ", email='" + email + '\'' +
-                ", tipoEntrada='" + tipoEntrada + '\'' +
-                ", cantidad=" + cantidad +
+                ", tipoEntrada='" + entryType + '\'' +
+                ", cantidad=" + quantity +
                 '}';
     }
 }
