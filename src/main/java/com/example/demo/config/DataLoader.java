@@ -5,12 +5,16 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 import com.example.demo.repository.AttractionRepository;
 import com.example.demo.repository.HotelRepository;
+import com.example.demo.repository.RestaurantRepository;
+import com.example.demo.repository.StoreRepository;
 import com.example.demo.repository.ThrillRepository;
 import com.example.demo.repository.ZoneRepository;
 import com.example.demo.repository.TypeRepository;
 import com.example.demo.entity.Zone;
 import com.example.demo.entity.Attraction;
 import com.example.demo.entity.Hotel;
+import com.example.demo.entity.Restaurant;
+import com.example.demo.entity.Store;
 import com.example.demo.entity.Thrill;
 import com.example.demo.entity.Type;
 
@@ -22,18 +26,22 @@ public class DataLoader implements CommandLineRunner {
     private final TypeRepository typeRepository;
     private final ZoneRepository zoneRepository;
     private final HotelRepository hotelRepository;
+    private final RestaurantRepository restaurantRepository;
+    private final StoreRepository storeRepository;
     
 
     public DataLoader(AttractionRepository attractionRepository,
                       ThrillRepository thrillRepository,
                       TypeRepository typeRepository,
                       ZoneRepository zoneRepository,
-                      HotelRepository hotelRepository) {
+                      HotelRepository hotelRepository, RestaurantRepository restaurantRepository, StoreRepository storeRepository) {
         this.attractionRepository = attractionRepository;
         this.thrillRepository = thrillRepository;
         this.typeRepository = typeRepository;
         this.zoneRepository = zoneRepository;
         this.hotelRepository = hotelRepository;
+        this.restaurantRepository = restaurantRepository;
+        this.storeRepository = storeRepository;
     }
 
     @Override
@@ -530,5 +538,92 @@ public class DataLoader implements CommandLineRunner {
         hotelRepository.save(hotel3);        
 
         System.out.println("Hoteles insertados correctamente.");
+
+
+        //Borrar la tabla de restaurantes para evitar repetecion de datos
+        System.out.println("Limpiando la tabla de restaurantes..."); 
+        restaurantRepository.deleteAll(); 
+        System.out.println("Tabla de restaurantes limpiada."); 
+        // Crear Restaurantes
+        System.out.println("Insertando restaurantes...");
+
+        Restaurant restaurant1 = new Restaurant();
+        restaurant1.setName("Gourmet Delights");
+        restaurant1.setSlogan("Sabores que despiertan los sentidos");
+        restaurant1.setTheme("Elegante y sofisticado");
+        restaurant1.setDiningType("À la carte");
+        restaurant1.setMeals("Ensaladas, carnes premium, postres");
+        restaurant1.setDietaryOptions("Sin gluten, vegetariano, vegano");
+        restaurant1.setLocation("Avenida Central 45, Ciudad");
+        restaurant1.setImageUrl1("gourmet1.jpg");
+        restaurant1.setImageUrl2("gourmet2.jpg");
+        restaurant1.setImageUrl3("gourmet3.jpg");
+        restaurant1.setCoverImage("gourmet_cover.jpg");
+        restaurant1.setVideoUrl("gourmet_video.mp4");
+
+        Restaurant restaurant2 = new Restaurant();
+        restaurant2.setName("Burrito Express");
+        restaurant2.setSlogan("Auténtico sabor mexicano");
+        restaurant2.setTheme("Mexicano y colorido");
+        restaurant2.setDiningType("Self-service");
+        restaurant2.setMeals("Burritos, tacos, nachos");
+        restaurant2.setDietaryOptions("Libre de lácteos, sin frutos secos");
+        restaurant2.setLocation("Calle Sabores 22, Ciudad");
+        restaurant2.setImageUrl1("burrito1.jpg");
+        restaurant2.setImageUrl2("burrito2.jpg");
+        restaurant2.setImageUrl3("burrito3.jpg");
+        restaurant2.setCoverImage("burrito_cover.jpg");
+        restaurant2.setVideoUrl("burrito_video.mp4");
+
+        Restaurant restaurant3 = new Restaurant();
+        restaurant3.setName("Green Bites");
+        restaurant3.setSlogan("Comida saludable, vida saludable");
+        restaurant3.setTheme("Natural y relajante");
+        restaurant3.setDiningType("Buffet");
+        restaurant3.setMeals("Ensaladas, smoothies, bowls de frutas");
+        restaurant3.setDietaryOptions("Orgánico, sin azúcares añadidos, vegano");
+        restaurant3.setLocation("Plaza Verde, Ciudad");
+        restaurant3.setImageUrl1("green1.jpg");
+        restaurant3.setImageUrl2("green2.jpg");
+        restaurant3.setImageUrl3("green3.jpg");
+        restaurant3.setCoverImage("green_cover.jpg");
+        restaurant3.setVideoUrl("green_video.mp4");
+
+        restaurantRepository.save(restaurant1);
+        restaurantRepository.save(restaurant2);
+        restaurantRepository.save(restaurant3);        
+
+        System.out.println("Hoteles insertados correctamente.");
+
+
+        //Borrar la tabla de restaurantes para evitar repeticion de datos
+        System.out.println("Limpiando la tabla de tiendas..."); 
+        storeRepository.deleteAll(); 
+        System.out.println("Tabla de tiendas limpiada."); 
+        // Crear Restaurantes
+        System.out.println("Insertando tiendas...");
+
+        Store store1 = new Store();
+        store1.setName("Galactic Gear");
+        store1.setProductType("Merchandising espacial: trajes de astronauta, juguetes alienígenas, souvenirs de planetas");
+        store1.setLocation("Zona Espacial - Parque de Atracciones");
+        store1.setCoverImage("galactic_gear_cover.jpg");
+
+        Store store2 = new Store();
+        store2.setName("Pirate's Treasure");
+        store2.setProductType("Accesorios piratas: espadas, sombreros, mapas del tesoro, monedas de oro");
+        store2.setLocation("Isla Pirata - Parque de Atracciones");
+        store2.setCoverImage("pirates_treasure_cover.jpg");
+
+        Store store3 = new Store();
+        store3.setName("Enchanted Emporium");
+        store3.setProductType("Varitas mágicas, capas de hechicero, pociones y grimorios");
+        store3.setLocation("Reino Encantado - Parque de Atracciones");
+        store3.setCoverImage("enchanted_emporium_cover.jpg");
+
+        storeRepository.save(store1);
+        storeRepository.save(store2);
+        storeRepository.save(store3);        
+
     }
 }
