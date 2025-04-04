@@ -498,40 +498,31 @@ public class DataLoader implements CommandLineRunner {
         // Crear Hoteles (Hoteles)
         System.out.println("Insertando hoteles...");
         Hotel hotel1 = new Hotel();
-        hotel1.setName("Hotel Playa Dorada");
-        hotel1.setSlogan("Vive la experiencia de un paraíso tropical.");
-        hotel1.setShortDescription("Un lugar ideal para unas vacaciones de lujo junto al mar.");
-        hotel1.setDescription("Hotel de lujo con acceso directo a la playa, piscina infinita y restaurantes gourmet.");
-        hotel1.setTheme("Tropical");
-        hotel1.setRoomTypes("Suite, Doble, Familia");
-        hotel1.setParkAccessDetails("Acceso a parque temático cercano.");
-        hotel1.setStars("5");
-        hotel1.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Playa+Dorada");
-        hotel1.setVideoUrl("https://www.youtube.com/watch?v=examplevideo1");
+        hotel1.setName("Castaway Bay");
+        hotel1.setDescription("Un resort tropical con parque acuático cubierto, ideal para familias que buscan diversión sin límites.");
+        hotel1.setTheme("Isla tropical y aventura acuática");
+        hotel1.setRoomTypes("Habitaciones estándar, suites familiares, villas");
+        hotel1.setStars("4");
+        hotel1.setCoverImage("/Imagenes/castaway_bay_cover.jpg");
+        hotel1.setUrl("https://www.castawaybay.com/");
 
         Hotel hotel2 = new Hotel();
-        hotel2.setName("Hotel Montaña Mágica");
-        hotel2.setSlogan("Una escapatoria única entre las montañas.");
-        hotel2.setShortDescription("Disfruta de la naturaleza en su máxima expresión.");
-        hotel2.setDescription("Un retiro en las montañas con vistas impresionantes, spa y actividades al aire libre.");
-        hotel2.setTheme("Montaña");
-        hotel2.setRoomTypes("Doble, Suite");
-        hotel2.setParkAccessDetails("Acceso a rutas de senderismo.");
-        hotel2.setStars("4");
-        hotel2.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Montaña+Mágica");
-        hotel2.setVideoUrl("https://www.youtube.com/watch?v=examplevideo2");
+        hotel2.setName("Sawmill Creek Resort");
+        hotel2.setDescription("Un elegante resort junto al lago, rodeado de naturaleza y con un campo de golf de primer nivel.");
+        hotel2.setTheme("Naturaleza y relajación junto al lago");
+        hotel2.setRoomTypes("Habitaciones estándar, suites de lujo, cabañas");
+        hotel2.setStars("4.5");
+        hotel2.setCoverImage("/Imagenes/sawmill_creek_cover.jpg");
+        hotel2.setUrl("https://www.sawmillcreekresort.com/");
 
         Hotel hotel3 = new Hotel();
-        hotel3.setName("Hotel Ciudad Imperial");
-        hotel3.setSlogan("El lujo y la comodidad en el corazón de la ciudad.");
-        hotel3.setShortDescription("Disfruta de un alojamiento exclusivo en el centro de la ciudad.");
-        hotel3.setDescription("Confort, ubicación privilegiada y un ambiente moderno. Ideal para negocios y turismo.");
-        hotel3.setTheme("Ciudad");
-        hotel3.setRoomTypes("Doble, Ejecutiva, Penthouse");
-        hotel3.setParkAccessDetails("Estacionamiento subterráneo.");
+        hotel3.setName("Cedar Point’s Marinas");
+        hotel3.setDescription("Un exclusivo resort y marina en el parque de atracciones Cedar Point, perfecto para los amantes del mar y la diversión.");
+        hotel3.setTheme("Náutico y aventura en el parque");
+        hotel3.setRoomTypes("Habitaciones estándar, suites temáticas, cabañas sobre el agua");
         hotel3.setStars("5");
-        hotel3.setCoverImage("https://via.placeholder.com/500x300?text=Hotel+Ciudad+Imperial");
-        hotel3.setVideoUrl("https://www.youtube.com/watch?v=examplevideo3");
+        hotel3.setCoverImage("/Imagenes/cedar_point_marinas_cover.jpg");
+        hotel3.setUrl("https://www.cedarpoint.com/resorts/marinas");
 
         hotelRepository.save(hotel1);
         hotelRepository.save(hotel2);
@@ -551,43 +542,25 @@ public class DataLoader implements CommandLineRunner {
         restaurant1.setName("Gourmet Delights");
         restaurant1.setSlogan("Sabores que despiertan los sentidos");
         restaurant1.setTheme("Elegante y sofisticado");
-        restaurant1.setDiningType("À la carte");
-        restaurant1.setMeals("Ensaladas, carnes premium, postres");
-        restaurant1.setDietaryOptions("Sin gluten, vegetariano, vegano");
-        restaurant1.setLocation("Avenida Central 45, Ciudad");
-        restaurant1.setImageUrl1("gourmet1.jpg");
-        restaurant1.setImageUrl2("gourmet2.jpg");
-        restaurant1.setImageUrl3("gourmet3.jpg");
-        restaurant1.setCoverImage("gourmet_cover.jpg");
-        restaurant1.setVideoUrl("gourmet_video.mp4");
+        restaurant1.setDiningType("Servicio a la carta");
+        restaurant1.setLocation("MILLENIUM MIDWAY - Parque de Atracciones");
+        restaurant1.setCoverImage("/Imagenes/gourmet_cover.jpg");
 
         Restaurant restaurant2 = new Restaurant();
         restaurant2.setName("Burrito Express");
         restaurant2.setSlogan("Auténtico sabor mexicano");
         restaurant2.setTheme("Mexicano y colorido");
         restaurant2.setDiningType("Self-service");
-        restaurant2.setMeals("Burritos, tacos, nachos");
-        restaurant2.setDietaryOptions("Libre de lácteos, sin frutos secos");
-        restaurant2.setLocation("Calle Sabores 22, Ciudad");
-        restaurant2.setImageUrl1("burrito1.jpg");
-        restaurant2.setImageUrl2("burrito2.jpg");
-        restaurant2.setImageUrl3("burrito3.jpg");
-        restaurant2.setCoverImage("burrito_cover.jpg");
-        restaurant2.setVideoUrl("burrito_video.mp4");
+        restaurant2.setLocation("GEMINI MIDWAY - Parque de Atracciones");
+        restaurant2.setCoverImage("/Imagenes/burrito_cover.jpeg");
 
         Restaurant restaurant3 = new Restaurant();
         restaurant3.setName("Green Bites");
         restaurant3.setSlogan("Comida saludable, vida saludable");
         restaurant3.setTheme("Natural y relajante");
         restaurant3.setDiningType("Buffet");
-        restaurant3.setMeals("Ensaladas, smoothies, bowls de frutas");
-        restaurant3.setDietaryOptions("Orgánico, sin azúcares añadidos, vegano");
-        restaurant3.setLocation("Plaza Verde, Ciudad");
-        restaurant3.setImageUrl1("green1.jpg");
-        restaurant3.setImageUrl2("green2.jpg");
-        restaurant3.setImageUrl3("green3.jpg");
-        restaurant3.setCoverImage("green_cover.jpg");
-        restaurant3.setVideoUrl("green_video.mp4");
+        restaurant3.setLocation("MAIN MIDWAY - Parque de Atracciones");
+        restaurant3.setCoverImage("/Imagenes/green_cover.jpeg");
 
         restaurantRepository.save(restaurant1);
         restaurantRepository.save(restaurant2);
@@ -604,22 +577,22 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Insertando tiendas...");
 
         Store store1 = new Store();
-        store1.setName("Galactic Gear");
+        store1.setName("Star Traders");
         store1.setProductType("Merchandising espacial: trajes de astronauta, juguetes alienígenas, souvenirs de planetas");
-        store1.setLocation("Zona Espacial - Parque de Atracciones");
-        store1.setCoverImage("galactic_gear_cover.jpg");
+        store1.setLocation("PLANET SNOOPY - Parque de Atracciones");
+        store1.setCoverImage("/Imagenes/galactic_gear_cover.png");
 
         Store store2 = new Store();
         store2.setName("Pirate's Treasure");
         store2.setProductType("Accesorios piratas: espadas, sombreros, mapas del tesoro, monedas de oro");
-        store2.setLocation("Isla Pirata - Parque de Atracciones");
-        store2.setCoverImage("pirates_treasure_cover.jpg");
+        store2.setLocation("CAMP SNOOPY - Parque de Atracciones");
+        store2.setCoverImage("/Imagenes/pirates_treasure_cover.jpg");
 
         Store store3 = new Store();
         store3.setName("Enchanted Emporium");
         store3.setProductType("Varitas mágicas, capas de hechicero, pociones y grimorios");
-        store3.setLocation("Reino Encantado - Parque de Atracciones");
-        store3.setCoverImage("enchanted_emporium_cover.jpg");
+        store3.setLocation("KIDDY KINGDOM - Parque de Atracciones");
+        store3.setCoverImage("/Imagenes/enchanted_emporium_cover.webp");
 
         storeRepository.save(store1);
         storeRepository.save(store2);

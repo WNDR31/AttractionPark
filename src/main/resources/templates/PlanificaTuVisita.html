@@ -47,42 +47,53 @@
       <div class="div-sub-body">
         <!-- Hoteles -->
         <div id="hoteles">
-          <div class="container py-5">
-            <h1 class="text-center mb-4">Hoteles Disponibles</h1>
-            <div class="row">
-                <!-- Iterar sobre los hoteles -->
-                <th:block th:each="hotel : ${hoteles}">
-                    <div class="col-md-4 mb-4">
-                        <div class="card hotel-card">
-                            <!-- Imagen del hotel -->
-                            <img th:src="@{${hotel.coverImage}}" class="hotel-image" alt="Imagen del hotel">
-                            <div class="card-body hotel-details">
-                                <h5 class="card-title" th:text="${hotel.name}">Nombre del hotel</h5>
-                                <p class="card-text hotel-description" th:text="${hotel.shortDescription}">Descripción corta</p>
-                                <p><strong>Estrellas:</strong> <span th:text="${hotel.stars}">5 estrellas</span></p>
-                                <p><strong>Tema:</strong> <span th:text="${hotel.theme}">Tema</span></p>
-                                <p><strong>Tipos de habitaciones:</strong> <span th:text="${hotel.roomTypes}">Tipos de habitación</span></p>
-                            </div>
-                            <div class="card-footer text-center">
-                                <a th:href="@{${hotel.videoUrl}}" class="btn btn-primary" target="_blank">Ver Video</a>
-                            </div>
-                        </div>
-                    </div>
-                </th:block>
+          <h1 class="h1-plan">Hoteles</h1>
+          <div class="card-container">
+            <div class="card" th:each="hotel : ${hoteles}">
+                <img th:src="@{${hotel.coverImage}}" alt="Imagen del hotel">
+                <div class="card-info">
+                    <h2 th:text="${hotel.name}"></h2>
+                    <p th:text="${hotel.description}"></p>
+                    <p><strong>Temática:</strong> <span th:text="${hotel.theme}"></span></p>
+                    <p><strong>Estrellas:</strong> <span th:text="${hotel.stars}"></span></p>
+                    <p><strong>Tipo de habitaciones:</strong> <span th:text="${hotel.roomTypes}"></span></p>
+                    <a th:href="${hotel.url}" target="_blank">Ver más</a>
+                </div>
             </div>
-          </div>
+        </div>
         </div>
         <br><br>
 
         <!-- Restaurantes -->
         <div id="restaurantes">
           <h1 class="h1-plan">Restaurantes</h1>
+          <div class="card-container">
+            <div class="card" th:each="restaurant : ${restaurantes}">
+                <img th:src="@{${restaurant.coverImage}}" alt="Imagen del restaurante">
+                <div class="card-info">
+                    <h2 th:text="${restaurant.name}"></h2>
+                    <p><strong>Slogan:</strong> <span th:text="${restaurant.slogan}"></span></p>
+                    <p><strong>Temática:</strong> <span th:text="${restaurant.theme}"></span></p>
+                    <p><strong>Tipo de servicio:</strong> <span th:text="${restaurant.diningType}"></span></p>
+                    <p><strong>Ubicación:</strong> <span th:text="${restaurant.location}"></span></p>
+                </div>
+            </div>
+          </div>
         </div>
         <br><br>
 
         <!-- Tiendas -->
         <div id="tiendas">
           <h1 class="h1-plan">Tiendas</h1>
+          <div class="card-container">
+            <div class="card" th:each="store : ${tiendas}">
+                <img th:src="@{${store.coverImage}}" alt="Imagen de la tienda">
+                <div class="card-info">
+                    <h2 th:text="${store.name}"></h2>
+                    <p><strong>Tipo de productos:</strong> <span th:text="${store.productType}"></span></p>
+                    <p><strong>Ubicación:</strong> <span th:text="${store.location}"></span></p>
+                </div>
+            </div>
         </div>
       </div>
 

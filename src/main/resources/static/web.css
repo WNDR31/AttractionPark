@@ -570,6 +570,7 @@ display: flex;
   font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s;
+  background-color: #E85234;
 }
 
 .btn_ticket:hover {
@@ -657,3 +658,88 @@ display: flex;
   font-weight: bolder;
 }
 
+
+/* PLANIFICA TU VISITA */
+h1 {
+  margin: 60px 0 30px 0;
+  color: #103869;
+}
+
+.card-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 1000px;
+  margin: auto;
+}
+.card {
+  display: flex;
+  flex-direction: row;
+  background: var(--background-color);
+  border-width: 2px;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  border-color: #103869;
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+.card:hover {
+  transform: scale(1.0); /* Slightly increase size on hover */
+}
+
+.card img {
+  width: 300px;
+  height: auto;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.card-info {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.card-info h2 {
+  margin: 0 0 10px 0;
+  color: #103869;
+}
+
+.card-info p {
+  margin: 5px 0;
+  color: #103869;
+}
+
+.card-info a {
+  margin-top: 10px;
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background-color: var(--red);
+  padding: 8px 15px;
+  border-radius: 5px;
+  width: fit-content;
+}
+
+.card-info a:hover {
+  background-color: #cb452a;
+}
+
+hr {
+  padding: 10px;
+  border: 3px solid var(--darkblue);
+  border-radius: 20px;
+}
+@media (max-width: 768px) {
+  .card {
+      flex-direction: column;
+  }
+
+  .card img {
+      width: 100%;
+      height: auto;
+  }
+}
