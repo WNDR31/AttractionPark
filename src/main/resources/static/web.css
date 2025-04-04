@@ -631,6 +631,23 @@ display: flex;
 
 /*------Apartado Planifica tu Visita -------*/ 
 
+.button-services {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: var(--darkblue); 
+  color: var(--background-color);
+  cursor: pointer;
+  font-size: 22px;
+  margin-bottom: 35px;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.button-services:hover {
+  background-color: #103869; 
+}
+
 .img-services {
   width: 100%;
 }
@@ -658,8 +675,6 @@ display: flex;
   font-weight: bolder;
 }
 
-
-/* PLANIFICA TU VISITA */
 h1 {
   margin: 60px 0 30px 0;
   color: #103869;
@@ -685,7 +700,7 @@ h1 {
 }
 
 .card:hover {
-  transform: scale(1.0); /* Slightly increase size on hover */
+  transform: scale(1.02); /* Slightly increase size on hover */
 }
 
 .card img {
