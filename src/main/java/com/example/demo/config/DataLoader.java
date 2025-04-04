@@ -85,10 +85,10 @@ public class DataLoader implements CommandLineRunner {
         typeRepository.saveAll(List.of(type1, type2, type3, type4, type5));
         System.out.println("Tipos de atracciones insertados correctamente.");
 
-        // Delete the attractions table to avoid data duplication
+        /* Delete the attractions table to avoid data duplication
         System.out.println("Limpiando la tabla de atracciones..."); 
         attractionRepository.deleteAll(); 
-        System.out.println("Tabla de atracciones limpiada."); 
+        System.out.println("Tabla de atracciones limpiada."); */
 
         // Attractions
         Attraction attraction1 = new Attraction();
@@ -133,7 +133,7 @@ public class DataLoader implements CommandLineRunner {
         attraction3.setImageUrl1("raptor1.jpg");
         attraction3.setImageUrl2("raptor2.JPG");
         attraction3.setImageUrl3("raptor3.JPG");
-        attraction3.setVideoUrl("https://youtu.be/Tb2H-8CQuyY?si=340I_YGX4QFqddXv");
+        attraction3.setVideoUrl("https://www.youtube.com/embed/Tb2H-8CQuyY?si=IbeF-K-zg-i5qVUB");
         attraction3.setZone(zone6);  
         attraction3.setIntensity(thrill5); 
         attraction3.setType(type1);  
@@ -150,7 +150,7 @@ public class DataLoader implements CommandLineRunner {
         attraction4.setImageUrl1("atomicscrambler1.jpg");
         attraction4.setImageUrl2("atomicscrambler2.jpeg");
         attraction4.setImageUrl3("atomicscrambler3.jpg");
-        attraction4.setVideoUrl("https://youtu.be/La4Hx-kJNeE?si=QGcvvBAouoJ_CO7o");
+        attraction4.setVideoUrl("https://www.youtube.com/embed/La4Hx-kJNeE?si=Q6pitS-8llrq-yKX");
         attraction4.setZone(zone6); 
         attraction4.setIntensity(thrill3);
         attraction4.setType(type2);
@@ -166,7 +166,7 @@ public class DataLoader implements CommandLineRunner {
         attraction5.setImageUrl1("monster1.jpg");
         attraction5.setImageUrl2("monster2.jpg");
         attraction5.setImageUrl3("monster3.jpg");
-        attraction5.setVideoUrl("https://youtu.be/HzpwhBFcaGo?si=O1U9XcT78zP_gv7s");
+        attraction5.setVideoUrl("https://www.youtube.com/embed/HzpwhBFcaGo?si=I2Zb774C_KpYSFvk");
         attraction5.setZone(zone3); 
         attraction5.setIntensity(thrill2);
         attraction5.setType(type3);
@@ -182,7 +182,7 @@ public class DataLoader implements CommandLineRunner {
         attraction6.setImageUrl1("thundercanyon1.jpg");
         attraction6.setImageUrl2("thundercanyon2.jpg");
         attraction6.setImageUrl3("thundercanyon3.jpg");
-        attraction6.setVideoUrl("https://youtu.be/6xh3k36HBq8?si=AGGIoL1NMQbTmNX_");
+        attraction6.setVideoUrl("https://www.youtube.com/embed/6xh3k36HBq8?si=JotuJdW4EevmZ8ke");
         attraction6.setZone(zone4); 
         attraction6.setIntensity(thrill1);
         attraction6.setType(type4);
@@ -198,7 +198,7 @@ public class DataLoader implements CommandLineRunner {
         attraction7.setImageUrl1("snoopyexpress1.jpg");
         attraction7.setImageUrl2("snoopyexpress2.jpg");
         attraction7.setImageUrl3("snoopyexpress3.jpg");
-        attraction7.setVideoUrl("https://youtu.be/y6U8Gl0X8Ds?si=eaTuX3N57ai6n1oF");
+        attraction7.setVideoUrl("https://www.youtube.com/embed/y6U8Gl0X8Ds?si=9Q9HpzKcbfSQK4Iq");
         attraction7.setZone(zone7); 
         attraction7.setIntensity(thrill1);
         attraction7.setType(type3);
@@ -214,7 +214,7 @@ public class DataLoader implements CommandLineRunner {
         attraction8.setImageUrl1("valravn1.jpg");
         attraction8.setImageUrl2("valravn2.jpg");
         attraction8.setImageUrl3("valravn3.jpg");
-        attraction8.setVideoUrl("https://youtu.be/1b1rvkktEv0");
+        attraction8.setVideoUrl("https://www.youtube.com/embed/1b1rvkktEv0?si=jfFSgM25D6POITr3");
         attraction8.setZone(zone6); // MAIN MIDWAY
         attraction8.setIntensity(thrill3); // Aggressive (assuming that thrill3 es "Aggressive")
         attraction8.setType(type1); // Roller coasters
@@ -230,7 +230,7 @@ public class DataLoader implements CommandLineRunner {
         attraction9.setImageUrl1("snoopydeep1.jpg");
         attraction9.setImageUrl2("snoopydeep2.jpg");
         attraction9.setImageUrl3("snoopydeep3.jpg");
-        attraction9.setVideoUrl("https://youtu.be/YuHJgrh9Qpo?si=1oTUAi6X19t0Jw7l");
+        attraction9.setVideoUrl("https://www.youtube.com/embed/YuHJgrh9Qpo?si=ZTqgeLPzrQJoJbzg");
         attraction9.setZone(zone7); 
         attraction9.setIntensity(thrill1);
         attraction9.setType(type3);
@@ -246,7 +246,7 @@ public class DataLoader implements CommandLineRunner {
         attraction10.setImageUrl1("gatekeeper1.jpg");
         attraction10.setImageUrl2("gatekeeper2.jpg");
         attraction10.setImageUrl3("gatekeeper3.jpg");
-        attraction10.setVideoUrl("https://youtu.be/pkOqi7Du3Og?si=M0Z4xJ8VzZ9WMDU7");
+        attraction10.setVideoUrl("https://www.youtube.com/embed/pkOqi7Du3Og?si=_Rut-diEfe4faRDF");
         attraction10.setZone(zone9); 
         attraction10.setIntensity(thrill5); 
         attraction10.setType(type1); 
@@ -262,7 +262,7 @@ public class DataLoader implements CommandLineRunner {
         attraction11.setImageUrl1("giantwheel1.jpg");
         attraction11.setImageUrl2("giantwheel2.webp");
         attraction11.setImageUrl3("giantwheel3.jpeg");
-        attraction11.setVideoUrl("https://youtu.be/rIRnP7OwyMU?si=sDcFNdQPQGk67afR");
+        attraction11.setVideoUrl("https://www.youtube.com/embed/rIRnP7OwyMU?si=vaQDrsykcMfOfxW7");
         attraction11.setZone(zone9); 
         attraction11.setIntensity(thrill3); 
         attraction11.setType(type3); 
@@ -278,7 +278,7 @@ public class DataLoader implements CommandLineRunner {
         attraction12.setImageUrl1("corkscrew1.jpg");
         attraction12.setImageUrl2("corkscrew2.jpg");
         attraction12.setImageUrl3("corkscrew3.jpeg");
-        attraction12.setVideoUrl("https://youtu.be/tBkTuaL--30?si=hZOa6Wa69vUbFSJy");
+        attraction12.setVideoUrl("https://www.youtube.com/embed/tBkTuaL--30?si=Qyfri2DtMcpKVeTs");
         attraction12.setZone(zone3); 
         attraction12.setIntensity(thrill5); 
         attraction12.setType(type1); 
@@ -295,7 +295,7 @@ public class DataLoader implements CommandLineRunner {
         attraction13.setImageUrl1("gemini1.jpg");
         attraction13.setImageUrl2("gemini2.jpeg");
         attraction13.setImageUrl3("gemini3.jpeg");
-        attraction13.setVideoUrl("https://youtu.be/O5anQIKQgAo?si=htfH5lptIHpVdoxe");
+        attraction13.setVideoUrl("https://www.youtube.com/embed/O5anQIKQgAo?si=_OGYmJrSsvxbF49A");
         attraction13.setZone(zone3); 
         attraction13.setIntensity(thrill5); 
         attraction13.setType(type1); 
@@ -312,7 +312,7 @@ public class DataLoader implements CommandLineRunner {
         attraction14.setImageUrl1("magnum1.jpg");
         attraction14.setImageUrl2("magnum2.png");
         attraction14.setImageUrl3("magnum3.jpg");
-        attraction14.setVideoUrl("https://youtu.be/3x3fIh72rfw?si=AJpss0QOIi05Y2Tm");
+        attraction14.setVideoUrl("https://www.youtube.com/embed/3x3fIh72rfw?si=EuJzzJqdlwenkZnx");
         attraction14.setZone(zone3); 
         attraction14.setIntensity(thrill5); 
         attraction14.setType(type1); 
@@ -329,7 +329,7 @@ public class DataLoader implements CommandLineRunner {
         attraction15.setImageUrl1("irondragon1.jpg");
         attraction15.setImageUrl2("irondragon2.jpeg");
         attraction15.setImageUrl3("irondragon3.jpg");
-        attraction15.setVideoUrl("https://youtu.be/2cwUMqSWSmU?si=2aioZ0oPGOzL5THv");
+        attraction15.setVideoUrl("https://www.youtube.com/embed/2cwUMqSWSmU?si=194v97KfCLkqBp6s");
         attraction15.setZone(zone5); 
         attraction15.setIntensity(thrill4); 
         attraction15.setType(type1);
@@ -346,7 +346,7 @@ public class DataLoader implements CommandLineRunner {
         attraction16.setImageUrl1("millenniumforce1.jpg");
         attraction16.setImageUrl2("millenniumforce2.JPG");
         attraction16.setImageUrl3("millenniumforce3.jpg");
-        attraction16.setVideoUrl("https://youtu.be/MybcORGVkEU?si=OkWtrWZsheO4Y5aV");
+        attraction16.setVideoUrl("https://www.youtube.com/embed/MybcORGVkEU?si=5GDsUKnwusLO9sWs");
         attraction16.setZone(zone5); 
         attraction16.setIntensity(thrill5); 
         attraction16.setType(type1); 
@@ -364,7 +364,7 @@ public class DataLoader implements CommandLineRunner {
         attraction17.setImageUrl1("rougarou1.jpg");
         attraction17.setImageUrl2("rougarou2.jpg");
         attraction17.setImageUrl3("rougarou3.jpg");
-        attraction17.setVideoUrl("https://youtu.be/RuweAtyeUuU?si=e67m6dxTkTo9yUNU");
+        attraction17.setVideoUrl("https://www.youtube.com/embed/RuweAtyeUuU?si=E-9anIKIlXVE55x7");
         attraction17.setZone(zone5);
         attraction17.setIntensity(thrill5);
         attraction17.setType(type1); 
@@ -381,7 +381,7 @@ public class DataLoader implements CommandLineRunner {
         attraction18.setImageUrl1("creekmine1.jpg");
         attraction18.setImageUrl2("creekmine2.jpg");
         attraction18.setImageUrl3("creekmine3.JPG");
-        attraction18.setVideoUrl("https://youtu.be/6x69vGPT-bw?si=FAte_xTF56Ea1JCL");
+        attraction18.setVideoUrl("https://www.youtube.com/embed/6x69vGPT-bw?si=yjktzSagJz9j9HBW");
         attraction18.setZone(zone1);
         attraction18.setIntensity(thrill4);
         attraction18.setType(type1); 
@@ -398,7 +398,7 @@ public class DataLoader implements CommandLineRunner {
         attraction19.setImageUrl1("maverick1.jpg");
         attraction19.setImageUrl2("maverick2.jpg");
         attraction19.setImageUrl3("maverick3.jpg");
-        attraction19.setVideoUrl("https://youtu.be/WUpQMWGVw4g?si=hiuZYnpiO3vP3R9e");
+        attraction19.setVideoUrl("https://www.youtube.com/embed/WUpQMWGVw4g?si=idB0RG8Bf5uNfqEW");
         attraction19.setZone(zone1);
         attraction19.setIntensity(thrill5); 
         attraction19.setType(type1); 
@@ -415,7 +415,7 @@ public class DataLoader implements CommandLineRunner {
         attraction20.setImageUrl1("steelvengeance1.jpg");
         attraction20.setImageUrl2("steelvengeance2.jpg");
         attraction20.setImageUrl3("steelvengeance3.jpg");
-        attraction20.setVideoUrl("https://youtu.be/RTXTbzctl0c");
+        attraction20.setVideoUrl("https://www.youtube.com/embed/RTXTbzctl0c?si=KgPVNcqzJNwapX3l");
         attraction20.setZone(zone1); 
         attraction20.setIntensity(thrill5);
         attraction20.setType(type1); 
@@ -432,7 +432,7 @@ public class DataLoader implements CommandLineRunner {
         attraction21.setImageUrl1("woodstockexpress1.jpg");
         attraction21.setImageUrl2("woodstockexpress2.jpg");
         attraction21.setImageUrl3("woodstockexpress3.jpg");
-        attraction21.setVideoUrl("https://youtu.be/fDBydpPplzQ?si=QxJ48zc16mTTxy3G");
+        attraction21.setVideoUrl("https://www.youtube.com/embed/fDBydpPplzQ?si=tO0J1y9d9Qc11DkF");
         attraction21.setZone(zone2); 
         attraction21.setIntensity(thrill4);
         attraction21.setType(type5); 
@@ -449,7 +449,7 @@ public class DataLoader implements CommandLineRunner {
         attraction22.setImageUrl1("wildernessrun1.jpg");
         attraction22.setImageUrl2("wildernessrun2.jpg");
         attraction22.setImageUrl3("wildernessrun3.jpg");
-        attraction22.setVideoUrl("https://youtu.be/gkVt5uryylQ");
+        attraction22.setVideoUrl("https://www.youtube.com/embed/gkVt5uryylQ?si=wiITknGmY4goc1PK");
         attraction22.setZone(zone2); 
         attraction22.setIntensity(thrill2); 
         attraction22.setType(type5);
@@ -466,7 +466,7 @@ public class DataLoader implements CommandLineRunner {
         attraction23.setImageUrl1("kiddiecarousel1.jpg");
         attraction23.setImageUrl2("kiddiecarousel2.jpg");
         attraction23.setImageUrl3("kiddiecarousel3.jpg");
-        attraction23.setVideoUrl("https://youtu.be/YyUm5gO4eTg?si=isdcgLlTV_U_bLJN");
+        attraction23.setVideoUrl("https://www.youtube.com/embed/YyUm5gO4eTg?si=PFbP0Ldmo-BnfzWm");
         attraction23.setZone(zone8); 
         attraction23.setIntensity(thrill1); // Low
         attraction23.setType(type5); 
@@ -483,7 +483,7 @@ public class DataLoader implements CommandLineRunner {
         attraction24.setImageUrl1("roto-whip1.jpg");
         attraction24.setImageUrl2("roto-whip2.jpg");
         attraction24.setImageUrl3("roto-whip3.jpg");
-        attraction24.setVideoUrl("https://youtu.be/8oHSwt3WUbc?si=iTBFH5E_ryMoWxUg");
+        attraction24.setVideoUrl("https://www.youtube.com/embed/8oHSwt3WUbc?si=baUuafiBVIhByhTx");
         attraction24.setZone(zone8); 
         attraction24.setIntensity(thrill2); 
         attraction24.setType(type5); 
