@@ -1,5 +1,3 @@
-
-
 package com.example.demo.repository;
 
 import com.example.demo.entity.Attraction;
@@ -10,7 +8,7 @@ import java.util.List;
 
 public interface AttractionRepository extends JpaRepository<Attraction, Long> {
     
-    // Métodos existentes
+    // Existing methods
     List<Attraction> findByZoneId(Long zoneId);
     List<Attraction> findByZoneName(String name);
     List<Attraction> findByTypeId(Long typeId);
@@ -18,7 +16,7 @@ public interface AttractionRepository extends JpaRepository<Attraction, Long> {
     List<Attraction> findByIntensityId(Long intensityId);
     List<Attraction> findByIntensityName(String name);
     
-    // Consulta para filtros combinados
+    // Query for combined filters
     @Query("SELECT a FROM Attraction a WHERE " +
            "(:zone IS NULL OR a.zone.name = :zone) AND " +
            "(:intensity IS NULL OR a.intensity.name = :intensity) AND " +

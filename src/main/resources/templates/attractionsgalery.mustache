@@ -9,36 +9,36 @@
     <link rel="stylesheet" href="/nav.css"> 
 </head>
 <body>
-<!-- Menú de navegación -->
-<nav id="navegacion-principal" class="navbar navbar-expand-lg fixed-top">
+<!-- Navegation bar -->
+<nav id="navegation-principal" class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <a id="parque" class="navbar-brand" href="PaginaPrincipal.html">LagoonLand</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegacion" aria-controls="menu-navegacion" aria-expanded="false" aria-label="Toggle navigation">
+        <a id="park" class="navbar-brand" href="PaginaPrincipal.html">LagoonLand</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegation" aria-controls="menu-navegation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="menu-navegacion">
-            <ul id="menu-navegacion" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="menu-navegation">
+            <ul id="menu-navegation" class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="PaginaPrincipal.html">HOME</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/planifica-tu-visita">PLANIFICA TU VISITA</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/attractionsgalery">DESCUBRE EL PARQUE</a></li>
                 <li class="nav-item"><a class="nav-link" href="#footer">HORARIOS</a></li>
-                <li class="nav-item"><a class="nav-link resaltar-tickets" href="Compra.html">COMPRA TUS TICKETS</a></li>
+                <li class="nav-item"><a class="nav-link highlight-tickets" href="Compra.html">COMPRA TUS TICKETS</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<!-- Botón del mapa flotante -->
+<!-- Floating map button -->
 <a href="http://localhost:8080/map" class="map-button">
     <i class="fas fa-map-marked-alt"></i>
     <span class="d-none d-sm-inline">Ver Mapa</span>
 </a>
 
-<!-- Overlay de carga -->
+<!-- Loading overlay -->
 <div class="loading-overlay" id="loadingOverlay">
     <div class="spinner"></div>
 </div>
 
-<!-- Encabezado con estilo -->
+<!-- Stylish Header -->
 <div class="header-gallery">
     <div class="container">
         <h1><i class="fas fa-theater-masks"></i> Galería de Atracciones</h1>
@@ -47,7 +47,7 @@
 </div>
 
 <div class="container">
-    <!-- Sección de Filtros mejorada -->
+    <!-- Improved Filters Section -->
     <div class="filter-section" id="filterSection">
         <form id="filterForm" action="/attractions/filter" method="get">
             <div class="row g-3">
@@ -100,7 +100,7 @@
         </form>
     </div>
 
-    <!-- Galería de Atracciones -->
+    <!-- Attractions Galery -->
     <div class="row" id="attractionsContainer">
         {{#attractions}}
             <div class="col-lg-4 col-md-6 mb-4 attraction-item" data-zone="{{zone.name}}" data-intensity="{{intensity.name}}" data-type="{{type.name}}">
@@ -159,7 +159,7 @@
         const attractionsContainer = document.getElementById('attractionsContainer');
         const noResults = document.querySelector('.no-results');
         
-        // Función para mostrar u ocultar el overlay de carga
+        // Function to show or hide the loading overlay
         function setLoading(loading) {
             if (loading) {
                 loadingOverlay.classList.add('active');
@@ -170,77 +170,76 @@
             }
         }
         
-        // Función para animar el filtrado
+        // Function to animate filtering
         function animateFilterChange() {
-            // Guardar la posición actual del scroll
+            // Save the current scroll position
             const scrollPosition = window.scrollY;
             const filterSection = document.getElementById('filterSection');
             
-            // Aplicar animación de transición
+            // Apply transition animation
             filterSection.style.opacity = '0.7';
             filterSection.style.transform = 'translateY(-10px)';
             
-            // Mostrar overlay de carga
+            // Show loading overlay
             setLoading(true);
             
-            // Esperar un momento para que se vea la animación
+            // Wait a moment for the animation to appear
             setTimeout(() => {
                 filterSection.style.opacity = '1';
                 filterSection.style.transform = 'translateY(0)';
                 
-                // Restaurar la posición del scroll después de la animación
+                // Restore scroll position after animation
                 window.scrollTo({
                     top: scrollPosition,
-                    behavior: 'instant' // Usamos 'instant' para evitar animación de scroll
+                    behavior: 'instant' // We use 'instant' to avoid scroll animation
                 });
                 
-                // Ocultar overlay después de un breve tiempo
+                // Hide overlay after a short time
                 setTimeout(() => {
                     setLoading(false);
                 }, 300);
             }, 300);
         }
         
-        // Manejar el envío del formulario
+        // Handle form submission
         filterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             animateFilterChange();
             
-            // Simular un retraso para la transición (en producción sería la llamada AJAX)
+            // Simulate a delay for the transition (in production it would be the AJAX call)
             setTimeout(() => {
-                // Aquí iría tu lógica de filtrado real
                 this.submit();
             }, 500);
         });
         
-        // Manejar el botón de reset
+        // Handling the reset button
         resetButton.addEventListener('click', function() {
-            // Guardar posición del scroll
+            // Save scroll position
             const scrollPosition = window.scrollY;
             
-            // Animación de reset
+            // Reset animation
             animateFilterChange();
             
-            // Resetear los valores de los select
+            // Reset the values ​​of the select
             const selects = filterForm.querySelectorAll('select');
             selects.forEach(select => {
                 select.value = '';
                 select.dispatchEvent(new Event('change'));
             });
             
-            // Enviar el formulario (esto recargará la página sin filtros)
+            // Submit the form (this will reload the page without filters)
             setTimeout(() => {
                 filterForm.submit();
             }, 500);
         });
         
-        // Actualizar estilos de los selectores al cargar la página
+        // Update selector styles on page load
         document.querySelectorAll('.form-select').forEach(select => {
             if(select.value !== '') {
                 select.classList.add('selected');
             }
             
-            // Escuchar cambios en los selectores
+            // Listen to changes in the selectors
             select.addEventListener('change', function() {
                 if(this.value !== '') {
                     this.classList.add('selected');
@@ -250,14 +249,14 @@
             });
         });
         
-        // Asegurar que las imágenes PNG se muestren correctamente
+        // Ensuring PNG images display correctly
         document.querySelectorAll('.attraction-card img').forEach(img => {
             if(img.src.toLowerCase().endsWith('.png')) {
                 img.style.backgroundColor = '#f8f9fa';
             }
         });
         
-        // Prevenir el comportamiento predeterminado del formulario si no hay cambios
+        // Prevent default form behavior if no changes are made
         filterForm.addEventListener('submit', function(e) {
             const formData = new FormData(this);
             let hasFilters = false;
@@ -271,7 +270,7 @@
             
             if (!hasFilters) {
                 e.preventDefault();
-                // Animación sutil para indicar que no hay cambios
+                // Subtle animation to indicate no changes
                 filterForm.classList.add('no-changes');
                 setTimeout(() => {
                     filterForm.classList.remove('no-changes');

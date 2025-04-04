@@ -46,9 +46,9 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Insertar datos en la base de datos
+        // Insert data into the database
 
-        // Crear Zonas
+        // Create zones
         System.out.println("Insertando zonas de prueba...");
         Zone zone1 = new Zone("FRONTIER TOWN");
         Zone zone2 = new Zone("CAMP SNOOPY");
@@ -63,29 +63,34 @@ public class DataLoader implements CommandLineRunner {
         zoneRepository.saveAll(List.of(zone1, zone2, zone3, zone4, zone5, zone6, zone7, zone8, zone9));
         System.out.println("Zonas insertadas correctamente.");
 
-        // Crear Intensidades (Thrill)
+        // Create intensities (Thrill)
         System.out.println("Insertando niveles de intensidad...");
-        Thrill thrill1 = new Thrill("Low");
-        Thrill thrill2 = new Thrill("Moderate");
-        Thrill thrill3 = new Thrill("Aggressive");
-        Thrill thrill4 = new Thrill("Mild");
-        Thrill thrill5 = new Thrill("High");
+        Thrill thrill1 = new Thrill("Baja");
+        Thrill thrill2 = new Thrill("Moderada");
+        Thrill thrill3 = new Thrill("Agresiva");
+        Thrill thrill4 = new Thrill("Media");
+        Thrill thrill5 = new Thrill("Alta");
 
         thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3, thrill4, thrill5));
         System.out.println("Intensidades insertadas correctamente.");
-
-        // Crear Tipos de Atracción
+        
+        // Create Attractions
         System.out.println("Insertando tipos de atracciones...");
-        Type type1 = new Type("Roller coasters"); // line = 40
-        Type type2 = new Type("Thrill rides"); // line = 30
-        Type type3 = new Type("Family rides"); // line = 20
-        Type type4 = new Type("Water Ride"); // line = 20
-        Type type5 = new Type("Children rides"); // line = 10
+        Type type1 = new Type("Montañas rusas"); // line = 40
+        Type type2 = new Type("Atracciones emocionantes"); // line = 30
+        Type type3 = new Type("Atracciones de adrenalina"); // line = 20
+        Type type4 = new Type("Atracciones de agua"); // line = 20
+        Type type5 = new Type("Atracciones infantiles"); // line = 10
 
         typeRepository.saveAll(List.of(type1, type2, type3, type4, type5));
         System.out.println("Tipos de atracciones insertados correctamente.");
 
-        // Crear Atracciones
+        // Delete the attractions table to avoid data duplication
+        System.out.println("Limpiando la tabla de atracciones..."); 
+        attractionRepository.deleteAll(); 
+        System.out.println("Tabla de atracciones limpiada."); 
+
+        // Attractions
         Attraction attraction1 = new Attraction();
         attraction1.setName("BlueStreak");
         attraction1.setDescription("Una montaña rusa de madera clásica y la más antigua en funcionamiento en Cedar Point. Ofrece un recorrido de 1 minuto y 30 segundos con una altura de 78 pies y una velocidad de hasta 40 mph. Su diseño tradicional de ida y vuelta proporciona múltiples colinas y una emocionante experiencia de airtime");
@@ -100,7 +105,7 @@ public class DataLoader implements CommandLineRunner {
         attraction1.setZone(zone6);
         attraction1.setIntensity(thrill4);
         attraction1.setType(type1);
-        attraction1.setLine(40); // Tiempo de espera en minutos
+        attraction1.setLine(40); // minutes
 
         Attraction attraction2 = new Attraction();
         attraction2.setName("Power tower");
@@ -116,7 +121,7 @@ public class DataLoader implements CommandLineRunner {
         attraction2.setZone(zone3); 
         attraction2.setIntensity(thrill5);
         attraction2.setType(type2);
-        attraction2.setLine(30); // Tiempo de espera en minutos
+        attraction2.setLine(30);
         
         Attraction attraction3 = new Attraction();
         attraction3.setName("Raptor");
@@ -149,7 +154,7 @@ public class DataLoader implements CommandLineRunner {
         attraction4.setZone(zone6); 
         attraction4.setIntensity(thrill3);
         attraction4.setType(type2);
-        attraction4.setLine(30); // Tiempo de espera en minutos
+        attraction4.setLine(30);
 
         Attraction attraction5 = new Attraction();
         attraction5.setName("Monster");
@@ -165,7 +170,7 @@ public class DataLoader implements CommandLineRunner {
         attraction5.setZone(zone3); 
         attraction5.setIntensity(thrill2);
         attraction5.setType(type3);
-        attraction5.setLine(20); // Tiempo de espera en minutos
+        attraction5.setLine(20);
 
         Attraction attraction6 = new Attraction();
         attraction6.setName("Thunder Canyon");
@@ -181,7 +186,7 @@ public class DataLoader implements CommandLineRunner {
         attraction6.setZone(zone4); 
         attraction6.setIntensity(thrill1);
         attraction6.setType(type4);
-        attraction6.setLine(20); // Tiempo de espera en minutos
+        attraction6.setLine(20);
 
         Attraction attraction7 = new Attraction();
         attraction7.setName("Snoopy's Express Railroad");
@@ -197,12 +202,12 @@ public class DataLoader implements CommandLineRunner {
         attraction7.setZone(zone7); 
         attraction7.setIntensity(thrill1);
         attraction7.setType(type3);
-        attraction7.setLine(20); // Tiempo de espera en minutos
+        attraction7.setLine(20);
 
         Attraction attraction8 = new Attraction();
         attraction8.setName("Valravn");
         attraction8.setDescription("Valravn es una montaña rusa de acero que abrió como la más alta, rápida y larga del mundo dentro de la categoría Dive Coaster. Con 223 pies de altura y una velocidad de 75 mph, Valravn desafía a los pasajeros con un emocionante descenso vertical de 90 grados y giros espectaculares, lo que la convierte en una de las mejores atracciones de Cedar Point.");
-        attraction8.setHeight(223.0); // feet
+        attraction8.setHeight(223.0); // foot
         attraction8.setDuration(143); // seconds 
         attraction8.setSpeed(75.0); // mph
         attraction8.setMinHeight(54);
@@ -211,9 +216,9 @@ public class DataLoader implements CommandLineRunner {
         attraction8.setImageUrl3("valravn3.jpg");
         attraction8.setVideoUrl("https://youtu.be/1b1rvkktEv0");
         attraction8.setZone(zone6); // MAIN MIDWAY
-        attraction8.setIntensity(thrill3); // Aggressive (asumiendo que thrill3 es "Aggressive")
+        attraction8.setIntensity(thrill3); // Aggressive (assuming that thrill3 es "Aggressive")
         attraction8.setType(type1); // Roller coasters
-        attraction8.setLine(40); // Tiempo de espera en minutos (para Roller coasters)
+        attraction8.setLine(40); 
         
         Attraction attraction9 = new Attraction();
         attraction9.setName("Snoopy's Deep Sea Divers");
@@ -229,13 +234,13 @@ public class DataLoader implements CommandLineRunner {
         attraction9.setZone(zone7); 
         attraction9.setIntensity(thrill1);
         attraction9.setType(type3);
-        attraction9.setLine(20); // Tiempo de espera en minutos
+        attraction9.setLine(20);
 
         Attraction attraction10 = new Attraction();
         attraction10.setName("GateKeeper");
         attraction10.setDescription("GateKeeper es una montaña rusa de acero con un diseño de inversiones y una caída impresionante. Con una altura de 170 pies y una velocidad de 67 mph, esta montaña rusa ofrece una experiencia única con un par de inversores y un vuelo inverso mientras los pasajeros cruzan por encima de la entrada del parque.");
-        attraction10.setHeight(170.0); // feet
-        attraction10.setDuration(120); // seconds (67 minutos)
+        attraction10.setHeight(170.0); // foot
+        attraction10.setDuration(120); // seconds (67 minutes)
         attraction10.setSpeed(67.0); // mph
         attraction10.setMinHeight(54);
         attraction10.setImageUrl1("gatekeeper1.jpg");
@@ -250,9 +255,9 @@ public class DataLoader implements CommandLineRunner {
         Attraction attraction11 = new Attraction();
         attraction11.setName("Giant Wheel");
         attraction11.setDescription("Giant Wheel es una rueda de observación de 136 pies (41.5 m) de altura, que ofrece impresionantes vistas panorámicas del parque y el lago Erie. Abierta desde 1972, esta atracción es un clásico de Cedar Point.");
-        attraction11.setHeight(136.0); // feet
+        attraction11.setHeight(136.0); // foot
         attraction11.setDuration(220);
-        attraction11.setSpeed(0.3); // No tiene velocidad significativa
+        attraction11.setSpeed(0.3); // It has no significant speed
         attraction11.setMinHeight(48);
         attraction11.setImageUrl1("giantwheel1.jpg");
         attraction11.setImageUrl2("giantwheel2.webp");
@@ -279,7 +284,7 @@ public class DataLoader implements CommandLineRunner {
         attraction12.setType(type1); 
         attraction12.setLine(40);
 
-        // Atracción 13 - Gemini
+        // Attraction 13 - Gemini
         Attraction attraction13 = new Attraction();
         attraction13.setName("Gemini");
         attraction13.setDescription("Gemini es una montaña rusa de madera y acero que ofrece una experiencia de carreras entre dos trenes. Con una altura de 125 pies y una velocidad de hasta 60 mph, este icónico recorrido de doble vía ha sido uno de los favoritos de los visitantes de Cedar Point desde su apertura en 1978.");
@@ -296,12 +301,12 @@ public class DataLoader implements CommandLineRunner {
         attraction13.setType(type1); 
         attraction13.setLine(40);
             
-        // Atracción 14 - Magnum XL-200
+        // Attraction 14 - Magnum XL-200
         Attraction attraction14 = new Attraction();
         attraction14.setName("Magnum XL-200");
         attraction14.setDescription("Magnum XL-200 es una montaña rusa de acero que ofrece una experiencia impresionante con caídas de hasta 200 pies de altura y una velocidad de 72 mph. Fue la primera montaña rusa en superar los 200 pies, y sigue siendo una de las más emocionantes en Cedar Point, destacando por sus impresionantes caídas y airtime.");
         attraction14.setHeight(205.0);
-        attraction14.setDuration(180); // 3 minutos = 180 segundos
+        attraction14.setDuration(180); // 3 minutes = 180 seconds
         attraction14.setSpeed(72.0);
         attraction14.setMinHeight(54);
         attraction14.setImageUrl1("magnum1.jpg");
@@ -313,12 +318,12 @@ public class DataLoader implements CommandLineRunner {
         attraction14.setType(type1); 
         attraction14.setLine(40);
 
-        // Atracción 15 - Iron Dragon
+        // Attraction 15 - Iron Dragon
         Attraction attraction15 = new Attraction();
         attraction15.setName("Iron Dragon");
         attraction15.setDescription("Iron Dragon es una montaña rusa suspendida que ofrece una experiencia única de vuelo, donde los pasajeros se cuelgan bajo los rieles mientras realizan giros, caídas y suaves inversiones. Con una altura de 76 pies y una velocidad de hasta 40 mph, esta atracción es conocida por su relajante pero emocionante recorrido.");
         attraction15.setHeight(76.0);
-        attraction15.setDuration(120); // 2 minutos = 120 segundos
+        attraction15.setDuration(120); // 2 minutes = 120 seconds
         attraction15.setSpeed(40.0);
         attraction15.setMinHeight(48);
         attraction15.setImageUrl1("irondragon1.jpg");
@@ -330,12 +335,12 @@ public class DataLoader implements CommandLineRunner {
         attraction15.setType(type1);
         attraction15.setLine(40);
 
-        // Atracción 16 - Millennium Force
+        // Attraction 16 - Millennium Force
         Attraction attraction16 = new Attraction();
         attraction16.setName("Millennium Force");
         attraction16.setDescription("Millennium Force es una de las montañas rusas más rápidas y altas del mundo. Con una altura de 310 pies y una velocidad de 93 mph, esta atracción de acero ofrece un recorrido épico con impresionantes caídas y airtime, lo que la convierte en un favorito entre los aficionados a las montañas rusas.");
         attraction16.setHeight(310.0);
-        attraction16.setDuration(180); // 3 minutos = 180 segundos
+        attraction16.setDuration(180); // 3 minutes = 180 seconds
         attraction16.setSpeed(93.0);
         attraction16.setMinHeight(54);
         attraction16.setImageUrl1("millenniumforce1.jpg");
@@ -348,12 +353,12 @@ public class DataLoader implements CommandLineRunner {
         attraction16.setLine(40);
     
 
-        // Atracción 17 - Rougarou
+        // Attraction 17 - Rougarou
         Attraction attraction17 = new Attraction();
         attraction17.setName("Rougarou");
         attraction17.setDescription("Rougarou es una montaña rusa invertida que combina la emoción de los giros rápidos y los intensos airtime moments con un diseño único. Con una altura de 145 pies y una velocidad de 60 mph, esta atracción desafía la gravedad con sus cuatro inversiones y giros vertiginosos.");
         attraction17.setHeight(145.0);
-        attraction17.setDuration(150); // 2.5 minutos = 150 segundos
+        attraction17.setDuration(150); // 2.5 minutes = 150 seconds
         attraction17.setSpeed(60.0);
         attraction17.setMinHeight(54);
         attraction17.setImageUrl1("rougarou1.jpg");
@@ -365,12 +370,12 @@ public class DataLoader implements CommandLineRunner {
         attraction17.setType(type1); 
         attraction17.setLine(40);
 
-        // Atracción 18 - Cedar Creek Mine Ride
+        // Attraction 18 - Cedar Creek Mine Ride
         Attraction attraction18 = new Attraction();
         attraction18.setName("Cedar Creek Mine Ride");
         attraction18.setDescription("Cedar Creek Mine Ride es una montaña rusa de tren minero que transporta a los visitantes al Viejo Oeste. Con dos elevadores y múltiples giros, ofrece una experiencia emocionante a través de túneles, sobre el agua y a través de una doble hélice. Abierta en 1969, sigue siendo una atracción icónica en Frontier Town.");
         attraction18.setHeight(48.0);
-        attraction18.setDuration(170); // 2.83 minutos ≈ 170 segundos
+        attraction18.setDuration(170); // 2.83 minutes ≈ 170 seconds
         attraction18.setSpeed(40.0);
         attraction18.setMinHeight(48);
         attraction18.setImageUrl1("creekmine1.jpg");
@@ -382,12 +387,12 @@ public class DataLoader implements CommandLineRunner {
         attraction18.setType(type1); 
         attraction18.setLine(40);
 
-        // Atracción 19 - Maverick
+        // Attraction 19 - Maverick
         Attraction attraction19 = new Attraction();
         attraction19.setName("Maverick");
         attraction19.setDescription("Maverick es una montaña rusa de acero que combina caídas intensas, giros cerrados y una velocidad impresionante. Con una altura de 105 pies y una velocidad de hasta 70 mph, Maverick es conocida por sus rápidas transiciones y su experiencia de airtime que mantiene a los pasajeros al borde de sus asientos.");
         attraction19.setHeight(105.0);
-        attraction19.setDuration(120); // 2 minutos = 120 segundos
+        attraction19.setDuration(120); // 2 minutes = 120 seconds
         attraction19.setSpeed(70.0);
         attraction19.setMinHeight(54);
         attraction19.setImageUrl1("maverick1.jpg");
@@ -399,12 +404,12 @@ public class DataLoader implements CommandLineRunner {
         attraction19.setType(type1); 
         attraction19.setLine(40);
 
-        // Atracción 20 - Steel Vengeance
+        // Attraction 20 - Steel Vengeance
         Attraction attraction20 = new Attraction();
         attraction20.setName("Steel Vengeance");
         attraction20.setDescription("Steel Vengeance es una montaña rusa híbrida de acero que utiliza una estructura de madera que supera los 200 pies de altura, convirtiéndola en la primera hypercoaster híbrida del mundo. Con 200 pies de altura y una velocidad de 74 mph, esta montaña rusa ofrece más de 27 momentos de airtime en su recorrido.");
         attraction20.setHeight(205.0);
-        attraction20.setDuration(150); // 2.5 minutos = 150 segundos
+        attraction20.setDuration(150); // 2.5 minutes = 150 seconds
         attraction20.setSpeed(74.0);
         attraction20.setMinHeight(54);
         attraction20.setImageUrl1("steelvengeance1.jpg");
@@ -416,12 +421,12 @@ public class DataLoader implements CommandLineRunner {
         attraction20.setType(type1); 
         attraction20.setLine(40);
 
-        // Atracción 21 - Woodstock Express
+        // Attraction 21 - Woodstock Express
         Attraction attraction21 = new Attraction();
         attraction21.setName("Woodstock Express");
         attraction21.setDescription("Woodstock Express es una montaña rusa infantil de acero fabricada por Vekoma, ubicada en Camp Snoopy. Esta atracción tiene un diseño de montaña rusa tradicional para niños, con un recorrido suave y fácil, perfecto para aquellos que se inician en el mundo de las montañas rusas.");
         attraction21.setHeight(35.0);
-        attraction21.setDuration(90); // 1.5 minutos = 90 segundos
+        attraction21.setDuration(90); // 1.5 minutes = 90 seconds
         attraction21.setSpeed(25.0);
         attraction21.setMinHeight(36);
         attraction21.setImageUrl1("woodstockexpress1.jpg");
@@ -433,12 +438,12 @@ public class DataLoader implements CommandLineRunner {
         attraction21.setType(type5); 
         attraction21.setLine(10); 
 
-        // Atracción 22 - Wilderness Run
+        // Attraction 22 - Wilderness Run
         Attraction attraction22 = new Attraction();
         attraction22.setName("Wilderness Run");
         attraction22.setDescription("Wilderness Run es una montaña rusa de acero diseñada especialmente para niños, anteriormente conocida como Jr. Gemini. Fue la primera montaña rusa fabricada por Intamin, y fue renombrada a Wilderness Run en 2014. Con una altura de 25 pies y una velocidad de 20 mph, es ideal para los más pequeños que están listos para su primera experiencia en montaña rusa.");
         attraction22.setHeight(25.0);
-        attraction22.setDuration(90); // 1.5 minutos = 90 segundos
+        attraction22.setDuration(90); // 1.5 minutes = 90 seconds
         attraction22.setSpeed(20.0);
         attraction22.setMinHeight(36);
         attraction22.setImageUrl1("wildernessrun1.jpg");
@@ -450,12 +455,12 @@ public class DataLoader implements CommandLineRunner {
         attraction22.setType(type5);
         attraction22.setLine(10);
 
-        // Atracción 23 - Kiddy Kingdom Carousel
+        // Attraction 23 - Kiddy Kingdom Carousel
         Attraction attraction23 = new Attraction();
         attraction23.setName("Kiddy Kingdom Carousel");
         attraction23.setDescription("Kiddy Kingdom Carousel es un carrusel tradicional con animales y vehículos para montar. Es una atracción clásica de la zona, ideal para los más pequeños.");
         attraction23.setHeight(0.0);
-        attraction23.setDuration(180); // 3 minutos = 180 segundos
+        attraction23.setDuration(180); // 3 minutes = 180 seconds
         attraction23.setSpeed(0.0);
         attraction23.setMinHeight(36);
         attraction23.setImageUrl1("kiddiecarousel1.jpg");
@@ -465,14 +470,14 @@ public class DataLoader implements CommandLineRunner {
         attraction23.setZone(zone8); 
         attraction23.setIntensity(thrill1); // Low
         attraction23.setType(type5); 
-        attraction23.setLine(10); // Tiempo de espera reducido para atracciones infantiles
+        attraction23.setLine(10); // Waiting time reduced for children attractions 
 
-        // Atracción 24 - Roto Whip
+        // Attraction 24 - Roto Whip
         Attraction attraction24 = new Attraction();
         attraction24.setName("Roto Whip");
         attraction24.setDescription("Roto Whip es un paseo giratorio en el que los niños se suben a carritos que giran rápidamente, ofreciendo un recorrido más dinámico y emocionante que otros paseos suaves.");
         attraction24.setHeight(10.0);
-        attraction24.setDuration(120); // 2 minutos = 120 segundos
+        attraction24.setDuration(120); // 2 minutes = 120 seconds
         attraction24.setSpeed(5.0);
         attraction24.setMinHeight(36);
         attraction24.setImageUrl1("roto-whip1.jpg");
@@ -482,20 +487,20 @@ public class DataLoader implements CommandLineRunner {
         attraction24.setZone(zone8); 
         attraction24.setIntensity(thrill2); 
         attraction24.setType(type5); 
-        attraction24.setLine(10); // Tiempo de espera reducido para atracciones infantiles
+        attraction24.setLine(10); 
 
         
-        // Guardar Atracciones en la base de datos
+        // Save Attractions to the Database
         attractionRepository.saveAll(List.of( attraction1,  attraction2,  attraction3,  attraction4,  attraction5, attraction6,  attraction7,  attraction8,  attraction9,  attraction10, attraction11, attraction12, attraction13, attraction14, attraction15, attraction16, attraction17, attraction18, attraction19, attraction20, attraction21, attraction22, attraction23, attraction24 ));
         System.out.println("Todas las atracciones (1-24) han sido insertadas correctamente.");
 
         System.out.println("DataLoader.run() se está ejecutando...");
 
-        //Borrar la tabla de hoteles para evitar repetecion de datos
+        // Delete the hotel table to avoid data duplication
         System.out.println("Limpiando la tabla de hoteles..."); 
         hotelRepository.deleteAll(); 
         System.out.println("Tabla de hoteles limpiada."); 
-        // Crear Hoteles (Hoteles)
+        // Create Hotels (Hotels)
         System.out.println("Insertando hoteles...");
         Hotel hotel1 = new Hotel();
         hotel1.setName("Castaway Bay");
@@ -531,11 +536,11 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Hoteles insertados correctamente.");
 
 
-        //Borrar la tabla de restaurantes para evitar repetecion de datos
+        // Delete the restaurant table to avoid data duplication
         System.out.println("Limpiando la tabla de restaurantes..."); 
         restaurantRepository.deleteAll(); 
         System.out.println("Tabla de restaurantes limpiada."); 
-        // Crear Restaurantes
+        // Create Restaurants
         System.out.println("Insertando restaurantes...");
 
         Restaurant restaurant1 = new Restaurant();
@@ -569,11 +574,11 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Hoteles insertados correctamente.");
 
 
-        //Borrar la tabla de restaurantes para evitar repeticion de datos
+        // Delete the shops table to avoid data duplication
         System.out.println("Limpiando la tabla de tiendas..."); 
         storeRepository.deleteAll(); 
         System.out.println("Tabla de tiendas limpiada."); 
-        // Crear Restaurantes
+        // Create Shops
         System.out.println("Insertando tiendas...");
 
         Store store1 = new Store();

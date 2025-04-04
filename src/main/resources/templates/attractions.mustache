@@ -10,25 +10,25 @@
     <link rel="stylesheet" href="/menu.css"> 
 </head>
 <body>
-<!-- Menú de navegación -->
-<nav id="navegacion-principal" class="navbar navbar-expand-lg fixed-top">
+<!-- Navegation bar -->
+<nav id="navegation-principal" class="navbar navbar-expand-lg fixed-top">
     <div class="container-fluid">
-        <a id="parque" class="navbar-brand" href="PaginaPrincipal.html">LagoonLand</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegacion" aria-controls="menu-navegacion" aria-expanded="false" aria-label="Toggle navigation">
+        <a id="park" class="navbar-brand" href="PaginaPrincipal.html">LagoonLand</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu-navegation" aria-controls="menu-navegation" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="collapse navbar-collapse" id="menu-navegacion">
-            <ul id="menu-navegacion" class="navbar-nav me-auto mb-2 mb-lg-0">
+        <div class="collapse navbar-collapse" id="menu-navegation">
+            <ul id="menu-navegation" class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item"><a class="nav-link" href="/PaginaPrincipal.html">HOME</a></li>
-                <li class="nav-item"><a class="nav-link" href="/PlanificaTuVisita.html">PLANIFICA TU VISITA</a></li>
+                <li class="nav-item"><a class="nav-link" href="http://localhost:8080/planifica-tu-visita">PLANIFICA TU VISITA</a></li>
                 <li class="nav-item"><a class="nav-link" href="http://localhost:8080/attractionsgalery">DESCUBRE EL PARQUE</a></li>
                 <li class="nav-item"><a class="nav-link" href="#footer">HORARIOS</a></li>
-                <li class="nav-item"><a class="nav-link resaltar-tickets" href="/Compra.html">COMPRA TUS TICKETS</a></li>
+                <li class="nav-item"><a class="nav-link highlight-tickets" href="/Compra.html">COMPRA TUS TICKETS</a></li>
             </ul>
         </div>
     </div>
 </nav>
-<!-- Encabezado con breadcrumb -->
+<!-- Header with breadcrumb -->
 <div class="header-detail">
     <div class="container">
         <h1><i class="fas fa-{{#attraction.type.name}}theater-masks{{/attraction.type.name}}"></i> {{attraction.name}}</h1>
@@ -36,7 +36,7 @@
 </div>
 
 <div class="container">
-    <!-- Tarjeta de detalle principal -->
+    <!-- Main detail card -->
     <div class="attraction-detail-card">
         <div class="detail-header">
             <img src="/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="main-image" 
@@ -155,12 +155,12 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        // Cambiar imagen principal al hacer clic en miniaturas
+        // Change main image when clicking on thumbnails
         window.changeMainImage = function(newSrc) {
             document.querySelector('.main-image').src = newSrc;
         };
         
-        // Inicializar lightgallery si hay múltiples imágenes
+        // Initialize lightgallery if there are multiple images
         {{#attraction.imageUrl2}}
         const gallery = document.querySelector('.gallery-thumbnails');
         gallery.addEventListener('click', function(e) {
@@ -182,64 +182,64 @@
         });
         {{/attraction.imageUrl2}}
 
-        // Función para simular cambios en el tiempo de espera
+        // Function to simulate changes in waiting time
         function simulateLiveWaitTime() {
             const waitTimeElement = document.querySelector('.wait-time-value');
             const trendIndicator = document.querySelector('.trend-indicator');
             if (!waitTimeElement || !trendIndicator) return;
             
-            // Valor inicial desde la base de datos
+            // Initial value from the database
             let currentTime = parseInt(waitTimeElement.textContent);
             let lastChange = 0;
             
-            // Actualizar cada 1-2 minutos (para simular)
+            // Update every 1-2 minutes (to simulate)
             setInterval(() => {
-                // Generar un cambio aleatorio (-5 a +10 minutos)
+                // Generate a random change (-5 to +10 minutes)
                 const change = Math.floor(Math.random() * 16) - 5;
                 let newTime = currentTime + change;
                 
-                // Mantener dentro de límites razonables (5-120 minutos)
+                // Keep within reasonable limits (5-120 minutes)
                 newTime = Math.max(5, Math.min(newTime, 120));
                 
-                // Solo actualizar si hay cambio
+                // Only update if there is a change
                 if (newTime !== currentTime) {
                     lastChange = newTime - currentTime;
                     currentTime = newTime;
                     
-                    // Actualizar indicador de tendencia
+                    // Update trend indicator
                     updateTrendIndicator(lastChange);
                     
-                    // Aplicar animación
+                    // Apply animation
                     waitTimeElement.classList.add('wait-time-change');
                     setTimeout(() => {
                         waitTimeElement.textContent = newTime;
                         waitTimeElement.classList.remove('wait-time-change');
                     }, 250);
                     
-                    // Cambiar color según la tendencia
+                    // Change color according to the trend
                     if (lastChange > 0) {
-                        waitTimeElement.style.color = '#e74c3c'; // Rojo - aumentando
+                        waitTimeElement.style.color = '#e74c3c'; // Red - increasing
                     } else if (lastChange < 0) {
-                        waitTimeElement.style.color = '#2ecc71'; // Verde - disminuyendo
+                        waitTimeElement.style.color = '#2ecc71'; // Green - decreasing
                     }
                     
-                    // Volver al color original después de 2 segundos
+                    // Return to original color after 2 seconds
                     setTimeout(() => {
                         waitTimeElement.style.color = 'var(--secondary-color)';
                     }, 2000);
                 }
-            }, 60000); // Actualizar cada minuto (ajustable)
+            }, 60000); // Update every minute (adjustable)
         }
 
-        // Función para actualizar el indicador de tendencia
+        // Function to update the trend indicator
         function updateTrendIndicator(change) {
             const trendIndicator = document.querySelector('.trend-indicator');
             if (!trendIndicator) return;
             
-            // Limpiar clases anteriores
+            // Clear previous classes
             trendIndicator.classList.remove('trend-up', 'trend-down', 'trend-stable');
             
-            // Determinar nueva tendencia
+            // Determine new trend
             if (change > 0) {
                 trendIndicator.classList.add('trend-up');
                 trendIndicator.innerHTML = '<i class="fas fa-arrow-up"></i>';
@@ -251,14 +251,13 @@
                 trendIndicator.innerHTML = '<i class="fas fa-equals"></i>';
             }
             
-            // Animación
+            // Animation
             trendIndicator.style.transform = 'scale(1.5)';
             setTimeout(() => {
                 trendIndicator.style.transform = 'scale(1)';
             }, 300);
         }
 
-        // Iniciar la simulación del tiempo de espera
         simulateLiveWaitTime();
     });
 </script>

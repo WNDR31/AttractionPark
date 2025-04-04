@@ -11,15 +11,15 @@ public class Type {
 
     private String name;
 
-    // Constructor vacío
+    // Empty constructor 
     public Type() {}
 
-    // Constructor con parámetros
+    // Constructor with parameters 
     public Type(String name) {
         this.name = name;
     }
 
-    // Getters y Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }

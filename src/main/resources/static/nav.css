@@ -1,4 +1,5 @@
-/* ============= ESTILOS PRINCIPALES (GALERÍA) ============= */
+/* CSS for attracionsgalery.mustache */
+/* ============= MAIN STYLES (GALERY) ============= */
 :root {            
   --primary-color: #2c3e50;
   --secondary-color: #e74c3c;
@@ -8,7 +9,7 @@
   --border-radius: 8px;
   --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   
-  /* Variables del segundo CSS que no entran en conflicto */
+  /* Web CSS variables */
   --darkblue: #00408C;
   --blue: #96ADD6;
   --red: #E85234;
@@ -21,11 +22,11 @@ body {
   background-color: #f9f9f9;
   color: #333;
   scroll-behavior: smooth;
-  padding-top: 70px; /* Para compensar el menú fijo */
+  padding-top: 70px; /* To compensate for the fixed menu */
 }
 
-/* ============= NAVEGACIÓN (Del segundo CSS, ajustado) ============= */
-#navegacion-principal {
+/* ============= NAVEGATION BAR (Web CSS adjusted) ============= */
+#navegation-principal {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,7 +39,7 @@ body {
   z-index: 1000;
 }
 
-#menu-navegacion li a {
+#menu-navegation li a {
   padding: 15px 15px;
   text-decoration: none;
   text-transform: uppercase;
@@ -48,18 +49,18 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#menu-navegacion li:hover,
-#menu-navegacion li.active {
+#menu-navegation li:hover,
+#menu-navegation li.active {
   background-color: var(--blue);
   border-radius: 15px;
 }
 
-.resaltar-tickets {
+.highlight-tickets {
   background-color: var(--pink);
   border-radius: 15px;
 }
 
-.resaltar-tickets:hover {
+.highlight-tickets:hover {
   background-color: var(--peach);
   border-radius: 15px;
 }
@@ -74,21 +75,21 @@ body {
 }
 
 @media (max-width: 767px) {
-  #menu-navegacion {
+  #menu-navegation {
     flex-direction: column;
     text-align: center;
   }
   
-  #menu-navegacion li {
+  #menu-navegation li {
     width: 100%;
   }
 }
 
-/* ============= GALERÍA (Estilos principales) ============= */
-/* Botón del mapa flotante */
+/* ============= GALERY ============= */
+/* Floating map button */
 .map-button {
   position: fixed;
-  top: 100px; /* Ajustado por el menú fijo */
+  top: 100px; /* Adjusted by the fixed menu */
   right: 20px;
   z-index: 1000;
   background-color: var(--secondary-color);
@@ -345,7 +346,7 @@ body {
   display: block;
 }
 
-/* ============= FOOTER (Combinación de ambos) ============= */
+/* ============= FOOTER ============= */
 .footer {
   background-color: var(--primary-color);
   color: white;
@@ -435,7 +436,7 @@ body {
   border-top: 1px solid #ddd;
 }
 
-/* ============= ANIMACIONES Y MEDIA QUERIES ============= */
+/* ============= ANIMATIONS AND MEDIA QUERIES ============= */
 .loading-overlay {
   position: fixed;
   top: 0;
@@ -483,21 +484,21 @@ body {
   .map-button {
     padding: 10px 15px;
     font-size: 0.9rem;
-    top: 70px; /* Ajustado por el menú fijo */
+    top: 70px; /* Adjusted to the fixed menu */
     right: 15px;
   }
 }
 
-/* ============= ESTILOS ESPECÍFICOS DEL SEGUNDO CSS ============= */
-#parque {
+/* ============= Web CSS specified styles ============= */
+#park {
   color: var(--darkblue);
   font-weight: bold;
   font-size: 24px;
 }
 
-#parque.navbar-brand {
+#park.navbar-brand {
   text-decoration: underline !important;
-  text-underline-offset: 1.5px; /* Espacio entre texto y subrayado */
-  text-decoration-color: var(--darkblue); /* Color del subrayado */
-  text-decoration-thickness: 2px; /* Grosor del subrayado */
+  text-underline-offset: 1.5px; /* Space between text and underline */
+  text-decoration-color: var(--darkblue); /* Underline color */
+  text-decoration-thickness: 2px;
 }

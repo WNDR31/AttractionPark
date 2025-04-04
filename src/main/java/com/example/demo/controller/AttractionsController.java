@@ -31,7 +31,7 @@ public class AttractionsController {
         this.typeRepository = typeRepository;
     }
 
-    // Lista todas las atracciones con datos para los filtros
+    // List to all attractions with data for filters
     @GetMapping("/attractionsgalery")
     public String getAttractions(Model model) {
         model.addAttribute("attractions", attractionRepository.findAll());
@@ -39,7 +39,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Muestra una atracción específica
+    // Show a specific attraction
     @GetMapping("/attractions/{id}")
     public String getAttractionDetails(@PathVariable Long id, Model model) {
         Attraction attraction = attractionRepository.findById(id)
@@ -48,7 +48,7 @@ public class AttractionsController {
         return "attractions";
     }
 
-    // Atracciones por zona (ID)
+    // Attractions by area (ID)
     @GetMapping("/attractions/zone/{zoneId}")
     public String getAttractionsByZone(@PathVariable Long zoneId, Model model) {
         model.addAttribute("attractions", attractionRepository.findByZoneId(zoneId));
@@ -56,7 +56,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Atracciones por nombre de zona
+    // Attractions by area name
     @GetMapping("/attractions/zone")
     public String getAttractionsByZoneName(@RequestParam String name, Model model) {
         model.addAttribute("attractions", attractionRepository.findByZoneName(name));
@@ -64,7 +64,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Atracciones por tipo (ID)
+    // Attractions by type (ID)
     @GetMapping("/attractions/type/{typeId}")
     public String getAttractionsByType(@PathVariable Long typeId, Model model) {
         model.addAttribute("attractions", attractionRepository.findByTypeId(typeId));
@@ -72,7 +72,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Atracciones por nombre de tipo
+    // Attractions by type name
     @GetMapping("/attractions/type")
     public String getAttractionsByTypeName(@RequestParam String name, Model model) {
         model.addAttribute("attractions", attractionRepository.findByTypeName(name));
@@ -80,7 +80,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Atracciones por intensidad (ID)
+    // Attractions by intensity (ID)
     @GetMapping("/attractions/intensity/{intensityId}")
     public String getAttractionsByIntensity(@PathVariable Long intensityId, Model model) {
         model.addAttribute("attractions", attractionRepository.findByIntensityId(intensityId));
@@ -88,7 +88,7 @@ public class AttractionsController {
         return "attractionsgalery";
     }
 
-    // Atracciones por nombre de intensidad
+    // Attractions by intensity name
     @GetMapping("/attractions/intensity")
     public String getAttractionsByIntensityName(@RequestParam String name, Model model) {
         model.addAttribute("attractions", attractionRepository.findByIntensityName(name));
@@ -98,17 +98,17 @@ public class AttractionsController {
         
     @GetMapping("/map")
     public String showParkMap(Model model) {
-        return "map"; // Renderiza el mapa completo
+        return "map"; // Render the entire map
     }
 
     @GetMapping("/attractions/filter")
-public String filterAttractions(
+    public String filterAttractions(
         @RequestParam(required = false) String zone,
         @RequestParam(required = false) String intensity,
         @RequestParam(required = false) String type,
         Model model) {
     
-    // Añade estos atributos para mantener los filtros seleccionados
+    // These attributes are used to keep the selected filters
     model.addAttribute("selectedZone", zone);
     model.addAttribute("selectedIntensity", intensity);
     model.addAttribute("selectedType", type);
@@ -132,7 +132,7 @@ public String filterAttractions(
     return "attractionsgalery";
 }
 
-    // Método para cargar datos de filtros
+    // Method for loading filter data
     private void loadFilterData(Model model) {
         model.addAttribute("zones", zoneRepository.findAllByOrderByNameAsc());
         model.addAttribute("intensities", thrillRepository.findAllByOrderByNameAsc());

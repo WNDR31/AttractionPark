@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="/map.css"> 
 </head>
 <body>
-    <!-- Encabezado -->
+    <!-- Header -->
     <header class="map-header">
         <div class="container">
             <h1 class="display-5">
@@ -19,12 +19,12 @@
         </div>
     </header>
 
-    <!-- Mapa Principal -->
+    <!-- Principal Map -->
     <main class="container main-container">
         <div class="map-wrapper">
             <div class="map-container">
              <svg class="map-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid meet">
-                <!-- Imagen de fondo del mapa -->
+                <!-- Background map image -->
                 <image href="/map.jpg" width="1200" height="800" class="map-bg"/>
                 
                 <!-- 1. FRONTIER TOWN -->
@@ -143,7 +143,7 @@
         </div>
     </main>
 
-    <!-- Pie de página -->
+    <!-- Footer -->
     <footer class="map-footer">
         <div class="container text-center">
             <p class="mb-0">© 2025 LagoonLand. Todos los derechos reservados.</p>
@@ -156,7 +156,7 @@
             const tooltip = document.getElementById('zoneTooltip');
             const zones = document.querySelectorAll('.map-zone');
             
-            // Verificar si se cargó la imagen
+            // Check if the image was loaded
             const mapImage = document.querySelector('.map-bg');
             mapImage.onload = function() {
                 console.log('Imagen del mapa cargada correctamente');
@@ -166,7 +166,7 @@
                 alert('No se pudo cargar el mapa. Por favor verifica la ruta de la imagen.');
             };
             
-            // Interacción con las zonas
+            // Interaction with the zones
             zones.forEach(zone => {
                 zone.addEventListener('mouseenter', function(e) {
                     this.style.fill = 'rgba(231, 76, 60, 0.3)';
@@ -174,7 +174,7 @@
                     this.style.strokeWidth = '3px';
                     this.style.filter = 'drop-shadow(0 4px 8px rgba(0,0,0,0.15))';
                     
-                    // Mostrar tooltip
+                    // Show tooltip
                     const zoneName = this.parentNode.querySelector('.zone-label').textContent;
                     tooltip.textContent = `Ver ${zoneName} →`;
                     tooltip.style.opacity = '1';
@@ -201,7 +201,7 @@
                 });
             });
             
-            // Ajuste para móviles
+            // Mobile fit
             function adjustForMobile() {
                 const labels = document.querySelectorAll('.zone-label');
                 const icons = document.querySelectorAll('.zone-icon');

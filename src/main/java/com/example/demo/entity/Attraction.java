@@ -31,11 +31,11 @@ public class Attraction {
 
     @ManyToOne
     @JoinColumn(name = "type_id")
-    private Type type;  // Relación con Type
+    private Type type;  // Relation with Type
 
     public Attraction() {}
 
-    // Getters y Setters
+    // Getters and Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -76,8 +76,8 @@ public class Attraction {
     public Thrill getIntensity() { return intensity; }
     public void setIntensity(Thrill intensity) { this.intensity = intensity; }
 
-    public Type getType() { return type; } // Getter para Type
-    public void setType(Type type) { this.type = type; } // Setter para Type
+    public Type getType() { return type; } // Getter for Type
+    public void setType(Type type) { this.type = type; } // Setter for Type
     public Integer getLine() {
         return line;
     }

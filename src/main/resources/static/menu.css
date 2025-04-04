@@ -1,4 +1,4 @@
-/*CSS para attractions.mustache*/
+/*CSS for attractions.mustache*/
 :root {
     --primary-color: #2c3e50;
     --secondary-color: #e74c3c;
@@ -8,7 +8,7 @@
     --border-radius: 8px;
     --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     
-    /* Variables del segundo CSS */
+    /* WEB CSS variables*/
     --darkblue: #00408C;
     --blue: #96ADD6;
     --red: #E85234;
@@ -28,11 +28,11 @@ body {
     background-color: var(--background-color);
     color: #333;
     scroll-behavior: smooth;
-    padding-top: 70px; /* Para compensar el menú fijo */
+    padding-top: 70px; /* To compensate for the fixed menu */
 }
 
-/* ============= MENÚ DE NAVEGACIÓN ============= */
-#navegacion-principal {
+/* ============= NAVEGATION BAR ============= */
+#navegation-principal {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -45,7 +45,7 @@ body {
     z-index: 1000;
 }
 
-#parque {
+#park {
     color: var(--darkblue);
     font-weight: bold;
     font-size: 24px;
@@ -55,14 +55,14 @@ body {
     text-decoration-thickness: 2px;
 }
 
-#menu-navegacion {
+#menu-navegation {
     display: flex;
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#menu-navegacion li a {
+#menu-navegation li a {
     padding: 15px 15px;
     text-decoration: none;
     text-transform: uppercase;
@@ -72,18 +72,18 @@ body {
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-#menu-navegacion li:hover,
-#menu-navegacion li.active {
+#menu-navegation li:hover,
+#menu-navegation li.active {
     background-color: var(--blue);
     border-radius: 15px;
 }
 
-.resaltar-tickets {
+.highlight-tickets {
     background-color: var(--pink);
     border-radius: 15px;
 }
 
-.resaltar-tickets:hover {
+.highlight-tickets:hover {
     background-color: var(--peach);
     border-radius: 15px;
 }
@@ -98,17 +98,17 @@ body {
 }
 
 @media (max-width: 767px) {
-    #menu-navegacion {
+    #menu-navegation {
         flex-direction: column;
         text-align: center;
     }
     
-    #menu-navegacion li {
+    #menu-navegation li {
         width: 100%;
     }
 }
 
-/* ============= HEADER DETALLE ============= */
+/* ============= HEADER DETAILS ============= */
 .header-detail {
     background: linear-gradient(135deg, var(--primary-color) 0%, #1a252f 100%);
     color: white;
@@ -140,7 +140,7 @@ body {
     text-decoration: none;
 }
 
-/* ============= TARJETA DE ATRACCIÓN ============= */
+/* ============= CARD ATTRACTION ============= */
 .attraction-detail-card {
     background-color: white;
     border-radius: var(--border-radius);
@@ -296,7 +296,7 @@ body {
     transform: translateY(-2px);
 }
 
-/* ============= TIEMPO DE ESPERA ============= */
+/* ============= WAITING TIME  ============= */
 .wait-time-container {
     position: relative;
     display: inline-flex;
@@ -459,7 +459,7 @@ body {
     border-top: 1px solid #ddd;
 }
 
-/* ============= ANIMACIONES ============= */
+/* ============= ANIMATIONS ============= */
 .loading-overlay {
     position: fixed;
     top: 0;

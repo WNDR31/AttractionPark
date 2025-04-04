@@ -11,15 +11,15 @@ public class Zone {
     
     private String name;
 
-    // Constructor vacío
+    // Empty constructor 
     public Zone() {}
 
-    // Constructor con parámetros
+    // Constructor with parameters 
     public Zone(String name) {
         this.name = name;
     }
 
-    // Getters y Setters
+    // Getters and Setters
     public Long getId() {
         return id;
     }
