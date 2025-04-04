@@ -1,0 +1,202 @@
+:root {
+    --primary: #2c3e50;
+    --secondary: #e74c3c;
+    --accent: #3498db;
+    --light: #ecf0f1;
+    --dark: #7f8c8d;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.map-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a252f 100%);
+    color: white;
+    padding: 1.5rem 0;
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.map-wrapper {
+    width: 95%;
+    max-width: 1400px;
+    margin: 0 auto 2rem;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    padding: 1rem;
+    position: relative;
+}
+
+.map-container {
+    width: 100%;
+    height: 0;
+    padding-bottom: 70%;
+    position: relative;
+    overflow: hidden;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.map-svg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.map-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.map-zone {
+    fill: rgba(52, 152, 219, 0.2);
+    stroke: var(--accent);
+    stroke-width: 2;
+    transition: all 0.3s;
+    cursor: pointer;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.map-zone:hover {
+    fill: rgba(231, 76, 60, 0.3);
+    stroke: var(--secondary);
+    stroke-width: 3;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+}
+
+.zone-label {
+    font-size: 1rem;
+    font-weight: 700;
+    fill: var(--primary);
+    pointer-events: none;
+    text-anchor: middle;
+    dominant-baseline: middle;
+    text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+}
+
+.zone-icon {
+    pointer-events: none;
+    text-anchor: middle;
+}
+
+.map-actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+}
+
+.btn-map {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s;
+}
+
+.btn-primary {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.btn-primary:hover {
+    background-color: #c0392b;
+    transform: translateY(-2px);
+}
+
+.map-footer {
+    background-color: var(--primary);
+    color: white;
+    padding: 1.5rem 0;
+    margin-top: 2rem;
+}
+
+.map-legend {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin: 1rem 0;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.zone-tooltip {
+    position: absolute;
+    background: rgba(0,0,0,0.85);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity 0.2s;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16);
+}
+
+/* Estilos para los iconos de zonas */
+.icon-wrapper {
+    pointer-events: none;
+}
+
+.icon-bg {
+    fill: white;
+    stroke: var(--primary);
+    stroke-width: 1.5;
+    filter: drop-shadow(0 2px 3px rgba(0,0,0,0.2));
+}
+
+.icon-fg {
+    fill: var(--secondary);
+}
+
+.main-container {
+    padding: 0 15px;
+}
+
+@media (max-width: 992px) {
+    .map-container {
+        padding-bottom: 90%;
+    }
+    
+    .zone-label {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .map-header {
+        padding: 1rem 0;
+    }
+    
+    .map-container {
+        padding-bottom: 100%;
+    }
+    
+    .zone-label {
+        font-size: 0.8rem;
+    }
+    
+    .zone-icon {
+        font-size: 0.8em;
+    }
+}
