@@ -506,14 +506,6 @@ display: flex;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
 }
 
-.div_ticketsZone {
-    display: flex;
-    margin-left: 200px;
-    margin-right: 200px;
-    align-items: center;
-    color: var(--background-color);
-}
-
 .textoCompra{
     padding: 70px;
     text-align: center;

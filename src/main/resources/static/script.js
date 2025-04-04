@@ -113,7 +113,7 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     })
     .then(data => {
         console.log('Reserva creada:', data);
-        alert('Reserva creada con éxito!');
+        alert('¡Gracias por tu compra! Te enviaremos un email con los datos de reserva.');
     })
     .catch(error => {
         console.error('Error al crear la reserva:', error);
