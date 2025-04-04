@@ -19,6 +19,6 @@ public class VisitPlanController {
         List<Hotel> hoteles = hotelRepository.findAll();
         System.out.println("Número de hoteles encontrados:" + hoteles.size());
         model.addAttribute("hoteles", hoteles);
-        return "PlanificaTuVisita.html";  // html estatico
+        return "PlanificaTuVisita";  // html estatico
     }
 }
