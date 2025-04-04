@@ -87,7 +87,6 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     const entrada = entradasSeleccionadas.values().next().value; // Obtener la primera entrada del Set
     const tipoEntrada = entrada[0]; // Tipo de entrada
     const cantidad = entrada[1]; // Cantidad de entradas
-    alert(tipoEntrada + cantidad);
 
     const reservationData = {
         name: nombre,
