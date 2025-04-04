@@ -49,6 +49,8 @@ public class ReservationService {
                     case "phone" -> reservation.setPhone((String) value);
                     case "date" -> reservation.setDate(LocalDate.parse((String) value));
                     case "email" -> reservation.setEmail((String) value);
+                    case "entryType" -> reservation.setTipoEntrada((String) value);
+                    case "quantity" -> reservation.setCantidad((Integer) value);
                 }
             });
 

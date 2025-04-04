@@ -14,16 +14,21 @@ public class Reservation {
     private String phone;
     private LocalDate date;
     private String email;
+    private String tipoEntrada;
+    private int cantidad;
 
     public Reservation() {}
 
-    public Reservation(String n, String s, String p, LocalDate d, String e){
-        name=n;
-        surname=s;
-        phone=p;
-        date=d;
-        email=e;
+    public Reservation(String n, String s, String p, LocalDate d, String e, String t, int c) {
+        name = n;
+        surname = s;
+        phone = p;
+        date = d;
+        email = e;
+        tipoEntrada = t;
+        cantidad = c;
     }
+
 
     // Getters and Setters
     public Long getId() {
@@ -74,6 +79,24 @@ public class Reservation {
         this.email = email;
     }
 
+    
+    public String getTipoEntrada() {
+        return tipoEntrada;
+    }
+
+    public void setTipoEntrada(String tipoEntrada) {
+        this.tipoEntrada = tipoEntrada;
+    }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+
     // toString method
     @Override
     public String toString() {
@@ -84,6 +107,8 @@ public class Reservation {
                 ", phone='" + phone + '\'' +
                 ", date=" + date +
                 ", email='" + email + '\'' +
+                ", tipoEntrada='" + tipoEntrada + '\'' +
+                ", cantidad=" + cantidad +
                 '}';
     }
 }

@@ -1,4 +1,3 @@
-
 //Función para mostrar le ventada de compra (modal)
 function mostrarVentanaCompra(titulo) {
     
@@ -6,107 +5,98 @@ function mostrarVentanaCompra(titulo) {
     modal.show();
 }
 
+// Cambiar de Set a un Set que almacene arrays (simulando tuplas)
+const entradasSeleccionadas = new Set();
 
-//Funciones para añadir al carrito
+// Función para añadir al carrito
 document.getElementById('agregarCarrito').addEventListener('click', function () {
     const tipoEntrada = document.getElementById('tipoEntrada').value;
     const cantidad = document.getElementById('cantidad').value;
     const tipoEntradaText = document.getElementById('tipoEntrada').options[document.getElementById('tipoEntrada').selectedIndex].text;
 
-    if (entradasSeleccionadas.has(tipoEntrada)) {
-        alert('Este tipo de entrada ya ha sido añadido al carrito.');
-        return;
-    }
-
     if (tipoEntrada === "" || cantidad === "") {
-        alert("Opciones incorrectas.");
+        alert("Opciones incorrectas. Por favor, selecciona un tipo de entrada y una cantidad válida.");
         return;
     }
-    const carritoVacio = document.getElementById('carritoVacio');
 
+
+    // Crear una "tupla" (array) con el tipo de entrada y la cantidad
+    const entrada = [tipoEntrada, cantidad];
+
+    // Verificar si ya existe una entrada con el mismo tipo
+    for (let item of entradasSeleccionadas) {
+        if (item[0] === tipoEntrada) {
+            alert('Este tipo de entrada ya ha sido añadido al carrito.');
+            return;
+        }
+    }
+
+    const carritoVacio = document.getElementById('carritoVacio');
     if (carritoVacio) {
         carritoVacio.remove();
     }
 
-    entradasSeleccionadas.add(tipoEntrada);
+        //Para que solo se pueda añadir una entrada (todavía 1:1)
+    if (entradasSeleccionadas.size > 0) {
+        alert("Solo puedes añadir un tipo de entrada al carrito.");
+        return;
+    }
+
+    // Añadir la "tupla" al Set
+    entradasSeleccionadas.add(entrada);
+
+    
 
     const carrito = document.getElementById('carrito');
     const li = document.createElement('li');
     li.className = 'list-group-item d-flex justify-content-between align-items-center';
     li.textContent = `${tipoEntradaText} - Cantidad: ${cantidad}`;
-    
+
     const removeButton = document.createElement('button');
     removeButton.className = 'btn btn-danger btn-sm';
     removeButton.textContent = 'Eliminar';
     removeButton.addEventListener('click', function () {
         carrito.removeChild(li);
-        entradasSeleccionadas.delete(tipoEntrada);
+        entradasSeleccionadas.delete(entrada);
     });
 
     li.appendChild(removeButton);
     carrito.appendChild(li);
 });
 
-const entradasSeleccionadas = new Set();
-
-
-/*
-//Validar Finalizar Compra
-document.addEventListener("DOMContentLoaded", function () {
-    document.querySelector(".btn-primary").addEventListener("click", function (event) {
-        event.preventDefault(); // Evita el envío del formulario por defecto
-
-        // Obtener elementos del formulario
-        const nombre = document.getElementById("nombre").value.trim();
-        const apellidos = document.getElementById("apellidos").value.trim();
-        const telefono = document.getElementById("telefono").value.trim();
-        const fechaVisita = document.getElementById("fechaVisita").value.trim();
-        const correo = document.getElementById("correo").value.trim();
-        
-        // Obtener el carrito
-        const carrito = document.getElementById("carrito");
-        const carritoVacio = document.getElementById("carritoVacio");
-        const elementosCarrito = carrito.querySelectorAll("li");
-        
-        // Validar que los campos obligatorios están rellenados
-        if (!nombre || !apellidos || !telefono || !fechaVisita || !correo) {
-            alert("Por favor, completa todos los campos del formulario.");
-            return;
-        }
-        
-        // Validar que el carrito no está vacío
-        if (elementosCarrito.length == 0 || carrito.contains(carritoVacio)) {
-            alert("El carrito de la compra está vacío. Añade al menos un ticket antes de finalizar la compra.");
-            return;
-        }
-        
-        // Mostrar mensaje de confirmación
-        alert("¡Compra realizada con éxito! Recibirás un correo con los detalles de tu compra.");
-        
-        // Opcional: Resetear formulario y vaciar carrito
-        document.getElementById("formCompra").reset();
-        carrito.innerHTML = '<li id="carritoVacio" class="list-group-item">Aún no has añadido ningún ticket al carrito</li>';
-    });
-});
-*/
-
 //-----------------------------Enviar formulario de compra------------------------------------------
 document.getElementById('formCompra').addEventListener('submit', function(event) {
     console.log("¡Función de envío del formulario INICIADA!");
     event.preventDefault(); // Evita el envío normal del formulario
+
+    // Validar que el carrito no está vacío
+    const carrito = document.getElementById('carrito');
+    const carritoVacio = document.getElementById('carritoVacio');
+    const elementosCarrito = carrito.querySelectorAll('li');
+
+    if (elementosCarrito.length === 0 || carrito.contains(carritoVacio)) {
+        alert("El carrito de la compra está vacío. Añade al menos un ticket antes de finalizar la compra.");
+        return;
+    }
 
     const nombre = document.getElementById('nombre').value;
     const apellidos = document.getElementById('apellidos').value;
     const telefono = document.getElementById('telefono').value;
     const fechaVisita = document.getElementById('fechaVisita').value;
     const correo = document.getElementById('correo').value;
+    const entrada = entradasSeleccionadas.values().next().value; // Obtener la primera entrada del Set
+    const tipoEntrada = entrada[0]; // Tipo de entrada
+    const cantidad = entrada[1]; // Cantidad de entradas
+    alert(tipoEntrada + cantidad);
 
     const reservationData = {
         name: nombre,
         surname: apellidos,
         phone: telefono,
         date: fechaVisita,
-        email: correo
+        email: correo,
+        entryType: tipoEntrada,
+        quantity: cantidad
     };
 
     fetch('http://localhost:8080/reservations', {
