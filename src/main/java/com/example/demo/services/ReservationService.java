@@ -67,4 +67,11 @@ public class ReservationService {
         System.out.println("**** ReservationService.getAllReservations() FINALIZADO ****"); // Log al final
         return allReservations;
     }
+
+    public void deleteReservation(Long id) {
+        if (!reservationRepository.existsById(id)) {
+            throw new RuntimeException("Reservation not found with ID: " + id);
+        }
+        reservationRepository.deleteById(id);
+    }
 }
