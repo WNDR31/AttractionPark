@@ -328,4 +328,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 
 
+//-----------------------------Funcion seleccionar modificar o eliminar------------------------------------------
+document.addEventListener('DOMContentLoaded', function() {
+    const mostrarFormularioEliminarBtn = document.getElementById('mostrarFormularioEliminar');
+    const mostrarFormularioModificarBtn = document.getElementById('mostrarFormularioModificar');
+    const formularioEliminarReservaDiv = document.getElementById('formularioEliminarReserva');
+    const formularioModificarReservaDiv = document.getElementById('formularioModificarReserva');
+
+    mostrarFormularioEliminarBtn.addEventListener('click', function() {
+        mostrarFormularioEliminarBtn.classList.add('active');
+        mostrarFormularioModificarBtn.classList.remove('active');
+
+        formularioEliminarReservaDiv.style.display = 'block'; 
+        formularioModificarReservaDiv.style.display = 'none'; 
+    });
+
+    mostrarFormularioModificarBtn.addEventListener('click', function() {
+        mostrarFormularioModificarBtn.classList.add('active');
+        mostrarFormularioEliminarBtn.classList.remove('active');
+
+        formularioModificarReservaDiv.style.display = 'block';
+        formularioEliminarReservaDiv.style.display = 'none';   
+    });
+});
+
 

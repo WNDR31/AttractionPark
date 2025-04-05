@@ -637,6 +637,17 @@ display: flex;
   margin-top: 20px;
   padding: 30px;
   gap: 10px; 
+  
+}
+.div-otherButtons .btn-danger {
+  background-color:#E85234;
+}
+
+.div-otherButtons .btn-danger.active {
+  background-color: rgb(255, 174, 0); 
+  border-color: rgb(255, 174, 0);
+  box-shadow: 0 0 10px rgba(255, 174, 0, 0.8);
+  color: white; 
 }
 
 .deleteForm {
