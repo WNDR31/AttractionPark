@@ -121,7 +121,7 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     });
 });
 
-/*Enviar formulario de eliminación de reserva*/
+//--------------------Función para eliminar reserva-----------------
 // Ocultar el formulario al cargar la página
 document.addEventListener('DOMContentLoaded', function () {
     const formulario = document.getElementById('formularioEliminarReserva');
@@ -169,6 +169,89 @@ document.getElementById('eliminarReserva').addEventListener('click', function ()
             alert('No se pudo eliminar la reserva. Revisa el ID introducido por favor.');
         });
 });
+//--------------------Función para modificar datos reserva----------------
+// Ocultar el formulario al cargar la página
+document.addEventListener('DOMContentLoaded', function () {
+    const formularioModificar = document.getElementById('formularioModificarReserva');
+    if (formularioModificar) { // Verificar si el formulario existe en la página
+        formularioModificar.style.display = 'none';
+    }
+});
+
+// Mostrar/ocultar el formulario de modificación al hacer clic en el botón
+const mostrarFormularioModificarBtn = document.getElementById('mostrarFormularioModificar'); // Asegúrate de que este botón exista en tu HTML
+if (mostrarFormularioModificarBtn) { // Verificar si el botón existe en la página
+    mostrarFormularioModificarBtn.addEventListener('click', function () {
+        const formularioModificar = document.getElementById('formularioModificarReserva');
+        if (formularioModificar) { // Verificar si el formulario existe de nuevo por si acaso
+            if (formularioModificar.style.display === 'none') {
+                formularioModificar.style.display = 'block';
+            } else {
+                formularioModificar.style.display = 'none';
+            }
+        }
+    });
+}
+
+
+// Manejar la modificación
+const modificarReservaBtn = document.getElementById('modificarReserva');
+if (modificarReservaBtn) { // Verificar si el botón existe en la página
+    modificarReservaBtn.addEventListener('click', function () {
+        const idReserva = document.getElementById('idReservaModificar').value;
+        const campoModificar = document.getElementById('campoModificar').value;
+        const nuevoValor = document.getElementById('nuevoValor').value;
+
+        if (!idReserva) {
+            alert('Por favor, introduce el ID de la reserva que deseas modificar.');
+            return;
+        }
+
+        if (!campoModificar) {
+            alert('Por favor, selecciona el campo que deseas modificar.');
+            return;
+        }
+
+        if (!nuevoValor) {
+            alert('Por favor, introduce el nuevo valor para el campo seleccionado.');
+            return;
+        }
+
+        // Confirmar antes de modificar (opcional, pero recomendable)
+        if (!confirm(`¿Estás seguro de que deseas modificar el campo "${campoModificar}" de la reserva con ID ${idReserva} al valor "${nuevoValor}"?`)) {
+            return;
+        }
+
+        // Enviar la solicitud PATCH al backend
+        fetch(`http://localhost:8080/reservations/${idReserva}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                [campoModificar]: nuevoValor // Usamos notación de corchetes para usar el valor de campoModificar como clave
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Error al modificar la reserva: ' + response.status);
+                }
+                return response.json(); // Opcional: Si tu backend devuelve la reserva modificada, puedes procesarla aquí
+            })
+            .then(updatedReservation => { // Opcional: Recibe la reserva modificada si el backend la devuelve
+                alert('Reserva modificada con éxito.');
+                // Ocultar el formulario de modificación
+                const formularioModificar = document.getElementById('formularioModificarReserva'); // Obtener el formulario de nuevo
+                if (formularioModificar) {
+                    formularioModificar.style.display = 'none';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('No se pudo modificar la reserva. Revisa el ID, el campo y el valor introducidos por favor.');
+            });
+    });
+}
 
 //--------------------Función para seleccionar el tipo de promoción----------------
 function mostrarOfertas(categoria) {
