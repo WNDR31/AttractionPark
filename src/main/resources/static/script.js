@@ -294,26 +294,46 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //---------------------Apartado de testimonios------------------------------------
-let currentReview = 0;
-
 function showReview(index) {
+    console.log("showReview called with index:", index);
     const reviews = document.querySelectorAll('.review-slide');
     const dots = document.querySelectorAll('.pagination-dot');
+    console.log("Number of review-slide elements found:", reviews.length);
+    console.log("Number of pagination-dot elements found:", dots.length); 
 
     if (reviews.length === 0 || dots.length === 0) {
         console.warn('No se encontraron elementos .review-slide o .pagination-dot');
         return;
     }
+    if (index >= reviews.length) {
+        currentReview = 0;
+    } else if (index < 0) {
+        currentReview = reviews.length - 1;
+    } else {
+        currentReview = index;
+    }
 
     reviews.forEach((review, i) => {
         review.classList.remove('active');
+    });
+    dots.forEach((dot, i) => {  
         dots[i].classList.remove('active');
     });
 
-    reviews[index].classList.add('active');
-    dots[index].classList.add('active');
+    reviews[currentReview].classList.add('active');
+    dots[currentReview].classList.add('active');
+}
+function nextReview() {
+    console.log("nextReview called"); 
+    showReview(currentReview + 1);
 }
 
+function prevReview() {
+    console.log("prevReview called"); 
+    showReview(currentReview - 1);
+}
+
+showReview(currentReview);
 
 //-----------------------------Suavizar el desplazamiento de horario -> footer------------------------------------------
 // Desplazamiento suave al hacer clic en los enlaces con el atributo href que comienza con #
