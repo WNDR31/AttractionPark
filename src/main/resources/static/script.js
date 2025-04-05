@@ -336,20 +336,27 @@ document.addEventListener('DOMContentLoaded', function() {
     const formularioModificarReservaDiv = document.getElementById('formularioModificarReserva');
 
     mostrarFormularioEliminarBtn.addEventListener('click', function() {
-        mostrarFormularioEliminarBtn.classList.add('active');
-        mostrarFormularioModificarBtn.classList.remove('active');
-
-        formularioEliminarReservaDiv.style.display = 'block'; 
-        formularioModificarReservaDiv.style.display = 'none'; 
+        if (mostrarFormularioEliminarBtn.classList.contains('active')) {
+            mostrarFormularioEliminarBtn.classList.remove('active');
+            formularioEliminarReservaDiv.style.display = 'none';
+        } else {
+            mostrarFormularioEliminarBtn.classList.add('active');
+            mostrarFormularioModificarBtn.classList.remove('active');
+            formularioEliminarReservaDiv.style.display = 'block';
+            formularioModificarReservaDiv.style.display = 'none';
+        }
     });
 
     mostrarFormularioModificarBtn.addEventListener('click', function() {
-        mostrarFormularioModificarBtn.classList.add('active');
-        mostrarFormularioEliminarBtn.classList.remove('active');
-
-        formularioModificarReservaDiv.style.display = 'block';
-        formularioEliminarReservaDiv.style.display = 'none';   
+        if (mostrarFormularioModificarBtn.classList.contains('active')) {
+            mostrarFormularioModificarBtn.classList.remove('active');
+            formularioModificarReservaDiv.style.display = 'none';
+        } else {
+            mostrarFormularioModificarBtn.classList.add('active');
+            mostrarFormularioEliminarBtn.classList.remove('active');
+            formularioModificarReservaDiv.style.display = 'block';
+            formularioEliminarReservaDiv.style.display = 'none';
+        }
     });
 });
-
 
