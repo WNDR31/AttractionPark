@@ -48,6 +48,8 @@ public class DataLoader implements CommandLineRunner {
     public void run(String... args) throws Exception {
         // Insert data into the database
 
+        //zoneRepository.deleteAll(); 
+
         // Create zones
         System.out.println("Insertando zonas de prueba...");
         Zone zone1 = new Zone("FRONTIER TOWN");
@@ -63,6 +65,8 @@ public class DataLoader implements CommandLineRunner {
         zoneRepository.saveAll(List.of(zone1, zone2, zone3, zone4, zone5, zone6, zone7, zone8, zone9));
         System.out.println("Zonas insertadas correctamente.");
 
+        //thrillRepository.deleteAll(); 
+
         // Create intensities (Thrill)
         System.out.println("Insertando niveles de intensidad...");
         Thrill thrill1 = new Thrill("Baja");
@@ -74,6 +78,8 @@ public class DataLoader implements CommandLineRunner {
         thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3, thrill4, thrill5));
         System.out.println("Intensidades insertadas correctamente.");
         
+        //typeRepository.deleteAll(); 
+
         // Create Attractions
         System.out.println("Insertando tipos de atracciones...");
         Type type1 = new Type("Montañas rusas"); // line = 40
@@ -86,9 +92,9 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Tipos de atracciones insertados correctamente.");
 
         /* Delete the attractions table to avoid data duplication
-        System.out.println("Limpiando la tabla de atracciones..."); 
-        attractionRepository.deleteAll(); 
-        System.out.println("Tabla de atracciones limpiada."); */
+        System.out.println("Limpiando la tabla de atracciones..."); */
+        //attractionRepository.deleteAll(); 
+        // System.out.println("Tabla de atracciones limpiada."); 
 
         // Attractions
         Attraction attraction1 = new Attraction();
