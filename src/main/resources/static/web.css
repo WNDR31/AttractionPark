@@ -1,6 +1,3 @@
-
-
-
 :root {
     --darkblue: #00408C;
     --blue: #96ADD6;
@@ -28,7 +25,7 @@ body {
 }
 
 
-/* -------------Menú de navegación-------------- */
+/* -------------Navigation Menu-------------- */
 
 #navegacion-principal {
   display: flex;
@@ -89,7 +86,9 @@ body {
   }
 }
 
-/*---------------------------Imagenes carousel pantalla home-----------------------*/
+
+
+/*---------------------------Carousel images on the home screen-----------------------*/
 
 .carousel-caption h1{
     font-size: 55px; 
@@ -103,7 +102,6 @@ body {
     text-shadow: 10px 10px 10px #000000; 
 }
 .carousel-caption {
-  /*background-color: var(--darkblue);*/
   padding: 10px; 
   margin: 10px;
   border-radius: 15px; 
@@ -118,7 +116,10 @@ body {
   background-color: white;
 }
 
-/*----------------------------Apartado tiendas, restaurantes y hoteles -----------------------------*/ 
+
+
+/*----------------------------Section for shops, restaurants, and hotels -----------------------------*/ 
+
 #seccion-titulo {
     text-align: center;
     margin-bottom: 100px;
@@ -154,7 +155,6 @@ body {
     text-align: center;
   }
   .servicios .columnas h2.nombre {
-    /*font-weight: bold;*/
     color: var(--blue);      
     margin-top: 5px;   
     margin-bottom: 15px; 
@@ -184,7 +184,11 @@ body {
     display: block;
     margin: 0 auto;
   }
-/*--------------------------------Apartado Promociones-------------------------------------*/ 
+
+
+
+/*--------------------------------Promotions Section-------------------------------------*/ 
+
 .contenedor-ofertas {
     max-width: 1200px;
     margin: 30px auto;
@@ -256,7 +260,7 @@ display: flex;
 }
 
 .precio-oferta {
-  background-color: var(--peach); /* Usa la variable CSS */
+  background-color: var(--peach); 
     color: white;
     font-size: 25px;
     padding: 10px 15px;
@@ -272,7 +276,7 @@ display: flex;
     font-size: 25px;
     font-style: oblique;
     margin: 15px 15px 10px 15px;
-  color: var(--blue); /* Usa la variable CSS */
+  color: var(--blue); 
 }
 
 .tarjeta-oferta p {
@@ -286,7 +290,10 @@ display: flex;
     font-style: italic;
 }
 
-/*-----------------------------------Apartado reviews -------------------------------------*/
+
+
+/*-----------------------------------Reviews Section -------------------------------------*/
+
 .container-reviews {
     max-width: 950px;
     display: flex;
@@ -430,7 +437,11 @@ display: flex;
   .pagination-dot.active {
     background-color: #004170;
   }
-/*----------------------------------Apartado Footer -------------------------------*/ 
+
+
+
+/*----------------------------------Footer Section -------------------------------*/ 
+
 #footer {
   background-color: #f0f0f0;
   color: #333;
@@ -457,12 +468,11 @@ display: flex;
 }
 
 #footer iframe {
-  max-width: 100%; /* Responsive iframe */
-  height: auto; /* Let height adjust based on content */
+  max-width: 100%; 
+  height: auto; 
   display: block;
   border: 0;
-  /* aspect-ratio: 16 / 9;  Removed aspect-ratio */
-  width: 300px; /* Reduced width for the calendar */
+  width: 300px; 
     margin-top: 10px;
 }
 
@@ -514,7 +524,10 @@ display: flex;
   padding-top: 20px;
   border-top: 1px solid #ddd;
 }
-/*----------------------Apartado compra de tickets -------------------------------*/ 
+
+
+
+/*----------------------Ticket Purchase Section -------------------------------*/ 
 
 .img_compra {
     border-bottom-right-radius: 70px;
@@ -684,7 +697,8 @@ display: flex;
 }
 
 
-/*------Apartado Planifica tu Visita -------*/ 
+
+/*------Plan Your Visit Section -------*/ 
 
 .button-services {
   padding: 10px 20px;
@@ -751,11 +765,11 @@ h1 {
   overflow: hidden;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   border-color: #103869;
-  transition: transform 0.3s ease; /* Smooth transition for scaling */
+  transition: transform 0.3s ease; 
 }
 
 .card:hover {
-  transform: scale(1.02); /* Slightly increase size on hover */
+  transform: scale(1.02); 
 }
 
 .card img {
@@ -814,7 +828,9 @@ hr {
   }
 }
 
-/* ERROR PAGE */
+
+
+/*------------ Error Page -------------*/ 
 
 .error-container {
   max-width: 600px;

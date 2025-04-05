@@ -1,14 +1,106 @@
-//Función para mostrar le ventada de compra (modal)
+//---------------------Reviews Section------------------------------------
+
+function showReview(index) {
+    console.log("showReview called with index:", index);
+    const reviews = document.querySelectorAll('.review-slide');
+    const dots = document.querySelectorAll('.pagination-dot');
+    console.log("Number of review-slide elements found:", reviews.length); 
+    console.log("Number of pagination-dot elements found:", dots.length); 
+
+    if (reviews.length === 0 || dots.length === 0) {
+        console.warn('No se encontraron elementos .review-slide o .pagination-dot');
+        return;
+    }
+    if (index >= reviews.length) {
+        currentReview = 0;
+    } else if (index < 0) {
+        currentReview = reviews.length - 1;
+    } else {
+        currentReview = index;
+    }
+
+    reviews.forEach((review, i) => {
+        review.classList.remove('active');
+    });
+    dots.forEach((dot, i) => {  
+        dots[i].classList.remove('active');
+    });
+
+    reviews[currentReview].classList.add('active');
+    dots[currentReview].classList.add('active');
+}
+showReview(0);
+
+function nextReview() {
+    console.log("nextReview called");
+    showReview(currentReview + 1);
+}
+
+function prevReview() {
+    console.log("prevReview called");
+    showReview(currentReview - 1);
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('Evento DOMContentLoaded disparado');
+    showReview(0);
+});
+
+
+
+//--------------------Function to select the type of promotion----------------
+function mostrarOfertas(categoria) {
+    console.log('Función mostrarOfertas llamada con categoría:', categoria); 
+    const botonesOferta = document.querySelectorAll('.boton-oferta');
+    const ofertasParque = document.getElementById('ofertas-parque');
+    const ofertasRestaurantes = document.getElementById('ofertas-restaurantes');
+
+    botonesOferta.forEach(boton => {
+        boton.classList.remove('seleccionado');
+    });
+
+    if (categoria === 'parque') {
+        if (ofertasParque.style.display === 'flex') {
+            ofertasParque.style.display = 'none';
+            return;
+        }
+        ofertasParque.style.display = 'flex';
+        ofertasRestaurantes.style.display = 'none';
+    } else if (categoria === 'restaurantes') {
+        if (ofertasRestaurantes.style.display === 'flex') {
+            ofertasRestaurantes.style.display = 'none';
+            return;
+        }
+        ofertasParque.style.display = 'none';
+        ofertasRestaurantes.style.display = 'flex';
+    }
+
+    botonesOferta.forEach(boton => {
+        if (boton.getAttribute('data-categoria') === categoria) {
+            boton.classList.add('seleccionado');
+            console.log('Clase "seleccionado" añadida al botón de:', categoria); 
+        }
+    });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Evento DOMContentLoaded disparado'); 
+    mostrarOfertas('parque');
+});
+
+
+
+//--------------------Buy Modal Section----------------
+
 function mostrarVentanaCompra(titulo) {
     
     let modal = new bootstrap.Modal(document.getElementById("modalCompra"));
     modal.show();
 }
 
-// Cambiar de Set a un Set que almacene arrays (simulando tuplas)
 const entradasSeleccionadas = new Set();
 
-// Función para añadir al carrito
+// Function to add to the shopping cart
 document.getElementById('agregarCarrito').addEventListener('click', function () {
     const tipoEntrada = document.getElementById('tipoEntrada').value;
     const cantidad = document.getElementById('cantidad').value;
@@ -19,11 +111,8 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
         return;
     }
 
-
-    // Crear una "tupla" (array) con el tipo de entrada y la cantidad
     const entrada = [tipoEntrada, cantidad];
 
-    // Verificar si ya existe una entrada con el mismo tipo
     for (let item of entradasSeleccionadas) {
         if (item[0] === tipoEntrada) {
             alert('Este tipo de entrada ya ha sido añadido al carrito.');
@@ -36,22 +125,20 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
         carritoVacio.remove();
     }
 
-        //Para que solo se pueda añadir una entrada (todavía 1:1)
+        // To ensure only one type of ticket can be added (still 1:1)
     if (entradasSeleccionadas.size > 0) {
         alert("Solo puedes añadir un tipo de entrada al carrito.");
         return;
     }
 
-    // Añadir la "tupla" al Set
     entradasSeleccionadas.add(entrada);
-
-    
 
     const carrito = document.getElementById('carrito');
     const li = document.createElement('li');
     li.className = 'list-group-item d-flex justify-content-between align-items-center';
     li.textContent = `${tipoEntradaText} - Cantidad: ${cantidad}`;
 
+    // Remove from shopping cart
     const removeButton = document.createElement('button');
     removeButton.className = 'btn btn-danger btn-sm';
     removeButton.textContent = 'Eliminar';
@@ -64,12 +151,12 @@ document.getElementById('agregarCarrito').addEventListener('click', function () 
     carrito.appendChild(li);
 });
 
-//-----------------------------Enviar formulario de compra------------------------------------------
+// Function to send the form
 document.getElementById('formCompra').addEventListener('submit', function(event) {
     console.log("¡Función de envío del formulario INICIADA!");
-    event.preventDefault(); // Evita el envío normal del formulario
+    event.preventDefault(); // Prevent the default form submission
 
-    // Validar que el carrito no está vacío
+    // Validate that the shopping cart is not empty
     const carrito = document.getElementById('carrito');
     const carritoVacio = document.getElementById('carritoVacio');
     const elementosCarrito = carrito.querySelectorAll('li');
@@ -84,9 +171,9 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     const telefono = document.getElementById('telefono').value;
     const fechaVisita = document.getElementById('fechaVisita').value;
     const correo = document.getElementById('correo').value;
-    const entrada = entradasSeleccionadas.values().next().value; // Obtener la primera entrada del Set
-    const tipoEntrada = entrada[0]; // Tipo de entrada
-    const cantidad = entrada[1]; // Cantidad de entradas
+    const entrada = entradasSeleccionadas.values().next().value; 
+    const tipoEntrada = entrada[0]; 
+    const cantidad = entrada[1]; 
 
     const reservationData = {
         name: nombre,
@@ -121,14 +208,16 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     });
 });
 
-//--------------------Función para eliminar reserva-----------------
-// Ocultar el formulario al cargar la página
+
+
+//--------------------Function to delete reservation-----------------
+// Hide the form when the page loads
 document.addEventListener('DOMContentLoaded', function () {
     const formulario = document.getElementById('formularioEliminarReserva');
     formulario.style.display = 'none';
 });
 
-// Mostrar/ocultar el formulario al hacer clic en el botón
+// Show/hide the form when clicking the button
 document.getElementById('mostrarFormularioEliminar').addEventListener('click', function () {
     const formulario = document.getElementById('formularioEliminarReserva');
     if (formulario.style.display === 'none') {
@@ -138,7 +227,7 @@ document.getElementById('mostrarFormularioEliminar').addEventListener('click', f
     }
 });
 
-// Manejar la eliminación
+// Handle deletion
 document.getElementById('eliminarReserva').addEventListener('click', function () {
     const idReserva = document.getElementById('idReservaEliminar').value;
 
@@ -147,12 +236,10 @@ document.getElementById('eliminarReserva').addEventListener('click', function ()
         return;
     }
 
-    // Confirmar antes de eliminar
     if (!confirm('¿Estás seguro de que deseas eliminar esta reserva?')) {
         return;
     }
 
-    // Enviar la solicitud DELETE al backend
     fetch(`http://localhost:8080/reservations/${idReserva}`, {
         method: 'DELETE'
     })
@@ -161,7 +248,6 @@ document.getElementById('eliminarReserva').addEventListener('click', function ()
                 throw new Error('Error al eliminar la reserva: ' + response.status);
             }
             alert('Reserva eliminada con éxito.');
-            // Ocultar el formulario
             document.getElementById('formularioEliminarReserva').style.display = 'none';
         })
         .catch(error => {
@@ -169,21 +255,24 @@ document.getElementById('eliminarReserva').addEventListener('click', function ()
             alert('No se pudo eliminar la reserva. Revisa el ID introducido por favor.');
         });
 });
-//--------------------Función para modificar datos reserva----------------
-// Ocultar el formulario al cargar la página
+
+
+
+//--------------------Function to modify reservation data----------------
+// Hide the form when the page loads
 document.addEventListener('DOMContentLoaded', function () {
     const formularioModificar = document.getElementById('formularioModificarReserva');
-    if (formularioModificar) { // Verificar si el formulario existe en la página
+    if (formularioModificar) { 
         formularioModificar.style.display = 'none';
     }
 });
 
-// Mostrar/ocultar el formulario de modificación al hacer clic en el botón
-const mostrarFormularioModificarBtn = document.getElementById('mostrarFormularioModificar'); // Asegúrate de que este botón exista en tu HTML
-if (mostrarFormularioModificarBtn) { // Verificar si el botón existe en la página
+// Show/hide the modification form when clicking the button
+const mostrarFormularioModificarBtn = document.getElementById('mostrarFormularioModificar'); 
+if (mostrarFormularioModificarBtn) { 
     mostrarFormularioModificarBtn.addEventListener('click', function () {
         const formularioModificar = document.getElementById('formularioModificarReserva');
-        if (formularioModificar) { // Verificar si el formulario existe de nuevo por si acaso
+        if (formularioModificar) { 
             if (formularioModificar.style.display === 'none') {
                 formularioModificar.style.display = 'block';
             } else {
@@ -193,10 +282,9 @@ if (mostrarFormularioModificarBtn) { // Verificar si el botón existe en la pág
     });
 }
 
-
-// Manejar la modificación
+// Handle the modification process
 const modificarReservaBtn = document.getElementById('modificarReserva');
-if (modificarReservaBtn) { // Verificar si el botón existe en la página
+if (modificarReservaBtn) { 
     modificarReservaBtn.addEventListener('click', function () {
         const idReserva = document.getElementById('idReservaModificar').value;
         const campoModificar = document.getElementById('campoModificar').value;
@@ -217,31 +305,29 @@ if (modificarReservaBtn) { // Verificar si el botón existe en la página
             return;
         }
 
-        // Confirmar antes de modificar (opcional, pero recomendable)
         if (!confirm(`¿Estás seguro de que deseas modificar el campo "${campoModificar}" de la reserva con ID ${idReserva} al valor "${nuevoValor}"?`)) {
             return;
         }
 
-        // Enviar la solicitud PATCH al backend
         fetch(`http://localhost:8080/reservations/${idReserva}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                [campoModificar]: nuevoValor // Usamos notación de corchetes para usar el valor de campoModificar como clave
+                [campoModificar]: nuevoValor // Using bracket notation to use the value of campoModificar as the key
             })
         })
             .then(response => {
                 if (!response.ok) {
                     throw new Error('Error al modificar la reserva: ' + response.status);
                 }
-                return response.json(); // Opcional: Si tu backend devuelve la reserva modificada, puedes procesarla aquí
+                return response.json(); 
             })
-            .then(updatedReservation => { // Opcional: Recibe la reserva modificada si el backend la devuelve
+            .then(updatedReservation => { 
                 alert('Reserva modificada con éxito.');
                 // Ocultar el formulario de modificación
-                const formularioModificar = document.getElementById('formularioModificarReserva'); // Obtener el formulario de nuevo
+                const formularioModificar = document.getElementById('formularioModificarReserva'); 
                 if (formularioModificar) {
                     formularioModificar.style.display = 'none';
                 }
@@ -253,103 +339,9 @@ if (modificarReservaBtn) { // Verificar si el botón existe en la página
     });
 }
 
-//--------------------Función para seleccionar el tipo de promoción----------------
-function mostrarOfertas(categoria) {
-    console.log('Función mostrarOfertas llamada con categoría:', categoria); // NUEVA LÍNEA
-    const botonesOferta = document.querySelectorAll('.boton-oferta');
-    const ofertasParque = document.getElementById('ofertas-parque');
-    const ofertasRestaurantes = document.getElementById('ofertas-restaurantes');
-
-    botonesOferta.forEach(boton => {
-        boton.classList.remove('seleccionado');
-    });
-
-    if (categoria === 'parque') {
-        if (ofertasParque.style.display === 'flex') {
-            ofertasParque.style.display = 'none';
-            return;
-        }
-        ofertasParque.style.display = 'flex';
-        ofertasRestaurantes.style.display = 'none';
-    } else if (categoria === 'restaurantes') {
-        if (ofertasRestaurantes.style.display === 'flex') {
-            ofertasRestaurantes.style.display = 'none';
-            return;
-        }
-        ofertasParque.style.display = 'none';
-        ofertasRestaurantes.style.display = 'flex';
-    }
-
-    botonesOferta.forEach(boton => {
-        if (boton.getAttribute('data-categoria') === categoria) {
-            boton.classList.add('seleccionado');
-            console.log('Clase "seleccionado" añadida al botón de:', categoria); // NUEVA LÍNEA
-        }
-    });
-}
-
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('Evento DOMContentLoaded disparado'); // NUEVA LÍNEA
-    mostrarOfertas('parque');
-});
-
-//---------------------Apartado de testimonios------------------------------------
-
-function showReview(index) {
-    console.log("showReview called with index:", index);
-    const reviews = document.querySelectorAll('.review-slide');
-    const dots = document.querySelectorAll('.pagination-dot');
-    console.log("Number of review-slide elements found:", reviews.length); 
-    console.log("Number of pagination-dot elements found:", dots.length); 
-
-    if (reviews.length === 0 || dots.length === 0) {
-        console.warn('No se encontraron elementos .review-slide o .pagination-dot');
-        return;
-    }
-    if (index >= reviews.length) {
-        currentReview = 0;
-    } else if (index < 0) {
-        currentReview = reviews.length - 1;
-    } else {
-        currentReview = index;
-    }
-
-    reviews.forEach((review, i) => {
-        review.classList.remove('active');
-    });
-    dots.forEach((dot, i) => {  
-        dots[i].classList.remove('active');
-    });
-
-    reviews[currentReview].classList.add('active');
-    dots[currentReview].classList.add('active');
-}
-
-function nextReview() {
-    console.log("nextReview called");
-    showReview(currentReview + 1);
-}
-
-function prevReview() {
-    console.log("prevReview called");
-    showReview(currentReview - 1);
-}
-showReview(currentReview);
-
-//-----------------------------Suavizar el desplazamiento de horario -> footer------------------------------------------
-// Desplazamiento suave al hacer clic en los enlaces con el atributo href que comienza con #
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-      e.preventDefault();
-      
-      document.querySelector(this.getAttribute('href')).scrollIntoView({
-        behavior: 'smooth'
-      });
-    });
-  });
 
 
-//-----------------------------Funcion seleccionar modificar o eliminar------------------------------------------
+//-----------------------------Function to select modify or delete------------------------------------------
 document.addEventListener('DOMContentLoaded', function() {
     const mostrarFormularioEliminarBtn = document.getElementById('mostrarFormularioEliminar');
     const mostrarFormularioModificarBtn = document.getElementById('mostrarFormularioModificar');
