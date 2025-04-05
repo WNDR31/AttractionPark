@@ -45,19 +45,19 @@
     <!-- Main detail card -->
     <div class="attraction-detail-card">
         <div class="detail-header">
-            <img src="/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="main-image" 
+            <img src="/Imagenes/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="main-image" 
                  onerror="this.onerror=null;this.src='https://via.placeholder.com/800x400?text=Imagen+no+disponible';">
             
             {{#attraction.imageUrl2}}
             <div class="gallery-thumbnails">
-                <img src="/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="thumbnail" 
+                <img src="/Imagenes/{{attraction.imageUrl1}}" alt="{{attraction.name}}" class="thumbnail" 
                      onclick="changeMainImage(this.src)" 
                      onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+1';">
-                <img src="/{{attraction.imageUrl2}}" alt="{{attraction.name}}" class="thumbnail" 
+                <img src="/Imagenes/{{attraction.imageUrl2}}" alt="{{attraction.name}}" class="thumbnail" 
                      onclick="changeMainImage(this.src)" 
                      onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+2';">
                 {{#attraction.imageUrl3}}
-                <img src="/{{attraction.imageUrl3}}" alt="{{attraction.name}}" class="thumbnail" 
+                <img src="/Imagenes/{{attraction.imageUrl3}}" alt="{{attraction.name}}" class="thumbnail" 
                      onclick="changeMainImage(this.src)" 
                      onerror="this.onerror=null;this.src='https://via.placeholder.com/80x60?text=Imagen+3';">
                 {{/attraction.imageUrl3}}
