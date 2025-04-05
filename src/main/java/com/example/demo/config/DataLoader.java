@@ -46,7 +46,20 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
+
+        System.out.println("Limpiando la tabla de atracciones..."); 
+        attractionRepository.deleteAll(); 
+        System.out.println("Tabla de atracciones limpiada."); 
+
         // Insert data into the database
+
+        /*System.out.println("Limpiando la tabla de zonas..."); 
+        zoneRepository.deleteAll(); 
+        System.out.println("Tabla de zonas limpiada."); */
+
+        System.out.println("Limpiando la tabla de zonas..."); 
+        zoneRepository.deleteAll(); 
+        System.out.println("Tabla de zonas limpiada.");
 
         // Create zones
         System.out.println("Insertando zonas de prueba...");
@@ -63,6 +76,14 @@ public class DataLoader implements CommandLineRunner {
         zoneRepository.saveAll(List.of(zone1, zone2, zone3, zone4, zone5, zone6, zone7, zone8, zone9));
         System.out.println("Zonas insertadas correctamente.");
 
+        /*System.out.println("Limpiando la tabla de intensidades..."); 
+        thrillRepository.deleteAll(); 
+        System.out.println("Tabla de intensidades limpiada.");*/
+
+        System.out.println("Limpiando la tabla de intensidades..."); 
+        thrillRepository.deleteAll(); 
+        System.out.println("Tabla de intensidades limpiada.");
+
         // Create intensities (Thrill)
         System.out.println("Insertando niveles de intensidad...");
         Thrill thrill1 = new Thrill("Baja");
@@ -73,7 +94,13 @@ public class DataLoader implements CommandLineRunner {
 
         thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3, thrill4, thrill5));
         System.out.println("Intensidades insertadas correctamente.");
+
+        System.out.println("Limpiando la tabla de tipos..."); 
+        typeRepository.deleteAll(); 
+        System.out.println("Tabla de tipos limpiada.");
         
+        //typeRepository.deleteAll(); 
+
         // Create Attractions
         System.out.println("Insertando tipos de atracciones...");
         Type type1 = new Type("Montañas rusas"); // line = 40
@@ -86,7 +113,11 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Tipos de atracciones insertados correctamente.");
 
         /* Delete the attractions table to avoid data duplication
-        System.out.println("Limpiando la tabla de atracciones..."); 
+        System.out.println("Limpiando la tabla de atracciones..."); */
+        //attractionRepository.deleteAll(); 
+        // System.out.println("Tabla de atracciones limpiada."); 
+
+        /*System.out.println("Limpiando la tabla de atracciones..."); 
         attractionRepository.deleteAll(); 
         System.out.println("Tabla de atracciones limpiada."); */
 
@@ -500,6 +531,7 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Limpiando la tabla de hoteles..."); 
         hotelRepository.deleteAll(); 
         System.out.println("Tabla de hoteles limpiada."); 
+
         // Create Hotels (Hotels)
         System.out.println("Insertando hoteles...");
         Hotel hotel1 = new Hotel();
