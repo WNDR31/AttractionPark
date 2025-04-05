@@ -629,6 +629,23 @@ display: flex;
   display: flex;
 }
 
+.div-otherButtons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+  padding: 30px;
+  gap: 10px; 
+}
+
+.deleteForm {
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-bottom: 100px;
+}
+
+
+
 /*------Apartado Planifica tu Visita -------*/ 
 
 .button-services {

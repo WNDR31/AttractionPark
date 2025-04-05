@@ -153,7 +153,26 @@
                     </div>
                 </div>
             </div>
-        </div>    
+        </div>  
+        
+        <h2 class="h2_buy">También te puede interesar:</h2>
+        <div class="div-otherButtons">
+            <!-- Botón para mostrar/ocultar el formulario -->
+            <button type="button" class="btn btn-danger" id="mostrarFormularioEliminar">Eliminar Reserva</button>
+            <button type="button" class="btn btn-danger" id="mostrarFormularioModificar">Modificar Reserva</button>
+        </div>
+
+        <!-- Formulario para eliminar reserva -->
+        <div id="formularioEliminarReserva" class="deleteForm">
+            <form id="formEliminarReserva">
+                <div class="mb-3">
+                    <label for="idReservaEliminar" class="form-label">ID de la Reserva:</label>
+                    <input type="number" class="form-control" id="idReservaEliminar" placeholder="Introduce el ID de la reserva" required>
+                </div>
+                <button type="button" class="btn btn-danger" id="eliminarReserva">Eliminar</button>
+            </form>
+        </div>
+
     </main>
     <footer id="footer">
         <div class="container-footer">

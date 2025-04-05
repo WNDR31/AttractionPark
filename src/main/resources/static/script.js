@@ -113,12 +113,61 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
     })
     .then(data => {
         console.log('Reserva creada:', data);
-        alert('¡Gracias por tu compra! Te enviaremos un email con los datos de reserva.');
+        alert('¡Gracias por tu compra! Tu ID de reserva es: ' + data.id + '. Te enviaremos un email con los datos de reserva.');
     })
     .catch(error => {
         console.error('Error al crear la reserva:', error);
         alert('Error al crear la reserva. Consulta la consola para más detalles.');
     });
+});
+
+/*Enviar formulario de eliminación de reserva*/
+// Ocultar el formulario al cargar la página
+document.addEventListener('DOMContentLoaded', function () {
+    const formulario = document.getElementById('formularioEliminarReserva');
+    formulario.style.display = 'none';
+});
+
+// Mostrar/ocultar el formulario al hacer clic en el botón
+document.getElementById('mostrarFormularioEliminar').addEventListener('click', function () {
+    const formulario = document.getElementById('formularioEliminarReserva');
+    if (formulario.style.display === 'none') {
+        formulario.style.display = 'block';
+    } else {
+        formulario.style.display = 'none';
+    }
+});
+
+// Manejar la eliminación
+document.getElementById('eliminarReserva').addEventListener('click', function () {
+    const idReserva = document.getElementById('idReservaEliminar').value;
+
+    if (!idReserva) {
+        alert('Por favor, introduce el ID de la reserva que deseas eliminar.');
+        return;
+    }
+
+    // Confirmar antes de eliminar
+    if (!confirm('¿Estás seguro de que deseas eliminar esta reserva?')) {
+        return;
+    }
+
+    // Enviar la solicitud DELETE al backend
+    fetch(`http://localhost:8080/reservations/${idReserva}`, {
+        method: 'DELETE'
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error al eliminar la reserva: ' + response.status);
+            }
+            alert('Reserva eliminada con éxito.');
+            // Ocultar el formulario
+            document.getElementById('formularioEliminarReserva').style.display = 'none';
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('No se pudo eliminar la reserva. Revisa el ID introducido por favor.');
+        });
 });
 
 //--------------------Función para seleccionar el tipo de promoción----------------

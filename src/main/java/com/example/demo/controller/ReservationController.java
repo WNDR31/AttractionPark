@@ -43,4 +43,10 @@ public class ReservationController {
         List<Reservation> reservations = reservationService.getAllReservations();
         return new ResponseEntity<>(reservations, HttpStatus.OK); 
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteReservation(@PathVariable Long id) {
+        reservationService.deleteReservation(id);
+        return ResponseEntity.noContent().build(); // Responde con un código 204 No Content
+    }
 }
