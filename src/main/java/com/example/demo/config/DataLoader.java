@@ -53,19 +53,13 @@ public class DataLoader implements CommandLineRunner {
 
         // Insert data into the database
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //zoneRepository.deleteAll(); 
-=======
         /*System.out.println("Limpiando la tabla de zonas..."); 
         zoneRepository.deleteAll(); 
         System.out.println("Tabla de zonas limpiada."); */
->>>>>>> 759c443c9ae00de0d8d09005fc135c3251dc1f7d
-=======
+
         System.out.println("Limpiando la tabla de zonas..."); 
         zoneRepository.deleteAll(); 
         System.out.println("Tabla de zonas limpiada.");
->>>>>>> 1274bbd13c93a7237053b7755c72e1c4da501fb6
 
         // Create zones
         System.out.println("Insertando zonas de prueba...");
@@ -82,19 +76,13 @@ public class DataLoader implements CommandLineRunner {
         zoneRepository.saveAll(List.of(zone1, zone2, zone3, zone4, zone5, zone6, zone7, zone8, zone9));
         System.out.println("Zonas insertadas correctamente.");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        //thrillRepository.deleteAll(); 
-=======
         /*System.out.println("Limpiando la tabla de intensidades..."); 
         thrillRepository.deleteAll(); 
         System.out.println("Tabla de intensidades limpiada.");*/
->>>>>>> 759c443c9ae00de0d8d09005fc135c3251dc1f7d
-=======
+
         System.out.println("Limpiando la tabla de intensidades..."); 
         thrillRepository.deleteAll(); 
         System.out.println("Tabla de intensidades limpiada.");
->>>>>>> 1274bbd13c93a7237053b7755c72e1c4da501fb6
 
         // Create intensities (Thrill)
         System.out.println("Insertando niveles de intensidad...");
@@ -124,20 +112,14 @@ public class DataLoader implements CommandLineRunner {
         typeRepository.saveAll(List.of(type1, type2, type3, type4, type5));
         System.out.println("Tipos de atracciones insertados correctamente.");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
         /* Delete the attractions table to avoid data duplication
         System.out.println("Limpiando la tabla de atracciones..."); */
         //attractionRepository.deleteAll(); 
         // System.out.println("Tabla de atracciones limpiada."); 
-=======
+
         /*System.out.println("Limpiando la tabla de atracciones..."); 
         attractionRepository.deleteAll(); 
         System.out.println("Tabla de atracciones limpiada."); */
->>>>>>> 759c443c9ae00de0d8d09005fc135c3251dc1f7d
-=======
-   
->>>>>>> 1274bbd13c93a7237053b7755c72e1c4da501fb6
 
         // Attractions
         Attraction attraction1 = new Attraction();
