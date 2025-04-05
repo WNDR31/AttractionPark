@@ -6,7 +6,7 @@
     <title>Galería de Atracciones</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0-alpha1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/nav.css"> 
+    <link rel="stylesheet" href="/nav.css">
 </head>
 <body>
 <!-- Navegation bar -->
@@ -106,11 +106,11 @@
         {{#attractions}}
             <div class="col-lg-4 col-md-6 mb-4 attraction-item" data-zone="{{zone.name}}" data-intensity="{{intensity.name}}" data-type="{{type.name}}">
                 <div class="attraction-card h-100">
-                    <img src="/{{imageUrl1}}" alt="{{name}}" class="img-fluid" 
+                    <img src="Imagenes/{{imageUrl1}}" alt="{{name}}" class="img-fluid"
                      onerror="this.onerror=null;this.src='https://via.placeholder.com/400x220?text=Imagen+no+disponible';">
                     <div class="card-body">
                         <h5 class="card-title">{{name}}</h5>
-                        
+
                         <div class="attraction-meta">
                             {{#type.name}}
                             <span class="meta-item">
@@ -128,7 +128,7 @@
                             </span>
                             {{/zone.name}}
                         </div>
-                        
+
                         <a href="/attractions/{{id}}" class="btn btn-details">
                             <i class="fas fa-info-circle"></i> Ver detalles
                         </a>
@@ -159,7 +159,7 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const attractionsContainer = document.getElementById('attractionsContainer');
         const noResults = document.querySelector('.no-results');
-        
+
         // Function to show or hide the loading overlay
         function setLoading(loading) {
             if (loading) {
@@ -170,76 +170,76 @@
                 document.body.style.overflow = '';
             }
         }
-        
+
         // Function to animate filtering
         function animateFilterChange() {
             // Save the current scroll position
             const scrollPosition = window.scrollY;
             const filterSection = document.getElementById('filterSection');
-            
+
             // Apply transition animation
             filterSection.style.opacity = '0.7';
             filterSection.style.transform = 'translateY(-10px)';
-            
+
             // Show loading overlay
             setLoading(true);
-            
+
             // Wait a moment for the animation to appear
             setTimeout(() => {
                 filterSection.style.opacity = '1';
                 filterSection.style.transform = 'translateY(0)';
-                
+
                 // Restore scroll position after animation
                 window.scrollTo({
                     top: scrollPosition,
                     behavior: 'instant' // We use 'instant' to avoid scroll animation
                 });
-                
+
                 // Hide overlay after a short time
                 setTimeout(() => {
                     setLoading(false);
                 }, 300);
             }, 300);
         }
-        
+
         // Handle form submission
         filterForm.addEventListener('submit', function(e) {
             e.preventDefault();
             animateFilterChange();
-            
+
             // Simulate a delay for the transition (in production it would be the AJAX call)
             setTimeout(() => {
                 this.submit();
             }, 500);
         });
-        
+
         // Handling the reset button
         resetButton.addEventListener('click', function() {
             // Save scroll position
             const scrollPosition = window.scrollY;
-            
+
             // Reset animation
             animateFilterChange();
-            
+
             // Reset the values ​​of the select
             const selects = filterForm.querySelectorAll('select');
             selects.forEach(select => {
                 select.value = '';
                 select.dispatchEvent(new Event('change'));
             });
-            
+
             // Submit the form (this will reload the page without filters)
             setTimeout(() => {
                 filterForm.submit();
             }, 500);
         });
-        
+
         // Update selector styles on page load
         document.querySelectorAll('.form-select').forEach(select => {
             if(select.value !== '') {
                 select.classList.add('selected');
             }
-            
+
             // Listen to changes in the selectors
             select.addEventListener('change', function() {
                 if(this.value !== '') {
@@ -249,26 +249,26 @@
                 }
             });
         });
-        
+
         // Ensuring PNG images display correctly
         document.querySelectorAll('.attraction-card img').forEach(img => {
             if(img.src.toLowerCase().endsWith('.png')) {
                 img.style.backgroundColor = '#f8f9fa';
             }
         });
-        
+
         // Prevent default form behavior if no changes are made
         filterForm.addEventListener('submit', function(e) {
             const formData = new FormData(this);
             let hasFilters = false;
-            
+
             for (const [key, value] of formData.entries()) {
                 if (value !== '') {
                     hasFilters = true;
                     break;
                 }
             }
-            
+
             if (!hasFilters) {
                 e.preventDefault();
                 // Subtle animation to indicate no changes
@@ -287,12 +287,12 @@
           <p>Correo: contacto@parqueLagoonLand.com</p>
           <p>Teléfono: +34 123 456 789</p>
         </div>
-        <div class="footer-section footer-horario"> 
+        <div class="footer-section footer-horario">
           <h3>Horarios</h3>
           <p>Lunes a Viernes: 10:00 - 20:00</p>
           <p>Sábados y Domingos: 10:00 - 22:00</p>
         </div>
-        <div class="footer-section"> 
+        <div class="footer-section">
           <h3>Calendario</h3>
           <iframe src="https://calendar.google.com/calendar/embed?wkst=1&ctz=Europe%2FParis&showPrint=0&showTitle=0&showCalendars=0&showTz=0&mode=MONTH&src=ZXMuc3BhaW4jaG9saWRheUBncm91cC52LmNhbGVuZGFyLmdvb2dsZS5jb20&color=%23F09300" style="border-width:0" width="500" height="400" frameborder="0" scrolling="no"></iframe>
         </div>
