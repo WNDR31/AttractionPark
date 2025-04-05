@@ -195,7 +195,7 @@ body {
     text-align: center;
     transition: background-color 0.3s, box-shadow 0.3s;
 }
-.botones-filtro {
+.filter-buttons {
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -503,6 +503,7 @@ display: flex;
     max-height: 760px;
     object-fit: cover;
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.2);
+    margin-top: 50px;
 }
 
 .textoCompra{
@@ -533,7 +534,7 @@ display: flex;
   max-width: 300px;
   max-height: 500px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 .buy_image {
