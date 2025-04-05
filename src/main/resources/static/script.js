@@ -294,11 +294,12 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 //---------------------Apartado de testimonios------------------------------------
+
 function showReview(index) {
     console.log("showReview called with index:", index);
     const reviews = document.querySelectorAll('.review-slide');
     const dots = document.querySelectorAll('.pagination-dot');
-    console.log("Number of review-slide elements found:", reviews.length);
+    console.log("Number of review-slide elements found:", reviews.length); 
     console.log("Number of pagination-dot elements found:", dots.length); 
 
     if (reviews.length === 0 || dots.length === 0) {
@@ -323,16 +324,16 @@ function showReview(index) {
     reviews[currentReview].classList.add('active');
     dots[currentReview].classList.add('active');
 }
+
 function nextReview() {
-    console.log("nextReview called"); 
+    console.log("nextReview called");
     showReview(currentReview + 1);
 }
 
 function prevReview() {
-    console.log("prevReview called"); 
+    console.log("prevReview called");
     showReview(currentReview - 1);
 }
-
 showReview(currentReview);
 
 //-----------------------------Suavizar el desplazamiento de horario -> footer------------------------------------------
