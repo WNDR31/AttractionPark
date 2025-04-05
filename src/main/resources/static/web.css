@@ -643,7 +643,14 @@ display: flex;
   margin-right: 200px;
   margin-bottom: 100px;
 }
-
+.modifyForm{
+  margin-left: 200px;
+  margin-right: 200px;
+  margin-bottom: 100px;
+}
+#formularioModificarReserva.modifyForm {
+  display: none; 
+}
 
 
 /*------Apartado Planifica tu Visita -------*/ 
@@ -775,3 +782,4 @@ hr {
       height: auto;
   }
 }
+

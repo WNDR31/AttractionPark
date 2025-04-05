@@ -172,7 +172,30 @@
                 <button type="button" class="btn btn-danger" id="eliminarReserva">Eliminar</button>
             </form>
         </div>
-
+        <!-- Formulario para modificar reserva -->
+        <div id="formularioModificarReserva" class="modifyForm">
+            <form id="formModificarReserva">
+                <div class="mb-3">
+                    <label for="idReservaModificar" class="form-label">ID de la Reserva:</label>
+                    <input type="number" class="form-control" id="idReservaModificar" placeholder="Introduce el ID de la reserva a modificar" required>
+                </div>
+                <div class="mb-3">
+                    <label for="campoModificar" class="form-label">Campo a Modificar:</label>
+                    <select class="form-select" id="campoModificar" required>
+                        <option value="">Selecciona el campo a modificar</option>
+                        <option value="name">Nombre</option>
+                        <option value="surname">Apellido</option>
+                        <option value="phone">Teléfono</option>
+                        <option value="email">Email</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="nuevoValor" class="form-label">Nuevo Valor:</label>
+                    <input type="text" class="form-control" id="nuevoValor" placeholder="Introduce el nuevo valor" required>
+                </div>
+                <button type="button" class="btn btn-primary" id="modificarReserva">Modificar Reserva</button>
+            </form>
+        </div>
     </main>
     <footer id="footer">
         <div class="container-footer">

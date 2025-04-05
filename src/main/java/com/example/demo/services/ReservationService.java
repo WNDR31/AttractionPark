@@ -47,13 +47,9 @@ public class ReservationService {
                     case "name" -> reservation.setName((String) value);
                     case "surname" -> reservation.setSurname((String) value);
                     case "phone" -> reservation.setPhone((String) value);
-                    case "date" -> reservation.setDate(LocalDate.parse((String) value));
                     case "email" -> reservation.setEmail((String) value);
-                    case "entryType" -> reservation.setEntryType((String) value);
-                    case "quantity" -> reservation.setQuantity((Integer) value);
                 }
             });
-
             return reservationRepository.save(reservation);
         } else {
             throw new RuntimeException("Reservation not found");
