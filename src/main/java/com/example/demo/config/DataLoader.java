@@ -78,9 +78,9 @@ public class DataLoader implements CommandLineRunner {
         System.out.println("Insertando niveles de intensidad...");
         Thrill thrill1 = new Thrill("Baja");
         Thrill thrill2 = new Thrill("Moderada");
-        Thrill thrill3 = new Thrill("Agresiva");
-        Thrill thrill4 = new Thrill("Media");
-        Thrill thrill5 = new Thrill("Alta");
+        Thrill thrill3 = new Thrill("Media");
+        Thrill thrill4 = new Thrill("Alta");
+        Thrill thrill5 = new Thrill("Agresiva");
 
         thrillRepository.saveAll(List.of(thrill1, thrill2, thrill3, thrill4, thrill5));
         System.out.println("Intensidades insertadas correctamente.");
@@ -129,7 +129,7 @@ public class DataLoader implements CommandLineRunner {
         attraction2.setImageUrl3("powertower3.jpg");
         attraction2.setVideoUrl("https://www.youtube.com/embed/OyOEWslMzhA?si=BNCtifyY1vomkPUY");
         attraction2.setZone(zone3); 
-        attraction2.setIntensity(thrill5);
+        attraction2.setIntensity(thrill4);
         attraction2.setType(type2);
         attraction2.setLine(30);
         
@@ -194,7 +194,7 @@ public class DataLoader implements CommandLineRunner {
         attraction6.setImageUrl3("thundercanyon3.jpg");
         attraction6.setVideoUrl("https://www.youtube.com/embed/6xh3k36HBq8?si=JotuJdW4EevmZ8ke");
         attraction6.setZone(zone4); 
-        attraction6.setIntensity(thrill1);
+        attraction6.setIntensity(thrill2);
         attraction6.setType(type4);
         attraction6.setLine(20);
 
@@ -226,7 +226,7 @@ public class DataLoader implements CommandLineRunner {
         attraction8.setImageUrl3("valravn3.jpg");
         attraction8.setVideoUrl("https://www.youtube.com/embed/1b1rvkktEv0?si=jfFSgM25D6POITr3");
         attraction8.setZone(zone6); // MAIN MIDWAY
-        attraction8.setIntensity(thrill3); // Aggressive (assuming that thrill3 es "Aggressive")
+        attraction8.setIntensity(thrill5); // Aggressive 
         attraction8.setType(type1); // Roller coasters
         attraction8.setLine(40); 
         
@@ -290,7 +290,7 @@ public class DataLoader implements CommandLineRunner {
         attraction12.setImageUrl3("corkscrew3.jpeg");
         attraction12.setVideoUrl("https://www.youtube.com/embed/tBkTuaL--30?si=Qyfri2DtMcpKVeTs");
         attraction12.setZone(zone3); 
-        attraction12.setIntensity(thrill5); 
+        attraction12.setIntensity(thrill4); 
         attraction12.setType(type1); 
         attraction12.setLine(40);
 
@@ -376,7 +376,7 @@ public class DataLoader implements CommandLineRunner {
         attraction17.setImageUrl3("rougarou3.jpg");
         attraction17.setVideoUrl("https://www.youtube.com/embed/RuweAtyeUuU?si=E-9anIKIlXVE55x7");
         attraction17.setZone(zone5);
-        attraction17.setIntensity(thrill5);
+        attraction17.setIntensity(thrill4);
         attraction17.setType(type1); 
         attraction17.setLine(40);
 
@@ -444,7 +444,7 @@ public class DataLoader implements CommandLineRunner {
         attraction21.setImageUrl3("woodstockexpress3.jpg");
         attraction21.setVideoUrl("https://www.youtube.com/embed/fDBydpPplzQ?si=tO0J1y9d9Qc11DkF");
         attraction21.setZone(zone2); 
-        attraction21.setIntensity(thrill4);
+        attraction21.setIntensity(thrill3);
         attraction21.setType(type5); 
         attraction21.setLine(10); 
 
