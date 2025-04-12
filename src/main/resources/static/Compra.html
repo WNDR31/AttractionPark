@@ -82,33 +82,33 @@
                     </div>
                     <div class="modal-body">
                         <h1 class="h1_buy">Formulario de Compra</h1>
-                        <form id="formCompra" method="post" action="ReservationController">
+                        <form id="formCompra" method="post" action="/reservations">
                             <h2 class="h2_buy">Datos Personales:</h2>
                             <p class="p_buy">Por favor, completa el siguiente formulario para proceder con la compra.</p>
                             <div>
                                 <div>
                                     <div class="mb-3">
                                         <label for="nombre" class="form-label">Nombre:</label>
-                                        <input type="text" class="form-control" id="nombre" required>
+                                        <input type="text" class="form-control" id="nombre" name="name" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="apellidos" class="form-label">Apellidos:</label>
-                                        <input type="text" class="form-control" id="apellidos" required>
+                                        <input type="text" class="form-control" id="apellidos" name="surname" required>
                                     </div>
                                 </div>
                                 <div class="form_2">
                                     <div class="me-3">
                                         <label for="telefono" class="form-label" width="100%">Número de Teléfono:</label>
-                                        <input type="tel" class="form-control" id="telefono" pattern="[0-9]{9}" required>
+                                        <input type="tel" class="form-control" id="telefono" name="phone" pattern="[0-9]{9}" required>
                                     </div>
                                     <div class="mb-3">
                                         <label for="fechaVisita" class="form-label" width="100%">Fecha:</label>
-                                        <input type="date" class="form-control" id="fechaVisita" required>
+                                        <input type="date" class="form-control" id="fechaVisita" name="fechaVisita" required>
                                     </div>
                                 </div>
                                 <div>
                                     <label for="correo" class="form-label">Correo Electrónico:</label>
-                                    <input type="email" class="form-control" id="correo" pattern=".+@.+\.com" required>
+                                    <input type="email" class="form-control" id="correo" name="email" pattern=".+@.+\.com" required>
                                 </div>
                                 
                             </div>
@@ -119,7 +119,7 @@
                             <div>
                                 <div class="mb-3">
                                     <label for="tipoEntrada" class="form-label">Tipo de Entrada:</label>
-                                    <select class="form-select" id="tipoEntrada" required>
+                                    <select class="form-select" id="tipoEntrada" name="tipoEntrada" required>
                                         <option value="" disabled selected>Selecciona un tipo de entrada</option>
                                         <option value="General">Entrada General - 50€</option>
                                         <option value="VIP">Entrada VIP - 80€</option>
@@ -130,7 +130,7 @@
                             
                             <div class="mb-3">
                                 <label for="cantidad" class="form-label">Cantidad de Boletos:</label>
-                                <select class="form-select" id="cantidad" required>
+                                <select class="form-select" id="cantidad" name="cantidad" required>
                                     <option value="" disabled selected>Selecciona la cantidad</option>
                                     <option value="1">1</option>
                                     <option value="2">2</option>
