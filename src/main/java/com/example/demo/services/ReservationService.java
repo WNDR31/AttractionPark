@@ -18,13 +18,6 @@ public class ReservationService {
         this.reservationRepository = reservationRepository;
     }
 
-    /*
-    //Crear una nueva reserva
-    public Reservation createReservation(Reservation reservation) {
-       return reservationRepository.save(reservation); // Usa el repositorio para guardar la entidad
-    }
-    
-    */
     public Reservation createReservation(Reservation reservation) {
         System.out.println("**** ReservationService.createReservation() INICIADO ****"); // LOG ANTES DE GUARDAR
         Reservation savedReservation = reservationRepository.save(reservation);
