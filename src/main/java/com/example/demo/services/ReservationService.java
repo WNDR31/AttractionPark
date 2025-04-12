@@ -2,13 +2,13 @@ package com.example.demo.services;
 
 import com.example.demo.entity.Reservation;
 import com.example.demo.repository.ReservationRepository;
-
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate; // Asegúrate de importar LocalDate
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.List;
 
 @Service
 public class ReservationService {
@@ -19,42 +19,33 @@ public class ReservationService {
     }
 
     public Reservation createReservation(Reservation reservation) {
-        System.out.println("**** ReservationService.createReservation() INICIADO ****"); // LOG ANTES DE GUARDAR
-        Reservation savedReservation = reservationRepository.save(reservation);
-        System.out.println("**** ReservationService.createReservation() RESERVACIÓN GUARDADA: " + savedReservation); // LOG DESPUÉS DE GUARDAR
-        System.out.println("**** ReservationService.createReservation() FINALIZADO ****"); // LOG AL FINAL
-        return savedReservation;
+        // Podrías añadir validaciones aquí si es necesario antes de guardar
+        return reservationRepository.save(reservation);
     }
 
-    // Actualización parcial con PATCH
+    public List<Reservation> getAllReservations() {
+        return reservationRepository.findAll();
+    }
+    public Optional<Reservation> getReservationById(Long id) {
+        return reservationRepository.findById(id);
+    }
+
     @Transactional
     public Reservation updateReservation(Long id, Map<String, Object> updates) {
-        Optional<Reservation> optionalReservation = reservationRepository.findById(id);
-        if (optionalReservation.isPresent()) {
-            Reservation reservation = optionalReservation.get();
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Reservation not found with ID: " + id));
 
-            updates.forEach((key, value) -> {
-                switch (key) {
-                    case "name" -> reservation.setName((String) value);
-                    case "surname" -> reservation.setSurname((String) value);
-                    case "phone" -> reservation.setPhone((String) value);
-                    case "email" -> reservation.setEmail((String) value);
-                }
-            });
-            return reservationRepository.save(reservation);
-        } else {
-            throw new RuntimeException("Reservation not found");
-        }
+        updates.forEach((key, value) -> {
+            switch (key) {
+                case "name" -> reservation.setName((String) value);
+                case "surname" -> reservation.setSurname((String) value);
+                case "phone" -> reservation.setPhone((String) value);
+                case "email" -> reservation.setEmail((String) value);
+                default -> System.out.println("Campo ignorado en actualización PATCH: " + key);
+            }
+        });
+        return reservationRepository.save(reservation);
     }
-    //Metodo para obtener todas las reservas
-    public List<Reservation> getAllReservations() {
-        System.out.println("**** ReservationService.getAllReservations() INICIADO ****"); // Log al inicio
-        List<Reservation> allReservations = reservationRepository.findAll(); // Usa findAll() del repositorio
-        System.out.println("**** ReservationService.getAllReservations() RESERVACIONES ENCONTRADAS: " + allReservations.size()); // Log con la cantidad
-        System.out.println("**** ReservationService.getAllReservations() FINALIZADO ****"); // Log al final
-        return allReservations;
-    }
-
     public void deleteReservation(Long id) {
         if (!reservationRepository.existsById(id)) {
             throw new RuntimeException("Reservation not found with ID: " + id);
