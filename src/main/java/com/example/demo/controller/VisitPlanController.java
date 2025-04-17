@@ -4,7 +4,6 @@ import com.example.demo.services.HotelService;
 import com.example.demo.services.RestaurantService;
 import com.example.demo.services.StoreService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -21,7 +20,6 @@ public class VisitPlanController {
     private final RestaurantService restaurantService;
     private final StoreService storeService;
 
-    @Autowired
     public VisitPlanController(HotelService hotelService, RestaurantService restaurantService, StoreService storeService) {
         this.hotelService = hotelService;
         this.restaurantService = restaurantService;
