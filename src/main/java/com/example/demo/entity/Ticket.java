@@ -12,6 +12,7 @@ public class Ticket {
     private Long id;
 
     private String name;
+    private Double price;
 
     @ManyToMany(mappedBy = "tickets")
     private List<Reservation> reservations = new ArrayList<>();
@@ -20,8 +21,9 @@ public class Ticket {
     public Ticket() {
     }
 
-    public Ticket(String name) {
+    public Ticket(String name, Double price) {
         this.name = name;
+        this.price = price;
     }
 
     public Long getId() {
@@ -39,5 +41,14 @@ public class Ticket {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 
 }

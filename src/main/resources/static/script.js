@@ -97,157 +97,121 @@ function mostrarVentanaCompra(titulo) {
     let modal = new bootstrap.Modal(document.getElementById("modalCompra"));
     modal.show();
 }
-// Function to handle the adding of tickets to the cart
+
 document.addEventListener("DOMContentLoaded", () => {
     const carrito = document.getElementById("carrito");
     const carritoVacio = document.getElementById("carritoVacio");
     const agregarCarritoButton = document.getElementById("agregarCarrito");
 
-    // Keep an array to track added tickets
-    let carritoTickets = [];
+    let carritoTickets = []; // Aquí guardamos los tickets añadidos al carrito
 
-    // Event listener for adding tickets to the cart
+    // Event listener para añadir tickets
     agregarCarritoButton.addEventListener("click", () => {
         const select = document.getElementById("tipoEntrada");
-        const ticketId = select.value;  // Get the selected ticket ID
-        const ticketName = select.options[select.selectedIndex].textContent; // Get the name of the selected ticket
+        const selectedOption = select.options[select.selectedIndex];
 
-        // If no ticket is selected, exit the function
+        const ticketId = select.value;
+        const ticketName = selectedOption.textContent.split(" - ")[0];
+        const ticketPrice = parseFloat(selectedOption.getAttribute("data-precio"));
+
         if (!ticketId) {
             alert("Por favor, selecciona un tipo de entrada.");
             return;
         }
 
-        // Create a ticket object to represent this selection
+        // Crea un objeto con la información del ticket
         const ticket = {
             id: ticketId,
-            name: ticketName
+            name: ticketName,
+            price: ticketPrice
         };
 
-        // Add the ticket to the carritoTickets array
+        // Añadir el ticket al carrito de manera interna
         carritoTickets.push(ticket);
+        
+        // Si el carrito no tiene tickets, oculta el mensaje "carrito vacío"
+        carritoVacio.style.display = carritoTickets.length === 0 ? "block" : "none";
 
-        // Update the UI to show the added ticket
-        updateCarritoUI();
+        // Crear el elemento de lista que representa el ticket añadido
+        const li = document.createElement("li");
+        li.classList.add("list-group-item", "d-flex", "justify-content-between", "align-items-center");
+        li.dataset.ticketId = ticketId; // Almacenamos el id del ticket en el li
 
-    });
+        // Añadir el nombre y precio del ticket, y el botón de eliminar
+        li.innerHTML = `
+            <span>${ticket.name} - €${ticket.price.toFixed(2)}</span>
+            <button class="btn btn-danger btn-sm">Eliminar</button>
+        `;
 
-    // Function to update the UI for the shopping cart
-    function updateCarritoUI() {
-        // Clear the carrito to redraw it
-        carrito.innerHTML = '';
-
-        // If there are no tickets in the carrito, show the "Carrito Vacio" message
-        if (carritoTickets.length === 0) {
-            carritoVacio.style.display = 'block';
-        } else {
-            carritoVacio.style.display = 'none';
+        // Botón de eliminar
+        const removeButton = li.querySelector("button");
+        removeButton.addEventListener("click", () => {
+            // Eliminar ticket del carrito interno
+            carritoTickets = carritoTickets.filter(t => t.id !== ticket.id);
             
-            // Add each ticket in the carritoTickets array to the UI
-            carritoTickets.forEach(ticket => {
-                const li = document.createElement("li");
-                li.classList.add("list-group-item");
-                li.textContent = ticket.name;
+            // Eliminar el elemento visual del carrito
+            li.remove();
 
-                // Store the ticket ID as a data attribute in the li
-                li.dataset.ticketId = ticket.id;
+            // Si ya no quedan tickets, muestra el mensaje de "carrito vacío"
+            if (carritoTickets.length === 0) {
+                carritoVacio.style.display = "block";
+            }
+        });
 
-                // Create the remove button for this ticket
-                const removeButton = document.createElement("button");
-                removeButton.classList.add("btn", "btn-danger", "btn-sm", "ms-3");
-                removeButton.textContent = "Eliminar";
-                removeButton.addEventListener("click", () => {
-                    // Remove the ticket from the carritoTickets array
-                    carritoTickets = carritoTickets.filter(t => t.id !== ticket.id);
-
-                    // Update the UI again after removal
-                    updateCarritoUI();
-                });
-
-                // Append the remove button to the list item
-                li.appendChild(removeButton);
-
-                // Append the new ticket to the carrito
-                carrito.appendChild(li);
-            });
-        }
-    }
-});
-
-// Function to send the form
-document.getElementById('formCompra').addEventListener('submit', function(event) {
-    console.log("¡Función de envío del formulario INICIADA!");
-    event.preventDefault(); // Prevent the default form submission
-
-    // Validate that the shopping cart is not empty
-    const carrito = document.getElementById('carrito');
-    const carritoVacio = document.getElementById('carritoVacio');
-    const elementosCarrito = carrito.querySelectorAll('li');
-
-    if (elementosCarrito.length === 0 || carrito.contains(carritoVacio)) {
-        alert("El carrito de la compra está vacío. Añade al menos un ticket antes de finalizar la compra.");
-        return;
-    }
-
-    // Get form values
-    const nombre = document.getElementById('nombre').value;
-    const apellidos = document.getElementById('apellidos').value;
-    const telefono = document.getElementById('telefono').value;
-    const fechaVisita = document.getElementById('fechaVisita').value;
-    const correo = document.getElementById('correo').value;
-
-    // Get the tickets from the cart
-    const carritoTickets = [];
-    const itemsCarrito = carrito.querySelectorAll('li');
-    itemsCarrito.forEach(item => {
-        if (item.id !== 'carritoVacio') {
-            carritoTickets.push({
-                id: item.dataset.ticketId, // Get the ticket ID from the data attribute
-                name: item.textContent.replace('Eliminar', '').trim() // Remove the "Eliminar" text
-            });
-        }
+        // Añadir el ticket a la lista del carrito
+        carrito.appendChild(li);
     });
+    
+    // Enviar el formulario con los tickets seleccionados
+    document.getElementById('formCompra').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevenir el comportamiento por defecto del formulario
 
-    // Validate that there are tickets in the cart
-    if (carritoTickets.length === 0) {
-        alert("No has seleccionado ningún ticket para la compra.");
-        return;
-    }
-
-    // Prepare the reservation data
-    const reservationData = {
-        name: nombre,
-        surname: apellidos,
-        phone: telefono,
-        date: fechaVisita,
-        email: correo,
-        tickets: carritoTickets // Add the selected tickets
-    };
-
-    // Make the POST request to the server
-    fetch('http://localhost:8080/reservations', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(reservationData)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error en la petición: ' + response.status);
+        // Validar que el carrito no esté vacío
+        if (carritoTickets.length === 0) {
+            alert("El carrito de la compra está vacío. Añade al menos un ticket antes de finalizar la compra.");
+            return;
         }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Reserva creada:', data);
-        alert('¡Gracias por tu compra! Tu ID de reserva es: ' + data.id + '. Te enviaremos un email con los datos de reserva.');
-    })
-    .catch(error => {
-        console.error('Error al crear la reserva:', error);
-        alert('Error al crear la reserva. Consulta la consola para más detalles.');
+
+        // Recoger los datos del formulario
+        const nombre = document.getElementById('nombre').value;
+        const apellidos = document.getElementById('apellidos').value;
+        const telefono = document.getElementById('telefono').value;
+        const fechaVisita = document.getElementById('fechaVisita').value;
+        const correo = document.getElementById('correo').value;
+
+        // Preparar la data para el POST
+        const reservationData = {
+            name: nombre,
+            surname: apellidos,
+            phone: telefono,
+            date: fechaVisita,
+            email: correo,
+            tickets: carritoTickets // Añadir tickets del carrito
+        };
+
+        // Realizar el POST
+        fetch('http://localhost:8080/reservations', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(reservationData)
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error en la petición: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(data => {
+            alert('¡Gracias por tu compra! Tu ID de reserva es: ' + data.id + '. Te enviaremos un email con los detalles.');
+        })
+        .catch(error => {
+            console.error('Error al crear la reserva:', error);
+            alert('Error al crear la reserva. Consulta la consola para más detalles.');
+        });
     });
 });
-
 
 
 
@@ -424,7 +388,8 @@ document.addEventListener("DOMContentLoaded", () => {
             data.forEach(ticket => {
                 const option = document.createElement("option");
                 option.value = ticket.id;
-                option.textContent = ticket.name;
+                option.textContent = `${ticket.name} - ${ticket.price.toFixed(2)}€`;
+                option.setAttribute("data-precio", ticket.price);
                 select.appendChild(option);
             });
         })
