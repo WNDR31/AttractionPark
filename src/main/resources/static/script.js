@@ -97,58 +97,81 @@ function mostrarVentanaCompra(titulo) {
     let modal = new bootstrap.Modal(document.getElementById("modalCompra"));
     modal.show();
 }
+// Function to handle the adding of tickets to the cart
+document.addEventListener("DOMContentLoaded", () => {
+    const carrito = document.getElementById("carrito");
+    const carritoVacio = document.getElementById("carritoVacio");
+    const agregarCarritoButton = document.getElementById("agregarCarrito");
 
-const entradasSeleccionadas = new Set();
+    // Keep an array to track added tickets
+    let carritoTickets = [];
 
-// Function to add to the shopping cart
-document.getElementById('agregarCarrito').addEventListener('click', function () {
-    const tipoEntrada = document.getElementById('tipoEntrada').value;
-    const cantidad = document.getElementById('cantidad').value;
-    const tipoEntradaText = document.getElementById('tipoEntrada').options[document.getElementById('tipoEntrada').selectedIndex].text;
+    // Event listener for adding tickets to the cart
+    agregarCarritoButton.addEventListener("click", () => {
+        const select = document.getElementById("tipoEntrada");
+        const ticketId = select.value;  // Get the selected ticket ID
+        const ticketName = select.options[select.selectedIndex].textContent; // Get the name of the selected ticket
 
-    if (tipoEntrada === "" || cantidad === "") {
-        alert("Opciones incorrectas. Por favor, selecciona un tipo de entrada y una cantidad válida.");
-        return;
-    }
-
-    const entrada = [tipoEntrada, cantidad];
-
-    for (let item of entradasSeleccionadas) {
-        if (item[0] === tipoEntrada) {
-            alert('Este tipo de entrada ya ha sido añadido al carrito.');
+        // If no ticket is selected, exit the function
+        if (!ticketId) {
+            alert("Por favor, selecciona un tipo de entrada.");
             return;
         }
-    }
 
-    const carritoVacio = document.getElementById('carritoVacio');
-    if (carritoVacio) {
-        carritoVacio.remove();
-    }
+        // Create a ticket object to represent this selection
+        const ticket = {
+            id: ticketId,
+            name: ticketName
+        };
 
-        // To ensure only one type of ticket can be added (still 1:1)
-    if (entradasSeleccionadas.size > 0) {
-        alert("Solo puedes añadir un tipo de entrada al carrito.");
-        return;
-    }
+        // Add the ticket to the carritoTickets array
+        carritoTickets.push(ticket);
 
-    entradasSeleccionadas.add(entrada);
+        // Update the UI to show the added ticket
+        updateCarritoUI();
 
-    const carrito = document.getElementById('carrito');
-    const li = document.createElement('li');
-    li.className = 'list-group-item d-flex justify-content-between align-items-center';
-    li.textContent = `${tipoEntradaText} - Cantidad: ${cantidad}`;
-
-    // Remove from shopping cart
-    const removeButton = document.createElement('button');
-    removeButton.className = 'btn btn-danger btn-sm';
-    removeButton.textContent = 'Eliminar';
-    removeButton.addEventListener('click', function () {
-        carrito.removeChild(li);
-        entradasSeleccionadas.delete(entrada);
     });
 
-    li.appendChild(removeButton);
-    carrito.appendChild(li);
+    // Function to update the UI for the shopping cart
+    function updateCarritoUI() {
+        // Clear the carrito to redraw it
+        carrito.innerHTML = '';
+
+        // If there are no tickets in the carrito, show the "Carrito Vacio" message
+        if (carritoTickets.length === 0) {
+            carritoVacio.style.display = 'block';
+        } else {
+            carritoVacio.style.display = 'none';
+            
+            // Add each ticket in the carritoTickets array to the UI
+            carritoTickets.forEach(ticket => {
+                const li = document.createElement("li");
+                li.classList.add("list-group-item");
+                li.textContent = ticket.name;
+
+                // Store the ticket ID as a data attribute in the li
+                li.dataset.ticketId = ticket.id;
+
+                // Create the remove button for this ticket
+                const removeButton = document.createElement("button");
+                removeButton.classList.add("btn", "btn-danger", "btn-sm", "ms-3");
+                removeButton.textContent = "Eliminar";
+                removeButton.addEventListener("click", () => {
+                    // Remove the ticket from the carritoTickets array
+                    carritoTickets = carritoTickets.filter(t => t.id !== ticket.id);
+
+                    // Update the UI again after removal
+                    updateCarritoUI();
+                });
+
+                // Append the remove button to the list item
+                li.appendChild(removeButton);
+
+                // Append the new ticket to the carrito
+                carrito.appendChild(li);
+            });
+        }
+    }
 });
 
 // Function to send the form
@@ -166,25 +189,42 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
         return;
     }
 
+    // Get form values
     const nombre = document.getElementById('nombre').value;
     const apellidos = document.getElementById('apellidos').value;
     const telefono = document.getElementById('telefono').value;
     const fechaVisita = document.getElementById('fechaVisita').value;
     const correo = document.getElementById('correo').value;
-    const entrada = entradasSeleccionadas.values().next().value; 
-    const tipoEntrada = entrada[0]; 
-    const cantidad = entrada[1]; 
 
+    // Get the tickets from the cart
+    const carritoTickets = [];
+    const itemsCarrito = carrito.querySelectorAll('li');
+    itemsCarrito.forEach(item => {
+        if (item.id !== 'carritoVacio') {
+            carritoTickets.push({
+                id: item.dataset.ticketId, // Get the ticket ID from the data attribute
+                name: item.textContent.replace('Eliminar', '').trim() // Remove the "Eliminar" text
+            });
+        }
+    });
+
+    // Validate that there are tickets in the cart
+    if (carritoTickets.length === 0) {
+        alert("No has seleccionado ningún ticket para la compra.");
+        return;
+    }
+
+    // Prepare the reservation data
     const reservationData = {
         name: nombre,
         surname: apellidos,
         phone: telefono,
         date: fechaVisita,
         email: correo,
-        entryType: tipoEntrada,
-        quantity: cantidad
+        tickets: carritoTickets // Add the selected tickets
     };
 
+    // Make the POST request to the server
     fetch('http://localhost:8080/reservations', {
         method: 'POST',
         headers: {
@@ -207,6 +247,7 @@ document.getElementById('formCompra').addEventListener('submit', function(event)
         alert('Error al crear la reserva. Consulta la consola para más detalles.');
     });
 });
+
 
 
 
@@ -372,4 +413,22 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
+
+//-----------------------------Function to show tickets------------------------------------------
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("/tickets")
+        .then(response => response.json())
+        .then(data => {
+            const select = document.getElementById("tipoEntrada");
+            data.forEach(ticket => {
+                const option = document.createElement("option");
+                option.value = ticket.id;
+                option.textContent = ticket.name;
+                select.appendChild(option);
+            });
+        })
+        .catch(error => console.error("Error cargando tickets:", error));
+});
+
 

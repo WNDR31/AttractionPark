@@ -1,6 +1,8 @@
 package com.example.demo.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.persistence.*;
 
@@ -14,19 +16,24 @@ public class Reservation {
     private String phone;
     private LocalDate date;
     private String email;
-    private String entryType;
-    private int quantity;
+
+    @ManyToMany
+    @JoinTable(
+        name = "reservation_ticket",
+        joinColumns = @JoinColumn(name = "reservation_id"),
+        inverseJoinColumns = @JoinColumn(name = "ticket_id")
+    )
+    private List<Ticket> tickets = new ArrayList<>();
 
     public Reservation() {}
 
-    public Reservation(String n, String s, String p, LocalDate d, String e, String t, int c) {
+    public Reservation(String n, String s, String p, LocalDate d, String e, List<Ticket> t) {
         name = n;
         surname = s;
         phone = p;
         date = d;
         email = e;
-        entryType = t;
-        quantity = c;
+        tickets = t;
     }
 
 
@@ -79,23 +86,13 @@ public class Reservation {
         this.email = email;
     }
 
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
     
-    public String getEntryType() {
-        return entryType;
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
-
-    public void setEntryType(String tipoEntrada) {
-        this.entryType = tipoEntrada;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int cantidad) {
-        this.quantity = cantidad;
-    }
-
 
     // toString method
     @Override
@@ -107,8 +104,6 @@ public class Reservation {
                 ", phone='" + phone + '\'' +
                 ", date=" + date +
                 ", email='" + email + '\'' +
-                ", tipoEntrada='" + entryType + '\'' +
-                ", cantidad=" + quantity +
                 '}';
     }
 }

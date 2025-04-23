@@ -1,6 +1,8 @@
 package com.example.demo.services;
 
 import com.example.demo.entity.Reservation;
+import com.example.demo.entity.Ticket;
+import com.example.demo.repository.TicketRepository;
 import com.example.demo.repository.ReservationRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -8,17 +10,26 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
     private final ReservationRepository reservationRepository;
+    private final TicketRepository ticketRepository; 
 
-    public ReservationService(ReservationRepository reservationRepository) {
+    public ReservationService(ReservationRepository reservationRepository, TicketRepository ticketRepository) {
         this.reservationRepository = reservationRepository;
+        this.ticketRepository = ticketRepository;
     }
 
     public Reservation createReservation(Reservation reservation) {
-        // Podrías añadir validaciones aquí si es necesario antes de guardar
+        List<Ticket> managedTickets = reservation.getTickets().stream()
+            .<Ticket>map(ticket -> ticketRepository.findById(ticket.getId())
+                    .orElseThrow(() -> new RuntimeException("Ticket no encontrado con id: " + ticket.getId())))
+            .collect(Collectors.toList());
+
+        reservation.setTickets(managedTickets);
+
         return reservationRepository.save(reservation);
     }
 
