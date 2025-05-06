@@ -8,10 +8,11 @@
 <body>
 <div class="container mt-4">
     <h1 th:text="${attraction.id} ? 'Edit Attraction' : 'Add Attraction'">Attraction Form</h1>
-    <form th:action="@{${attraction.id} ? '/attractions/' + ${attraction.id} : '/attractions'}"
-          th:object="${attraction}"
-          method="post">
+    <form th:action="@{/attractions}"
+      th:object="${attraction}"
+      method="post">
 
+      
         <input type="hidden" th:field="*{id}"/>
 
         <div class="form-group">
